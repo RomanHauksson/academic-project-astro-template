@@ -2,7 +2,7 @@
 
 This is a template you can use to create a webpage for your research project. It uses the [Astro](ttps://docs.astro.build/en/getting-started/) web framework and [Tailwind CSS](https://tailwindcss.com/docs/) for styling.
 
-See a live demo of the template [here]().
+See a live demo of the template [here](https://academic-project-astro-template.vercel.app/).
 
 ![](./screenshot.png)
 
