@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Link } from "../types";
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<div class="flex flex-row flex-wrap justify-center gap-2">
+  {
+    links.map((link) => (
+      <a
+        href={link.url}
+        class="flex flex-row bg-slate-700 text-white rounded-full gap-2 items-center text-lg px-4 py-2 hover:bg-slate-800"
+      >
+        {link.icon && <Icon name={link.icon} />}
+        <span>{link.name}</span>
+      </a>
+    ))
+  }
+</div>

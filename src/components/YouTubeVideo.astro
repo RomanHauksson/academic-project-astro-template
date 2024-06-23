@@ -1,0 +1,26 @@
+---
+interface Props {
+  videoId: string;
+  aspectRatio?: number;
+  caption?: string;
+}
+
+const { videoId, aspectRatio = 16 / 9, caption } = Astro.props;
+const HEIGHT = 315;
+const WIDTH = aspectRatio * HEIGHT;
+---
+
+<!-- <div class="max-h-30 aspect-video mb-4 rounded-lg overflow-hidden"></div> -->
+<figure class="flex flex-col gap-2">
+  <div class="max-h-30 aspect-video rounded-lg overflow-hidden">
+    <iframe
+      loading="lazy"
+      width="100%"
+      height="100%"
+      src={"https://www.youtube.com/embed/" + videoId}
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+  {caption && <figcaption class="text-lg text-center">{caption}</figcaption>}
+</figure>

@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import Video from "../components/Video.astro";
+import Links from "../components/Links.astro";
+import AuthorList from "../components/AuthorList.astro";
+import Section from "../components/Section.astro";
+import YouTubeVideo from "../components/YouTubeVideo.astro";
+import PDF from "../components/PDF.astro";
+
+import outside from "../assets/outside.mp4";
+import transformer from "../assets/transformer.webp";
+
+const title = "Academic Project Title";
+---
+
+<Layout title={title}>
+  <header class="flex flex-col gap-8 items-center">
+    <h1 class="text-5xl text-center font-medium">{title}</h1>
+    <AuthorList
+      authors={[
+        {
+          name: "Author One",
+          url: "https://example.com",
+          institution: "Institution One",
+          notes: ["*", "†"],
+        },
+        {
+          name: "Author Two",
+          institution: "Institution Two",
+          notes: ["*", "†"],
+        },
+        {
+          name: "Author Three",
+          url: "https://example.com",
+          institution: "Institution Three",
+          notes: ["†"],
+        },
+        {
+          name: "Author Four",
+          url: "https://example.com",
+          institution: "Institution Four",
+        },
+        {
+          name: "Author Five",
+          url: "https://example.com",
+          institution: "Institution Five",
+        },
+      ]}
+    />
+    <p class="text-xl">Conference Name</p>
+    <p class="text-sm">
+      <sup>*</sup>author note one, <sup>†</sup>author note two
+    </p>
+    <Links
+      links={[
+        {
+          name: "Paper",
+          url: "https://arxiv.org/pdf/1706.03762",
+          icon: "fa-solid:file-pdf",
+        },
+        {
+          name: "Code",
+          url: "https://github.com/tensorflow/tensor2tensor",
+          icon: "mdi:github",
+        },
+        {
+          name: "arXiv",
+          url: "https://arxiv.org/abs/1706.03762",
+          icon: "academicons:arxiv",
+        },
+      ]}
+    />
+
+    <Video
+      source={outside}
+      caption="Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus."
+    />
+  </header>
+
+  <main class="flex flex-col gap-8 items-center">
+    <Section title="Abstract">
+      <p class="text-lg">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+        ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat
+        nibh elementum, et tempor dolor mattis.
+      </p>
+    </Section>
+
+    <Section title="Another section">
+      <p class="text-lg">
+        Hendrerit gravida rutrum quisque non tellus orci ac. Accumsan lacus vel
+        facilisis volutpat est velit egestas dui. Nec dui nunc mattis enim ut
+        tellus elementum sagittis. Morbi tristique senectus et netus et
+        malesuada. Aliquam sem fringilla ut morbi tincidunt augue interdum
+        velit. Pretium nibh ipsum consequat nisl vel. Facilisi morbi tempus
+        iaculis urna. Imperdiet proin fermentum leo vel. Consectetur libero id
+        faucibus nisl. Mattis pellentesque id nibh tortor id aliquet lectus. Sed
+        blandit libero volutpat sed cras.
+      </p>
+      <p class="text-lg">
+        Varius morbi enim nunc faucibus a pellentesque. Urna molestie at
+        elementum eu facilisis. Vestibulum lectus mauris ultrices eros in
+        cursus. Adipiscing tristique risus nec feugiat. Nibh mauris cursus
+        mattis molestie a iaculis. Risus ultricies tristique nulla aliquet.
+        Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
+        placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
+        gravida dictum fusce ut.
+      </p>
+    </Section>
+
+    <Section title="Figure with caption">
+      <figure class="self-center flex flex-col gap-2">
+        <Image
+          class="max-h-[30rem] w-auto rounded-lg m-auto"
+          src={transformer}
+          alt="alt text"
+        />
+        <figcaption class="text-lg text-center text-slate-700">
+          Purus sit amet volutpat consequat mauris. Vulputate odio ut enim
+          blandit volutpat maecenas volutpat.
+        </figcaption>
+      </figure>
+    </Section>
+
+    <Section title="YouTube video">
+      <YouTubeVideo videoId="wjZofJX0v4M" />
+    </Section>
+
+    <Section title="PDF">
+      <PDF source="https://arxiv.org/pdf/1706.03762" />
+    </Section>
+
+    <Section title="BibTeX citation">
+      <code class="whitespace-pre-line">
+        {
+          `@misc{vaswani2023attention,
+  title={Attention Is All You Need}, 
+  author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
+  year={2023},
+  eprint={1706.03762},
+  archivePrefix={arXiv},
+  primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
+  }`
+        }
+      </code>
+      <pre></pre>
+    </Section>
+  </main>
+  <footer class="m-auto">
+    <p class="text-slate-600">
+      This page was built using Roman Hauksson's Academic Project Astro
+      template, which was adopted from Eliahu Horwitz's <a
+        class="text-blue-500 hover:underline"
+        href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+        >Academic Project Page Template</a
+      >, which was adopted from Keunhong Park's <a
+        class="text-blue-500 hover:underline"
+        href="https://nerfies.github.io/">project page for <i>Nerfies</i></a
+      >. It is licensed under a <a
+        class="text-blue-500 hover:underline"
+        href="http://creativecommons.org/licenses/by-sa/4.0/"
+        >Creative Commons Attribution-ShareAlike 4.0 International License</a
+      >.
+    </p>
+  </footer>
+</Layout>

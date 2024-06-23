@@ -1,0 +1,29 @@
+---
+interface Props {
+  source: string;
+  caption?: string;
+}
+
+const { source, caption: subtitle } = Astro.props;
+---
+
+<figure class="flex flex-col gap-2">
+  <video
+    class="rounded-lg"
+    poster=""
+    autoplay
+    controls
+    muted
+    loop
+    height="100%"
+  >
+    <source src={source} type="video/mp4" />
+  </video>
+  {
+    subtitle && (
+      <figcaption class="text-lg text-center text-slate-700">
+        {subtitle}
+      </figcaption>
+    )
+  }
+</figure>
