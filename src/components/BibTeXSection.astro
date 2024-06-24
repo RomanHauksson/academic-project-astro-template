@@ -17,16 +17,31 @@ const { data } = Astro.props;
       id="copy-bibtex"
       name="lucide:clipboard-copy"
     />
+    <Icon
+      class="hidden"
+      id="copy-bibtex-successful"
+      name="lucide:clipboard-check"
+    />
   </h2>
-  <code class="whitespace-pre-wrap overflow-scroll">
+  <code class="whitespace-pre overflow-auto bg-zinc-300 p-4 rounded-lg w-full">
     {data}
   </code>
 </Section>
-<script>
+<script define:vars={{ data }}>
   function copyBibtex() {
-    navigator.clipboard.writeText(data).then((err) => {
-      console.error("Failed to copy BibTeX data: ", err);
-    });
+    const copyButton = document.querySelector("#copy-bibtex");
+    const successIcon = document.querySelector("#copy-bibtex-successful");
+    if (copyButton && successIcon) {
+      navigator.clipboard.writeText(data).catch((err) => {
+        console.error("Failed to copy BibTeX data: ", err);
+      });
+      copyButton.style.display = "none";
+      successIcon.style.display = "inline";
+      setTimeout(() => {
+        copyButton.style.display = "inline";
+        successIcon.style.display = "none";
+      }, 1000);
+    }
   }
   const copyButton = document.querySelector("#copy-bibtex");
   if (copyButton) {
