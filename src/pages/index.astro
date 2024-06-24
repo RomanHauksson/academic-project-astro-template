@@ -8,6 +8,7 @@ import AuthorList from "../components/AuthorList.astro";
 import Section from "../components/Section.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import PDF from "../components/PDF.astro";
+import BibTeXSection from "../components/BibTeXSection.astro";
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
@@ -18,41 +19,43 @@ const title = "Academic Project Title";
 <Layout title={title}>
   <header class="flex flex-col gap-8 items-center">
     <h1 class="text-5xl text-center font-medium">{title}</h1>
-    <AuthorList
-      authors={[
-        {
-          name: "Author One",
-          url: "https://example.com",
-          institution: "Institution One",
-          notes: ["*", "†"],
-        },
-        {
-          name: "Author Two",
-          institution: "Institution Two",
-          notes: ["*", "†"],
-        },
-        {
-          name: "Author Three",
-          url: "https://example.com",
-          institution: "Institution Three",
-          notes: ["†"],
-        },
-        {
-          name: "Author Four",
-          url: "https://example.com",
-          institution: "Institution Four",
-        },
-        {
-          name: "Author Five",
-          url: "https://example.com",
-          institution: "Institution Five",
-        },
-      ]}
-    />
-    <p class="text-xl">Conference Name</p>
-    <p class="text-sm">
-      <sup>*</sup>author note one, <sup>†</sup>author note two
-    </p>
+    <section class="flex flex-col gap-4 items-center">
+      <AuthorList
+        authors={[
+          {
+            name: "Author One",
+            url: "https://example.com",
+            institution: "Institution One",
+            notes: ["*", "†"],
+          },
+          {
+            name: "Author Two",
+            url: "https://example.com",
+            institution: "Institution Two",
+            notes: ["*", "†"],
+          },
+          {
+            name: "Author Three",
+            url: "https://example.com",
+            institution: "Institution Three",
+            notes: ["†"],
+          },
+          {
+            name: "Author Four",
+            institution: "Institution Four",
+          },
+          {
+            name: "Author Five",
+            url: "https://example.com",
+            institution: "Institution Four",
+          },
+        ]}
+      />
+      <p class="text-xl">Conference Name</p>
+      <p class="text-sm">
+        <sup>*</sup>author note one, <sup>†</sup>author note two
+      </p>
+    </section>
     <Links
       links={[
         {
@@ -132,40 +135,44 @@ const title = "Academic Project Title";
       <PDF source="https://arxiv.org/pdf/1706.03762" />
     </Section>
 
-    <Section title="BibTeX citation">
-      <code class="whitespace-pre-line">
-        {
-          `@misc{vaswani2023attention,
+    <BibTeXSection
+    data=`@misc{vaswani2023attention,
   title={Attention Is All You Need}, 
   author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
   year={2023},
   eprint={1706.03762},
   archivePrefix={arXiv},
-  primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
-  }`
-        }
-      </code>
-      <pre></pre>
-    </Section>
+  primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area'}
+}`/>
   </main>
   <footer class="m-auto">
-    <p class="text-slate-600">
+    <p class="text-zinc-500 text-sm">
       This page was built using Roman Hauksson's <a
-        class="text-blue-500 hover:underline"
         href="https://github.com/RomanHauksson/academic-project-astro-template"
         >Academic Project Astro template</a
-      >, which was adopted from Eliahu Horwitz's <a
-        class="text-blue-500 hover:underline"
+      >, which was adapted from Eliahu Horwitz's <a
         href="https://github.com/eliahuhorwitz/Academic-project-page-template"
         >Academic Project Page Template</a
-      >, which was adopted from Keunhong Park's <a
-        class="text-blue-500 hover:underline"
+      >, which was adapted from Keunhong Park's <a
         href="https://nerfies.github.io/">project page for <i>Nerfies</i></a
       >. It is licensed under a <a
-        class="text-blue-500 hover:underline"
         href="http://creativecommons.org/licenses/by-sa/4.0/"
         >Creative Commons Attribution-ShareAlike 4.0 International License</a
       >.
     </p>
   </footer>
 </Layout>
+
+<style is:global>
+  body {
+    font-family: "Noto Sans", sans-serif;
+    color: #18181b;
+    background-color: #f4f4f5;
+  }
+  a {
+    color: #3b82f6;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
