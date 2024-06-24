@@ -1,0 +1,35 @@
+---
+import Section from "./Section.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  data: string;
+}
+
+const { data } = Astro.props;
+---
+
+<Section>
+  <h2 class="w-full text-3xl font-bold flex flex-row items-center gap-2">
+    <span>BibTeX</span>
+    <Icon
+      class="cursor-pointer hover:text-zinc-500 active:text-zinc-700"
+      id="copy-bibtex"
+      name="lucide:clipboard-copy"
+    />
+  </h2>
+  <code class="whitespace-pre-wrap overflow-scroll">
+    {data}
+  </code>
+</Section>
+<script>
+  function copyBibtex() {
+    navigator.clipboard.writeText(data).then((err) => {
+      console.error("Failed to copy BibTeX data: ", err);
+    });
+  }
+  const copyButton = document.querySelector("#copy-bibtex");
+  if (copyButton) {
+    copyButton.addEventListener("click", () => copyBibtex());
+  }
+</script>
