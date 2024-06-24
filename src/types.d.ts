@@ -1,7 +1,7 @@
 type Author = {
   name: string;
   url?: string;
-  institution: string;
+  institution?: string;
   notes?: string[];
 }
 
