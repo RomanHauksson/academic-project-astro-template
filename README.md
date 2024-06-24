@@ -1,6 +1,6 @@
 # academic project page template
 
-This is a template you can use to create a simple project page for your research paper. It uses the [Astro](ttps://docs.astro.build/en/getting-started/) web framework and [Tailwind CSS](https://tailwindcss.com/docs/) for styling.
+This is a template you can use to create a simple project page for your research paper. It uses the [Astro](https://docs.astro.build/en/getting-started/) web framework and [Tailwind CSS](https://tailwindcss.com/docs/) for styling.
 
 See a live demo of the template [here](https://academic-project-astro-template.vercel.app/).
 
