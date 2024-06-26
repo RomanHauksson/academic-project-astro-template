@@ -12,9 +12,12 @@ import TwoColumns from "../components/TwoColumns.astro";
 import Video from "../components/Video.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import PDF from "../components/PDF.astro";
-import BibTeXSection from "../components/BibTeXSection.astro";
 import Figure from "../components/Figure.astro";
 import LaTeX from "../components/LaTeX.astro";
+import Splat from "../components/Splat.tsx"
+
+import CodeBlock from "../components/CodeBlock.astro";
+export const components = {pre: CodeBlock}
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
@@ -52,16 +55,16 @@ import transformer from "../assets/transformer.webp";
   ]}
   conference="Conference Name"
   notes={[
-  {
-    symbol: "*",
-    text: "author note one",
-  },
-  {
-    symbol: "†",
-    text: "author note two",
-  },
-]}
-links={[
+    {
+      symbol: "*",
+      text: "author note one",
+    },
+    {
+      symbol: "†",
+      text: "author note two",
+    },
+  ]}
+  links={[
     {
       name: "Paper",
       url: "https://arxiv.org/pdf/1706.03762",
@@ -84,39 +87,34 @@ links={[
 
 ## Abstract
 
-Lorem ipsum dolor *sit amet*, **consectetur adipiscing** elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis.
+Varius morbi enim nunc faucibus a pellentesque. Urna molestie at
+elementum eu facilisis. Vestibulum lectus mauris ultrices eros in
+cursus. Adipiscing tristique risus nec feugiat. Nibh mauris cursus
+mattis molestie a iaculis. Risus ultricies tristique nulla aliquet.
+Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
+placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
+gravida dictum fusce ut.
 
-<LaTeX formula="\int_a^b f(x) dx" />
-
-## Another section
+## Another section, with a figure
 
 Hendrerit gravida rutrum quisque non tellus orci ac. Accumsan lacus vel facilisis volutpat est velit egestas dui. Nec dui nunc mattis enim uttellus elementum sagittis. Morbi tristique senectus et netus et malesuada. Aliquam sem fringilla ut morbi tincidunt augue interdum velit.
 
-<Figure caption="Here's an equation.">
-  <LaTeX formula="\int_a^b f(x) dx" />
+<Figure
+    caption="Use the figure component to display images, videos, equations, or any other element, with a caption."
+  >
+    <Image src={transformer} alt="alt text" />
 </Figure>
-
-## Table
-
-| Column 1 | Column 2 | Column 3 |
-|-----------|-----------|-----------|
-| Cell 1    | Cell 2    | Cell 3    |
-| Cell 4    | Cell 5    | Cell 6    |
-| Cell 7    | Cell 8    | Cell 9    |
 
 ## Two columns
 
+Use the two columns component to display two columns of content. In this example, the left column contains a figure with a YouTube video and the right column contains a Figure with a custom React component.
+
 <TwoColumns>
-  <p slot="left">
-    Risus ultricies tristique nulla aliquet. Ultrices mi tempus imperdiet
-    nulla malesuada pellentesque elit eget. Est placerat in egestas erat
-    imperdiet sed euismod nisi porta. Ultrices gravida dictum fusce ut.
-  </p>
-  <Figure
-    slot="right"
-    caption="Urna molestie at elementum eu facilisis. Vestibulum lectus mauris ultrices eros in cursus. Adipiscing tristique risus nec feugiat."
-  >
-    <Video source={outside} />
+  <Figure slot="left" caption="Take a look at this YouTube video.">
+    <YouTubeVideo videoId="wjZofJX0v4M" />
+  </Figure>
+  <Figure slot="right" caption="Now look at this Gaussian Splat.">
+    <Splat client:idle />
   </Figure>
 </TwoColumns>
 
@@ -128,62 +126,24 @@ Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
 placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
 gravida dictum fusce ut.
 
-<TwoColumns>
-  <Figure
-    slot="left"
-    caption="Urna molestie at elementum eu facilisis. Vestibulum lectus mauris ultrices eros in cursus. Adipiscing tristique risus nec feugiat."
-  >
-    <Image src={transformer} alt="alt text" />
-  </Figure>
-  <p slot="right">
-    Risus ultricies tristique nulla aliquet. Ultrices mi tempus imperdiet
-    nulla malesuada pellentesque elit eget. Est placerat in egestas erat
-    imperdiet sed euismod nisi porta. Ultrices gravida dictum fusce ut.
-  </p>
-</TwoColumns>
+## LaTeX equations
 
-## Figure with caption
+Risus ultricies tristique nulla aliquet.
+Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
+placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
+gravida dictum fusce ut.
 
-<Figure
-  caption="Purus sit amet volutpat consequat mauris. Vulputate odio ut enim blandit volutpat maecenas volutpat."
->
-  <Image src={transformer} alt="alt text" />
-</Figure>
+<LaTeX formula="\int_a^b f(x) dx" />
 
-<Figure
-  caption="Purus sit amet volutpat consequat mauris. Vulputate odio ut enim blandit volutpat maecenas volutpat."
->
-  <YouTubeVideo videoId="wjZofJX0v4M" />
-</Figure>
+## BibTeX
 
-## Putting two columns in a figure
-
-<Figure caption="This is a caption.">
-  <TwoColumns>
-    <p slot="left">
-      Risus ultricies tristique nulla aliquet. Ultrices mi tempus imperdiet
-      nulla malesuada pellentesque elit eget. Est placerat in egestas erat
-      imperdiet sed euismod nisi porta. Ultrices gravida dictum fusce ut.
-    </p>
-    <Video slot="right" source={outside} />
-  </TwoColumns>
-</Figure>
-
-## YouTube video
-
-<YouTubeVideo videoId="wjZofJX0v4M" />
-
-## PDF
-
-<PDF source="https://arxiv.org/pdf/1706.03762" />
-
-<BibTeXSection
-data="@misc{vaswani2023attention,
+```
+@misc{vaswani2023attention,
   title={Attention Is All You Need}, 
   author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
   year={2023},
   eprint={1706.03762},
   archivePrefix={arXiv},
   primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area'}
-}"
-/>
+}
+```

@@ -24,20 +24,20 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="p-6 pt-12 flex flex-col gap-8 items-center max-w-[50rem] m-auto">
-    <main class="flex flex-col w-full gap-8 items-center">
-      <slot />
-    </main>
+  <body class="p-6 pt-12 flex flex-col gap-4 items-center max-w-[50rem] m-auto">
+    <!-- <main class="flex flex-col w-full gap-8 items-center"> -->
+    <slot />
+    <!-- </main> -->
     <footer class="m-auto">
       <p class="text-zinc-500 text-sm">
-        This page was built using Roman Hauksson's <a
+        This page was built using <a
           href="https://github.com/RomanHauksson/academic-project-astro-template"
-          >Academic Project Astro template</a
-        >, which was adapted from Eliahu Horwitz's <a
+          >Roman Hauksson's academic project page template</a
+        >, which was adapted from <a
           href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-          >Academic Project Page Template</a
-        >, which was adapted from Keunhong Park's <a
-          href="https://nerfies.github.io/">project page for <i>Nerfies</i></a
+          >Eliahu Horwitz's template</a
+        >, which was adapted from <a href="https://nerfies.github.io/"
+          >Keunhong Park's project page for <i>Nerfies</i></a
         >. It is licensed under a <a
           href="http://creativecommons.org/licenses/by-sa/4.0/"
           >Creative Commons Attribution-ShareAlike 4.0 International License</a
@@ -62,6 +62,39 @@ const { title } = Astro.props;
     @apply text-5xl text-center font-medium;
   }
   h2 {
-    @apply w-full text-3xl font-bold;
+    @apply w-full text-3xl font-bold mt-4;
   }
 </style>
+
+<!-- <script>
+  function copyCode(button: HTMLElement) {
+    const codeBlock = button.closest("pre");
+    if (!codeBlock) {
+      return;
+    }
+    const codeContent = codeBlock.querySelector("code")?.innerText;
+    if (!codeContent) {
+      return;
+    }
+    const successIcon = codeBlock.querySelector(
+      ".copy-code-successful"
+    ) as HTMLElement;
+    if (!successIcon) {
+      console.error("Failed to find success icon.");
+      return;
+    }
+    navigator.clipboard.writeText(codeContent).catch((err) => {
+      console.error("Failed to copy code: ", err);
+    });
+    button.style.display = "none";
+    successIcon.style.display = "inline";
+    setTimeout(() => {
+      button.style.display = "inline";
+      successIcon.style.display = "none";
+    }, 1000);
+  }
+
+  document.querySelectorAll(".copy-code").forEach((button) => {
+    button.addEventListener("click", () => copyCode(button as HTMLElement));
+  });
+</script> -->
