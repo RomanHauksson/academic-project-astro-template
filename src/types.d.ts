@@ -11,4 +11,9 @@ type Link = {
   icon?: string;
 }
 
-export { Author, Link };
+type Note = {
+  symbol: string;
+  text: string;
+}
+
+export { Author, Link, Note };
