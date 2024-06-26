@@ -25,7 +25,7 @@ const Roman = () => {
   }, []);
 
   return (
-    <div className="bg-zinc-300 h-[20rem] w-[30rem] rounded-lg">
+    <div className="bg-zinc-300 h-[20rem] w-full rounded-lg">
       <Canvas camera={{ position: [0, 0, 0], rotation: [0, 0, 0] }}>
         <OrbitControls />
         <Splat
