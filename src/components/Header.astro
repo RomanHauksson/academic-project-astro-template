@@ -15,12 +15,12 @@ interface Props {
 const { title, authors, conference, notes, links } = Astro.props as Props;
 ---
 
-<header class="flex flex-col gap-10 items-center">
+<header class="flex flex-col gap-10 items-center mb-6">
   <h1>{title}</h1>
   <div class="flex flex-col gap-6 items-center">
     <Authors authors={authors} />
     {conference && <p>{conference}</p>}
     {notes && <Notes notes={notes} />}
+    {links && <Links links={links} />}
   </div>
-  {links && <Links links={links} />}
 </header>
