@@ -25,6 +25,43 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="p-6 pt-12 flex flex-col gap-8 items-center max-w-[50rem] m-auto">
-    <slot />
+    <main class="flex flex-col w-full gap-8 items-center">
+      <slot />
+    </main>
+    <footer class="m-auto">
+      <p class="text-zinc-500 text-sm">
+        This page was built using Roman Hauksson's <a
+          href="https://github.com/RomanHauksson/academic-project-astro-template"
+          >Academic Project Astro template</a
+        >, which was adapted from Eliahu Horwitz's <a
+          href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+          >Academic Project Page Template</a
+        >, which was adapted from Keunhong Park's <a
+          href="https://nerfies.github.io/">project page for <i>Nerfies</i></a
+        >. It is licensed under a <a
+          href="http://creativecommons.org/licenses/by-sa/4.0/"
+          >Creative Commons Attribution-ShareAlike 4.0 International License</a
+        >.
+      </p>
+    </footer>
   </body>
 </html>
+
+<style is:global>
+  body {
+    font-family: "Noto Sans", sans-serif;
+    @apply text-zinc-900 bg-zinc-50;
+  }
+  a {
+    @apply text-blue-500 hover:underline;
+  }
+  p {
+    @apply text-lg;
+  }
+  h1 {
+    @apply text-5xl text-center font-medium;
+  }
+  h2 {
+    @apply w-full text-3xl font-bold;
+  }
+</style>
