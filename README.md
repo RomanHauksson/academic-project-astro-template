@@ -1,6 +1,6 @@
 # Academic project page template
 
-This is a template you can use to create a simple project page for your research paper. See a live demo [here](https://academic-project-astro-template.vercel.app/).
+This is a template you can use to create a simple project page for your research paper. See a live demo [here](https://research-template.roman.technology).
 
 ![](./public/screenshot.png)
 
