@@ -17,6 +17,7 @@ import YouTubeVideo from "../components/YouTubeVideo.astro";
 import PDF from "../components/PDF.astro";
 import Figure from "../components/Figure.astro";
 import LaTeX from "../components/LaTeX.astro";
+import SmallCaps from "../components/SmallCaps.astro";
 import Splat from "../components/Splat.tsx"
 
 import CodeBlock from "../components/CodeBlock.astro";
@@ -29,30 +30,23 @@ import transformer from "../assets/transformer.webp";
   title={frontmatter.title}
   authors={[
     {
-      name: "Author One",
-      url: "https://example.com",
-      institution: "Institution One",
+      name: "Roman Hauksson",
+      url: "https://roman.technology",
+      institution: "Independent",
       notes: ["*", "†"],
     },
     {
       name: "Author Two",
-      url: "https://example.com",
       institution: "Institution Two",
       notes: ["*", "†"],
     },
     {
       name: "Author Three",
-      url: "https://example.com",
       institution: "Institution Three",
       notes: ["†"],
     },
     {
       name: "Author Four",
-      institution: "Institution Four",
-    },
-    {
-      name: "Author Five",
-      url: "https://example.com",
       institution: "Institution Four",
     },
   ]}
@@ -70,17 +64,17 @@ import transformer from "../assets/transformer.webp";
   links={[
     {
       name: "Paper",
-      url: "https://arxiv.org/pdf/1706.03762",
+      url: "",
       icon: "fa-solid:file-pdf",
     },
     {
       name: "Code",
-      url: "https://github.com/tensorflow/tensor2tensor",
+      url: "https://github.com/RomanHauksson/academic-project-astro-template",
       icon: "mdi:github",
     },
     {
       name: "arXiv",
-      url: "https://arxiv.org/abs/1706.03762",
+      url: "",
       icon: "academicons:arxiv",
     },
   ]}
@@ -90,55 +84,38 @@ import transformer from "../assets/transformer.webp";
 
 ## Abstract
 
-Varius morbi enim nunc faucibus a pellentesque. Urna molestie at
-elementum eu facilisis. Vestibulum lectus mauris ultrices eros in
-cursus. Adipiscing tristique risus nec feugiat. Nibh mauris cursus
-mattis molestie a iaculis. Risus ultricies tristique nulla aliquet.
-Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
-placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
-gravida dictum fusce ut.
+This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold** and _italics_ as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
 ## Another section, with a figure
 
-Hendrerit gravida rutrum quisque non tellus orci ac. Accumsan lacus vel facilisis volutpat est velit egestas dui. Nec dui nunc mattis enim uttellus elementum sagittis. Morbi tristique senectus et netus et malesuada. Aliquam sem fringilla ut morbi tincidunt augue interdum velit.
+Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
 <Figure
-    caption="Use the figure component to display images, videos, equations, or any other element, with a caption."
+    caption="Diagram of the transformer deep learning architecture."
   >
     <Image src={transformer} alt="alt text" />
 </Figure>
 
 ## Two columns
 
-Use the two columns component to display two columns of content. In this example, the left column contains a figure with a YouTube video and the right column contains a Figure with a custom React component.
+Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom React component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they stack on top of each other vertically.
 
 <TwoColumns>
   <Figure slot="left" caption="Take a look at this YouTube video.">
     <YouTubeVideo videoId="wjZofJX0v4M" />
   </Figure>
-  <Figure slot="right" caption="Now look at this Gaussian Splat.">
+  <Figure slot="right" caption="Now look at this Gaussian Splat, rendered with a React component.">
     <Splat client:idle />
   </Figure>
 </TwoColumns>
 
-Varius morbi enim nunc faucibus a pellentesque. Urna molestie at
-elementum eu facilisis. Vestibulum lectus mauris ultrices eros in
-cursus. Adipiscing tristique risus nec feugiat. Nibh mauris cursus
-mattis molestie a iaculis. Risus ultricies tristique nulla aliquet.
-Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
-placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
-gravida dictum fusce ut.
+## LaTeX
 
-## LaTeX equations
-
-Risus ultricies tristique nulla aliquet.
-Ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Est
-placerat in egestas erat imperdiet sed euismod nisi porta. Ultrices
-gravida dictum fusce ut.
+You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page.
 
 <LaTeX formula="\int_a^b f(x) dx" />
 
-## BibTeX
+## BibTeX citation
 
 ```
 @misc{vaswani2023attention,
