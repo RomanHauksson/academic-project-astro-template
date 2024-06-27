@@ -1,6 +1,9 @@
 ---
 layout: ../layouts/Layout.astro
-title: Academic Project Title
+title: Academic Project Page Template
+description: This is a description of the academic project.
+favicon: /favicon.svg
+thumbnail: /screenshot.png
 ---
 
 import { Image } from "astro:assets";
@@ -23,7 +26,7 @@ import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 
 <Header
-  title="Academic Project Title"
+  title={frontmatter.title}
   authors={[
     {
       name: "Author One",
