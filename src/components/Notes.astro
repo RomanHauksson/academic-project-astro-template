@@ -11,11 +11,12 @@ const { notes } = Astro.props;
 // To preserve the lack of a space, save this file without formatting by pressing `Cmd+Shift+P` and selecting `File: Save without formatting`.
 ---
 
-<p class="text-sm">
+<p class="text-sm text-center">
   {
     notes.map((note, index, array) => (
       <>
-        <sup>{note.symbol}</sup>{note.text}
+        <sup>{note.symbol}</sup>
+        {note.text}
         {index < array.length - 1 ? "," : ""}
       </>
     ))
