@@ -2,7 +2,7 @@
 
 This is a template you can use to create a simple project page for your research paper. See a live demo [here](https://academic-project-astro-template.vercel.app/).
 
-![](./screenshot.png)
+![](./public/screenshot.png)
 
 ## Features
 
