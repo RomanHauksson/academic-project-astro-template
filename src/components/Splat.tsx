@@ -27,7 +27,6 @@ const Roman = () => {
   return (
     <div className="bg-zinc-300 h-[20rem] w-full rounded-lg">
       <Canvas camera={{ position: [0, 0, 0], rotation: [0, 0, 0] }}>
-        <OrbitControls />
         <Splat
           src="https://roman.technology/Roman.splat"
           position={[0.3, -0.43, -1.74]}
