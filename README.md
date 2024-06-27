@@ -19,7 +19,7 @@ This is a template you can use to create a simple project page for your research
 2. Run `npm install` from the root of the project to install dependencies.
 3. Edit the template in `/src/pages/index.mdx`.
 4. Run `npm run dev` to see a live preview of your changes and `npm run build` to build the website when you're done.
-5. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), etc.
+5. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
 
 ## Notes
 
