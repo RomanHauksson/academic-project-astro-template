@@ -6,6 +6,6 @@ interface Props {
 const { source } = Astro.props;
 ---
 
-<video class="rounded-lg" poster="" autoplay controls muted loop height="100%">
+<video class="rounded-lg h-full" autoplay controls muted loop>
   <source src={source} type="video/mp4" />
 </video>
