@@ -1,5 +1,7 @@
 # Academic project page template
 
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template)
+
 This is a template you can use to create a simple project page for your research paper. See a live demo [here](https://research-template.roman.technology).
 
 ![](./public/screenshot.png)
