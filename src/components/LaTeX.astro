@@ -3,15 +3,22 @@ import katex from "katex";
 
 interface Props {
   formula: string;
+  inline?: boolean;
 }
 
-const { formula = "" } = Astro.props;
+const { formula = "", inline } = Astro.props;
 const html = katex.renderToString(formula, { throwOnError: false });
 ---
 
-<div class="text-center">
-  <span set:html={html} class="" />
-</div>
+{
+  inline ? (
+    <span set:html={html} class="" />
+  ) : (
+    <div class="text-center">
+      <span set:html={html} class="" />
+    </div>
+  )
+}
 
 <link
   rel="stylesheet"
