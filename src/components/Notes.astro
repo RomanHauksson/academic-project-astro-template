@@ -8,16 +8,14 @@ interface Props {
 const { notes } = Astro.props;
 // Saving this document with automatic formatting adds a line in between the note symbol in the `<sup>` element and the note text.
 // This adds a space in between the symbol and the text in the final HTML.
-// To preserve the lack of a space, save this file without formatting by pressing `Cmd+Shift+P` and selecting `File: Save without formatting`.
+// To preserve the lack of a space, save this file without formatting by pressing `Cmd+Shift+P` (in VS Code) and selecting `File: Save without formatting`.
 ---
 
 <p class="text-sm text-center">
   {
     notes.map((note, index, array) => (
       <>
-        <sup>{note.symbol}</sup>
-        {note.text}
-        {index < array.length - 1 ? "," : ""}
+        <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
       </>
     ))
   }
