@@ -17,6 +17,8 @@ This is a template you can use to create a simple project page for your research
 
 ## Usage
 
+Need help setting up the template? Book a free call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live.
+
 1. Click "Use this template" to make a copy of this repository and then clone it, or just clone it directly.
 2. Run `npm install` from the root of the project to install dependencies.
 3. Edit the template in `/src/pages/index.mdx`.
