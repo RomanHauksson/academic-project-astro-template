@@ -2,8 +2,8 @@
 layout: ../layouts/Layout.astro
 title: Academic Project Page Template
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
-favicon: ./favicon.svg
-thumbnail: ./screenshot.png
+favicon: favicon.svg
+thumbnail: screenshot.png
 ---
 
 import Layout from "../layouts/Layout.astro";
@@ -86,6 +86,11 @@ export const components = {pre: CodeBlock}
 ## Abstract
 
 This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold** and _italics_ as well as custom components like <SmallCaps>small caps.</SmallCaps>
+
+| Method | Accuracy (<LaTeX inline formula="\alpha" />) | Speed (<LaTeX inline formula="\beta" />) |
+|--------|-------------------------------------------|----------------------------------------|
+| A | <LaTeX inline formula="0.956 \pm 0.012" /> | <LaTeX inline formula="1.23 \times 10^{-3}" /> |
+| B | <LaTeX inline formula="0.978 \pm 0.008" /> | <LaTeX inline formula="2.45 \times 10^{-3}" /> |
 
 </HighlightedSection>
 
