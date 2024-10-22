@@ -41,7 +41,9 @@ const { title, description, favicon, thumbnail } = Astro.props.frontmatter;
 
     <title>{title}</title>
   </head>
-  <body class="p-6 pt-12 flex flex-col gap-4 items-center max-w-[50rem] m-auto">
+  <body
+    class="flex flex-col gap-4 items-center pt-12 pb-6 w-full *:px-6 *:max-w-[60rem]"
+  >
     <slot />
     <footer class="m-auto">
       <p class="text-zinc-500 text-sm">

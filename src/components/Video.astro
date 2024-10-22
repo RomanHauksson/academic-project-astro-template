@@ -6,12 +6,14 @@ interface Props {
 const { source } = Astro.props;
 ---
 
-<video
-  class="rounded-lg w-full h-auto aspect-video"
-  autoplay
-  controls
-  muted
-  loop
->
-  <source src={source} type="video/mp4" />
-</video>
+<div class="w-full flex justify-center">
+  <video
+    class="w-full h-auto aspect-video rounded-lg"
+    autoplay
+    controls
+    muted
+    loop
+  >
+    <source src={source} type="video/mp4" />
+  </video>
+</div>
