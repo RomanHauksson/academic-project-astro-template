@@ -6,25 +6,24 @@ favicon: /favicon.svg
 thumbnail: /screenshot.png
 ---
 
-import { Image } from "astro:assets";
-
 import Layout from "../layouts/Layout.astro";
 
 import Header from "../components/Header.astro";
-import TwoColumns from "../components/TwoColumns.astro";
 import Video from "../components/Video.astro";
-import YouTubeVideo from "../components/YouTubeVideo.astro";
-import PDF from "../components/PDF.astro";
-import Figure from "../components/Figure.astro";
-import LaTeX from "../components/LaTeX.astro";
+import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
+import Figure from "../components/Figure.astro";
+import Image from "../components/Image.astro";
+import TwoColumns from "../components/TwoColumns.astro";
+import YouTubeVideo from "../components/YouTubeVideo.astro";
+import LaTeX from "../components/LaTeX.astro";
+
+import outside from "../assets/outside.mp4";
+import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
 
 import CodeBlock from "../components/CodeBlock.astro";
 export const components = {pre: CodeBlock}
-
-import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
 
 <Header
   title={frontmatter.title}
@@ -82,18 +81,22 @@ import transformer from "../assets/transformer.webp";
 
 <Video source={outside} />
 
+<HighlightedSection>
+
 ## Abstract
 
 This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold** and _italics_ as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
-## Another section, with a figure
+</HighlightedSection>
+
+## Figures
 
 Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
 <Figure
     caption="Diagram of the transformer deep learning architecture."
   >
-    <Image src={transformer} alt="alt text" />
+    <Image source={transformer} altText="Diagram of the transformer deep learning architecture." />
 </Figure>
 
 ## Two columns
@@ -109,6 +112,18 @@ Use the two columns component to display two columns of content. In this example
   </Figure>
 </TwoColumns>
 
+## Heading levels
+
+Use headings to divide your content into sections.
+
+### Heading 3
+
+Go down a level to heading 3...
+
+#### Heading 4
+
+...and down again to heading 4.
+
 ## LaTeX
 
 You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
@@ -117,7 +132,7 @@ You can also add LaTeX formulas, rendered during the build process using [KaTeX]
 
 ## BibTeX citation
 
-```
+```bibtex
 @misc{roman2024academic,
   author = "{Roman Hauksson}",
   title = "Academic Project Page Template",
