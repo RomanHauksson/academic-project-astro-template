@@ -103,36 +103,3 @@ const baseUrl = import.meta.env.BASE_URL;
     @apply px-4;
   }
 </style>
-
-<!-- <script>
-  function copyCode(button: HTMLElement) {
-    const codeBlock = button.closest("pre");
-    if (!codeBlock) {
-      return;
-    }
-    const codeContent = codeBlock.querySelector("code")?.innerText;
-    if (!codeContent) {
-      return;
-    }
-    const successIcon = codeBlock.querySelector(
-      ".copy-code-successful"
-    ) as HTMLElement;
-    if (!successIcon) {
-      console.error("Failed to find success icon.");
-      return;
-    }
-    navigator.clipboard.writeText(codeContent).catch((err) => {
-      console.error("Failed to copy code: ", err);
-    });
-    button.style.display = "none";
-    successIcon.style.display = "inline";
-    setTimeout(() => {
-      button.style.display = "inline";
-      successIcon.style.display = "none";
-    }, 1000);
-  }
-
-  document.querySelectorAll(".copy-code").forEach((button) => {
-    button.addEventListener("click", () => copyCode(button as HTMLElement));
-  });
-</script> -->
