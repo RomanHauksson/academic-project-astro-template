@@ -1,0 +1,18 @@
+---
+interface Props {
+  color?: string;
+}
+
+const { color = "#e4e4e7" } = Astro.props;
+---
+
+<section
+  class="!max-w-full !px-0 py-6 w-full mx-0 flex justify-center"
+  style={`background-color: ${color};`}
+>
+  <div
+    class="flex flex-col gap-4 items-center w-full max-w-[60rem] [&>h2]:mt-0 px-6"
+  >
+    <slot />
+  </div>
+</section>
