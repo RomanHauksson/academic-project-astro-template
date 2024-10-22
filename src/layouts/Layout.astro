@@ -20,14 +20,14 @@ const baseUrl = import.meta.env.BASE_URL;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
-    <link rel="icon" type="image/svg+xml" href={`${baseUrl}${favicon}`} />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}/${favicon}`} />
 
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     {
       thumbnail && (
-        <meta property="og:image" content={`${baseUrl}${thumbnail}`} />
+        <meta property="og:image" content={`${baseUrl}/${thumbnail}`} />
       )
     }
 
