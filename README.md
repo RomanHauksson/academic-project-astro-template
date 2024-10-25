@@ -18,11 +18,12 @@ This is a template you can use to create a simple project page for your research
 
 Need help setting it up? Please schedule a call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live! I want to talk to potential users to figure out pain points and features to add.
 
+1. [Install Node.js](https://nodejs.org/en/download/package-manager).
 1. Click "Use this template" to make a copy of this repository and then clone it, or just clone it directly.
-2. Run `npm install` from the root of the project to install dependencies.
-3. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon at `/public/favicon.svg` and the social link thumbnail at `/public/thumbnail.png`.
-4. Run `npm run dev` to see a live preview of your page while you edit it.
-5. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
+1. Run `npm install` from the root of the project to install dependencies.
+1. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon at `/public/favicon.svg` and the social link thumbnail (optional) at `/public/thumbnail.png`.
+1. Run `npm run dev` to see a live preview of your page while you edit it.
+1. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
 
 ## Notes
 
