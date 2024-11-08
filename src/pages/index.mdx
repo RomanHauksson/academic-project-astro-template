@@ -23,7 +23,8 @@ import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
 
 import CodeBlock from "../components/CodeBlock.astro";
-export const components = {pre: CodeBlock}
+import Table from "../components/Table.astro";
+export const components = {pre: CodeBlock, table: Table}
 
 <Header
   title={frontmatter.title}
