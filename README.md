@@ -14,6 +14,13 @@ This is a template you can use to create a simple project page for your research
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
 - Built with modern web development tools like [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
+## Real-world examples
+
+- [CLIP-RT: Learning Language-Conditioned Robotic Policies from Natural Language Supervision](https://clip-rt.github.io/)
+- [StochSync: Stochastic Diffusion Synchronization for Image Generation in Arbitrary Spaces](https://stochsync.github.io/)
+- [CRESSim: Simulator for Advancing Surgical Autonomy](https://tbs-ualberta.github.io/CRESSim/)
+- [PCO: Precision-Controllable Offset Surfaces with Sharp Features](https://alan-leo-wong.github.io/SIGASIA24-PCO-ProjectPage/)
+
 ## Usage
 
 Need help setting it up? Please schedule a call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live! I want to talk to potential users to figure out pain points and features to add.
