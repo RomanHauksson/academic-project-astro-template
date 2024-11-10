@@ -1,18 +1,16 @@
-# Academic project page template
+# Research project page template
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRomanHauksson%2Facademic-project-astro-template)
-
-This is a template you can use to create a simple project page for your research paper. See a live demo [here](https://research-template.roman.technology).
+This is a template you can use to build a project page for your research paper, adapted from the original [Nerfies page](https://nerfies.github.io/). It's designed to be easy to set up for those without web development experience, but web developers will appreciate that it's flexible and built with modern, familiar technologies. See a live demo of the template [here](https://research-template.roman.technology).
 
 ![](./public/screenshot.png)
 
 ## Features
 
-- Polished, quick-to-load, responsive, accessible, and SEO-friendly template adapted from the original [Nerfies page](https://nerfies.github.io/).
-- Easily edit in Markdown instead of HTML.
+- Easily edit the content in Markdown instead of HTML.
+- Quick-to-load, responsive, accessible, and SEO-friendly.
 - Includes out-of-the-box components for the header, figures, LaTeX equations, two-column layouts, code blocks (with syntax highlighting), small caps, videos, and YouTube embeds.
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
-- Built with modern web development tools like [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+- Built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [Typescript](https://www.typescriptlang.org/).
 
 ## Real-world examples
 
@@ -31,6 +29,8 @@ Need help setting it up? Please schedule a call with me [here](https://cal.com/r
 1. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon at `/public/favicon.svg` and the social link thumbnail (optional) at `/public/thumbnail.png`.
 1. Run `npm run dev` to see a live preview of your page while you edit it.
 1. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRomanHauksson%2Facademic-project-astro-template)
 
 ## Notes
 
