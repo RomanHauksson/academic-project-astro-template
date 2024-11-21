@@ -10,10 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/mdx": "^3.1.5",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^3.1.9",
     "@astrojs/react": "^3.6.2",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/tailwind": "^5.1.2",
     "@iconify-json/academicons": "^1.1.14",
     "@iconify-json/fa-solid": "^1.1.8",
     "@iconify-json/lucide": "^1.1.194",
@@ -23,7 +23,7 @@
     "@react-three/fiber": "^8.16.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "astro": "^4.15.3",
+    "astro": "^4.16.13",
     "astro-icon": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
