@@ -99,10 +99,10 @@ This is a live demo for a template you can use to create a simple project page f
 
 Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
-<Figure
-    caption="Diagram of the transformer deep learning architecture."
-  >
-    <Image source={transformer} altText="Diagram of the transformer deep learning architecture." />
+<Figure>
+  <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Diagram of the transformer deep learning architecture.</span>
+</Figure>
 </Figure>
 
 ## Two columns
@@ -110,11 +110,13 @@ Use the figure component to display images, videos, equations, or any other elem
 Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
 
 <TwoColumns>
-  <Figure slot="left" caption="Take a look at this YouTube video.">
-    <YouTubeVideo videoId="wjZofJX0v4M" />
+  <Figure slot="left">
+    <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
+    <span slot="caption">Take a look at this YouTube video.</span>
   </Figure>
-  <Figure slot="right" caption="Now look at this Gaussian Splat, rendered with a React component.">
-    <Splat client:idle />
+  <Figure slot="right">
+    <Splat slot="figure" client:idle />
+    <span slot="caption">Now look at this <a href="https://en.wikipedia.org/wiki/Gaussian_splatting">Gaussian splat</a>, rendered with a React component.</span>
   </Figure>
 </TwoColumns>
 
