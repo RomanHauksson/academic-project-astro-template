@@ -14,6 +14,7 @@ This is a template you can use to build a project page for your research paper, 
 
 ## Real-world examples
 
+- [Lossy Compression With Pretrained Diffusion Models](https://jeremyiv.github.io/diffc-project-page/)
 - [CLIP-RT: Learning Language-Conditioned Robotic Policies from Natural Language Supervision](https://clip-rt.github.io/)
 - [StochSync: Stochastic Diffusion Synchronization for Image Generation in Arbitrary Spaces](https://stochsync.github.io/)
 - [CRESSim: Simulator for Advancing Surgical Autonomy](https://tbs-ualberta.github.io/CRESSim/)
