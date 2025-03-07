@@ -18,9 +18,14 @@ import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 
+import { ImageComparison } from "../components/ImageComparison.tsx";
+
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
+import dogsDiffc from "../assets/dogs-diffc.png"
+import dogsTrue from "../assets/dogs-true.png"
+
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
@@ -103,6 +108,13 @@ Use the figure component to display images, videos, equations, or any other elem
   <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
   <span slot="caption">Diagram of the transformer deep learning architecture.</span>
 </Figure>
+
+## Image comparison slider
+
+An interactive, accessible slider component with keyboard navigation.
+<Figure>
+  <ImageComparison slot="figure" client:load imageUrlOne={dogsDiffc.src} imageUrlTwo={dogsTrue.src} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
+  <span slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm.</span>
 </Figure>
 
 ## Two columns
