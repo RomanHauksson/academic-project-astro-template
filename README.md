@@ -27,7 +27,7 @@ Want help setting it up? Please schedule a call with me [here](https://cal.com/r
 1. [Install Node.js](https://nodejs.org/en/download/package-manager).
 1. Click "Use this template" to make a copy of this repository and then clone it, or just clone it directly.
 1. Run `npm install` from the root of the project to install dependencies.
-1. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon at `/public/favicon.svg` and the social link thumbnail (optional) at `/public/thumbnail.png`.
+1. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon and social link thumbnail (optional). In the frontmatter in `index.mdx`, they are set to `favicon.svg` and `screenshot-light.png` respectively, which refer to files in `/public/`.
 1. Run `npm run dev` to see a live preview of your page while you edit it.
 1. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
 
