@@ -22,7 +22,7 @@ This is a template you can use to build a project page for your research paper, 
 
 ## Usage
 
-Need help setting it up? Please schedule a call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live! I want to talk to potential users to figure out pain points and features to add.
+Want help setting it up? Please schedule a call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live! I want to talk to potential users to figure out pain points and features to add.
 
 1. [Install Node.js](https://nodejs.org/en/download/package-manager).
 1. Click "Use this template" to make a copy of this repository and then clone it, or just clone it directly.
