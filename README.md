@@ -2,13 +2,13 @@
 
 This is a template you can use to build a project page for your research paper, adapted from the original [Nerfies page](https://nerfies.github.io/). It's designed to be easy to set up for those without web development experience, but web developers will appreciate that it's flexible and built with modern, familiar technologies. See a live demo of the template [here](https://research-template.roman.technology).
 
-<img src="public/screenshot-light.png" width="30rem" /> <img src = "public/screenshot-dark.png" width="30rem" />
+<img src="public/screenshot-light.png" width="48%" /> <img src = "public/screenshot-dark.png" width="48%" />
 
 ## Features
 
 - Easily edit the content in Markdown instead of HTML.
 - Quick-to-load, works with mobile devices, accessible, and SEO-friendly.
-- Includes out-of-the-box components for the header, figures, LaTeX equations, two-column layouts, code blocks (with syntax highlighting), small caps, videos, and YouTube embeds.
+- Includes out-of-the-box components for the header, figures, image comparison sliders, LaTeX equations, two-column layouts, code blocks (with syntax highlighting), small caps, videos, and YouTube embeds.
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
 - Built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [Typescript](https://www.typescriptlang.org/).
 
