@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   frontmatter: {
     title: string;
@@ -44,11 +46,13 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="flex flex-col gap-4 items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem]"
+    class="flex flex-col gap-4 items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem] text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
   >
     <slot />
     <footer class="m-auto">
-      <p class="text-zinc-500 text-sm">
+      <p
+        class="text-zinc-500 dark:text-zinc-400 text-sm [&_a]:text-blue-500 dark:[&_a]:text-blue-300"
+      >
         This page was built using <a
           href="https://github.com/RomanHauksson/academic-project-astro-template"
           >Roman Hauksson's academic project page template</a
@@ -65,44 +69,3 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     </footer>
   </body>
 </html>
-
-<style is:global>
-  body {
-    font-family: "Noto Sans", sans-serif;
-    @apply text-zinc-900 bg-zinc-50;
-  }
-  a {
-    @apply text-blue-500 hover:underline;
-  }
-  p {
-    @apply text-lg w-full;
-  }
-  h1 {
-    @apply text-5xl text-center font-medium;
-  }
-  h2 {
-    @apply w-full text-3xl font-bold;
-  }
-  h3 {
-    @apply w-full text-xl font-bold;
-  }
-  h4 {
-    @apply w-full font-bold;
-  }
-  table {
-    @apply border-y-2 border-black;
-  }
-  thead {
-    @apply border-b border-black;
-  }
-  th,
-  td {
-    @apply px-4;
-  }
-  ul {
-    @apply prose list-disc list-inside w-full;
-  }
-  ol {
-    @apply prose list-decimal list-inside w-full;
-  }
-</style>
