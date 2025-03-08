@@ -1,0 +1,49 @@
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    /* background-color: var(--shiki-dark-bg) !important; */
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+a {
+  @apply text-blue-500 dark:text-blue-300 hover:underline;
+}
+p {
+  @apply text-lg w-full;
+}
+h1 {
+  @apply text-5xl text-center font-medium;
+}
+h2 {
+  @apply w-full text-3xl font-bold;
+}
+h3 {
+  @apply w-full text-xl font-bold;
+}
+h4 {
+  @apply w-full font-bold;
+}
+table {
+  @apply border-y-2 border-black dark:border-zinc-50;
+}
+thead {
+  @apply border-b border-black dark:border-zinc-50;
+}
+th,
+td {
+  @apply px-4;
+}
+ul {
+  @apply prose list-disc list-inside w-full;
+}
+ol {
+  @apply prose list-decimal list-inside w-full;
+}

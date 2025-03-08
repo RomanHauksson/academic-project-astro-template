@@ -25,7 +25,7 @@ const Roman = () => {
   }, []);
 
   return (
-    <div className="bg-zinc-300 h-[20rem] w-full rounded-lg">
+    <div className="bg-zinc-300 dark:bg-zinc-800 h-[20rem] w-full rounded-lg">
       <Canvas camera={{ position: [0, 0, 0], rotation: [0, 0, 0] }}>
         <Splat
           src="https://roman.technology/Roman.splat"
