@@ -104,15 +104,17 @@ Use the figure component to display images, videos, equations, or any other elem
 
 <Figure>
   <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
-  <span slot="caption">Diagram of the transformer deep learning architecture.</span>
+  <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
 </Figure>
 
 ## Image comparison slider
 
 An interactive, accessible slider component with keyboard navigation.
+
 <Figure>
   <ImageComparison slot="figure" client:load imageOne={dogsDiffc} imageTwo={dogsTrue} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
-  <span slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the <a href="https://jeremyiv.github.io/diffc-project-page/">DiffC algorithm</a>.</span>
+
+  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
 ## Two columns
@@ -122,11 +124,11 @@ Use the two columns component to display two columns of content. In this example
 <TwoColumns>
   <Figure slot="left">
     <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
-    <span slot="caption">Take a look at this YouTube video.</span>
+    <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
     <Splat slot="figure" client:idle />
-    <span slot="caption">Now look at this <a href="https://en.wikipedia.org/wiki/Gaussian_splatting">Gaussian splat</a>, rendered with a React component.</span>
+    <Fragment slot="caption">Now look at this [Gaussian splat](https://en.wikipedia.org/wiki/Gaussian_splatting), rendered with a React component.</Fragment>
   </Figure>
 </TwoColumns>
 
