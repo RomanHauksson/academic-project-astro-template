@@ -4,13 +4,13 @@ import {
 } from "react-compare-slider";
 
 export function ImageComparison({
-  imageUrlOne,
-  imageUrlTwo,
+  imageOne,
+  imageTwo,
   altTextOne,
   altTextTwo,
 }: {
-  imageUrlOne: string;
-  imageUrlTwo: string;
+  imageOne: ImageMetadata;
+  imageTwo: ImageMetadata;
   altTextOne?: string;
   altTextTwo?: string;
 }) {
@@ -19,8 +19,22 @@ export function ImageComparison({
       <ReactCompareSlider
         boundsPadding={0}
         // clip="both"
-        itemOne={<ReactCompareSliderImage alt={altTextOne} src={imageUrlOne} />}
-        itemTwo={<ReactCompareSliderImage alt={altTextTwo} src={imageUrlTwo} />}
+        itemOne={
+          <ReactCompareSliderImage
+            alt={altTextOne}
+            src={imageOne.src}
+            width={imageOne.width}
+            height={imageOne.height}
+          />
+        }
+        itemTwo={
+          <ReactCompareSliderImage
+            alt={altTextTwo}
+            src={imageTwo.src}
+            width={imageTwo.width}
+            height={imageTwo.height}
+          />
+        }
         keyboardIncrement="5%"
         position={50}
         style={{
