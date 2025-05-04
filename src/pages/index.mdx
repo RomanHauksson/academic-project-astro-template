@@ -17,6 +17,7 @@ import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 
 import { ImageComparison } from "../components/ImageComparison.tsx";
+import { MyThumbnailSwitcher, ThumbnailPage } from "../components/MyThumbnailSwitcher.tsx";
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
@@ -90,6 +91,28 @@ export const components = {pre: CodeBlock, table: Table}
 
 <Video source={outside} />
 
+## Thumbnail switcher
+
+{/* <MyThumbnailSwitcher client:load>
+  <ThumbnailPage thumbnail="bruh">
+  This is some content
+  </ThumbnailPage>
+  <ThumbnailPage thumbnail="bruh 2">
+  This is another set of content
+  </ThumbnailPage>
+</MyThumbnailSwitcher> */}
+
+<MyThumbnailSwitcher client:load>
+  <ThumbnailPage>
+    <Image slot="thumbnail" src={dogsDiffc} />
+    <p slot="content">The DiffC dog</p>
+  </ThumbnailPage>
+  <ThumbnailPage>
+    <Image slot="thumbnail" src={dogsTrue} />
+    <p slot="content">The true dog</p>
+  </ThumbnailPage>
+</MyThumbnailSwitcher>
+
 <HighlightedSection>
 
 ## Abstract
@@ -113,7 +136,6 @@ An interactive, accessible slider component with keyboard navigation.
 
 <Figure>
   <ImageComparison slot="figure" client:load imageOne={dogsDiffc} imageTwo={dogsTrue} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
-
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
