@@ -36,7 +36,7 @@ Want help setting it up? Please schedule a call with me [here](https://cal.com/r
 
 ### Icons
 
-This template uses [Astro Icon](https://www.astroicon.dev/) library.
+This template uses the [Astro Icon](https://www.astroicon.dev/) library.
 
 To use a custom icon:
 
