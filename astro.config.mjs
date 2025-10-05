@@ -5,11 +5,9 @@ import mdx from "@astrojs/mdx";
 
 import react from "@astrojs/react";
 
-import svelte from "@astrojs/svelte";
-
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), icon(), mdx(), react(), svelte()],
+  integrations: [tailwind(), icon(), mdx(), react()],
   markdown: {
     shikiConfig: {
       themes: {

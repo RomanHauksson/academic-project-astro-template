@@ -46,7 +46,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="flex flex-col gap-4 items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem] text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
+    class="flex flex-col [&>*]:mt-[1em] items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem] text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
   >
     <slot />
     <footer class="m-auto">
@@ -55,15 +55,13 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
       >
         This page was built using <a
           href="https://github.com/RomanHauksson/academic-project-astro-template"
-          >Roman Hauksson's academic project page template</a
-        >, which was adapted from <a
+          >this project page template</a
+        >, adapted from <a
           href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-          >Eliahu Horwitz's template</a
-        >, which was adapted from <a href="https://nerfies.github.io/"
-          >Keunhong Park's project page for <i>Nerfies</i></a
-        >. It is licensed under a <a
-          href="http://creativecommons.org/licenses/by-sa/4.0/"
-          >Creative Commons Attribution-ShareAlike 4.0 International License</a
+          >Eliahu Horwitz</a
+        > and <a href="https://nerfies.github.io/">Keunhong Park</a>. Licensed
+        under <a href="http://creativecommons.org/licenses/by-sa/4.0/"
+          >CC BY-SA 4.0</a
         >.
       </p>
     </footer>
