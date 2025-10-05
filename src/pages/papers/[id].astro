@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+import Authors from "@components/Authors.astro";
+import Notes from "@components/Notes.astro";
+import Links from "@components/Links.astro";
+
+// Custom components for HTML elements written in markdown
+import CodeBlock from "@components/CodeBlock.astro";
+import Table from "@components/Table.astro";
+
+export async function getStaticPaths() {
+  const papers = await getCollection("papers");
+  return papers.map((paper) => ({
+    params: { id: paper.id },
+    props: { paper },
+  }));
+}
+
+const { paper } = Astro.props;
+const { Content } = await render(paper);
+const { title, authors, conference, notes, links, favicon, thumbnail } =
+  paper.data;
+---
+
+<Layout title={title} favicon={favicon || "favicon.svg"} thumbnail={thumbnail}>
+  <header class="flex flex-col gap-10 items-center mb-6">
+    <h1>{title}</h1>
+    <div class="flex flex-col gap-6 items-center">
+      <Authors authors={authors} />
+      {conference && <p class="text-center">{conference}</p>}
+      {notes && <Notes notes={notes} />}
+      {links && <Links links={links} />}
+    </div>
+  </header>
+  <Content components={{ pre: CodeBlock, table: Table }} />
+</Layout>

@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+
+const papers = await getCollection("papers");
+---
+
+<h2>Papers</h2>
+<div>
+  {papers.map((paper) => <div>{paper.data.title}</div>)}
+</div>

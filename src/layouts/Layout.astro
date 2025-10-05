@@ -2,15 +2,13 @@
 import "../styles/global.css";
 
 interface Props {
-  frontmatter: {
-    title: string;
-    description?: string;
-    favicon: string;
-    thumbnail?: string;
-  };
+  title: string;
+  description?: string;
+  favicon: string;
+  thumbnail?: string;
 }
 
-const { title, description, favicon, thumbnail } = Astro.props.frontmatter;
+const { title, description, favicon, thumbnail } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
