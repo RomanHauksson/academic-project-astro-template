@@ -15,6 +15,7 @@ This is a template you can use to build a project page for your research paper, 
 ## Real-world examples
 
 - [Token-Efficient Long Video Understanding for Multimodal LLMs](https://research.nvidia.com/labs/lpr/storm/) (NVIDIA Research)
+- [PolyPose: Deformable 2D/3D Registration via Polyrigid Transforms](https://polypose.csail.mit.edu/) (MIT CSAIL)
 - [Lossy Compression With Pretrained Diffusion Models](https://jeremyiv.github.io/diffc-project-page/) (ICLR 2025)
 - [CLIP-RT: Learning Language-Conditioned Robotic Policies from Natural Language Supervision](https://clip-rt.github.io/)
 - [StochSync: Stochastic Diffusion Synchronization for Image Generation in Arbitrary Spaces](https://stochsync.github.io/)
