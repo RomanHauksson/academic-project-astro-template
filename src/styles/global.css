@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 body {
   font-family: "Noto Sans", sans-serif;
 }
