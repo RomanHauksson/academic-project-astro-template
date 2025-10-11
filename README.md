@@ -7,14 +7,16 @@ This is a template you can use to build a project page for your research paper, 
 ## Features
 
 - Easily edit the content in Markdown instead of HTML.
-- Quick-to-load, works with mobile devices, accessible, and SEO-friendly.
-- Includes out-of-the-box components for the header, figures, image comparison sliders, LaTeX equations, two-column layouts, code blocks (with syntax highlighting), small caps, videos, and YouTube embeds.
+- Quick-to-load, works with mobile devices, accessible, SEO-friendly, and supports dark mode.
+- Includes out-of-the-box components for figures, image comparison sliders, LaTeX, two-column layouts, code blocks (with syntax highlighting), small caps, videos, and YouTube embeds.
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
 - Built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [Typescript](https://www.typescriptlang.org/).
 
 ## Real-world examples
 
-- [Lossy Compression With Pretrained Diffusion Models](https://jeremyiv.github.io/diffc-project-page/)
+- [Token-Efficient Long Video Understanding for Multimodal LLMs](https://research.nvidia.com/labs/lpr/storm/) (NVIDIA Research)
+- [PolyPose: Deformable 2D/3D Registration via Polyrigid Transforms](https://polypose.csail.mit.edu/) (MIT CSAIL)
+- [Lossy Compression With Pretrained Diffusion Models](https://jeremyiv.github.io/diffc-project-page/) (ICLR 2025)
 - [CLIP-RT: Learning Language-Conditioned Robotic Policies from Natural Language Supervision](https://clip-rt.github.io/)
 - [StochSync: Stochastic Diffusion Synchronization for Image Generation in Arbitrary Spaces](https://stochsync.github.io/)
 - [CRESSim: Simulator for Advancing Surgical Autonomy](https://tbs-ualberta.github.io/CRESSim/)
@@ -35,7 +37,7 @@ Want help setting it up? Please schedule a call with me [here](https://cal.com/r
 
 ### Icons
 
-This template uses [Astro Icon](https://www.astroicon.dev/) library.
+This template uses the [Astro Icon](https://www.astroicon.dev/) library.
 
 To use a custom icon:
 
@@ -64,6 +66,11 @@ import { Icon } from "astro-icon/components";
 - If you're using VS Code, I recommend installing the [Astro extension](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode) to get IntelliSense, syntax highlighting, and other features.
 - When people share the link to your project on social media, it will often appear as a "link preview" based on the title, description, thumbnail, and favicon you configured. Double check that these previews look right using [this tool](https://linkpreview.xyz/).
 - The Nerfies page uses the Google Sans font, which is licensed by Google, so unfortunately, I had to change it to a different font instead (I picked Noto Sans).
+
+## Alternative templates
+
+- [Clarity: A Minimalist Website Template for AI Research](https://shikun.io/projects/clarity) by Shikun Liu. Beautiful and careful design that's distinct from the original Nerfies page. Editable via an HTML template and SCSS.
+- [Academic Project Page Template](https://denkiwakame.github.io/academic-project-template/) by Mai Nishimura. Built with React and UIKit and editable with Markdown in a YAML file.
 
 ## Credits
 
