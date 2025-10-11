@@ -4,11 +4,13 @@
 body {
   font-family: "Noto Sans", sans-serif;
 }
-a {
-  @apply text-blue-500 dark:text-blue-300 hover:underline;
+.links {
+  a {
+    @apply text-blue-500 dark:text-blue-300 hover:underline;
+  }
 }
 p {
-  @apply text-lg w-full;
+  /* @apply text-lg w-full; */
 }
 h1 {
   @apply text-5xl text-center font-medium;
