@@ -4,9 +4,40 @@ title: Research Project Page Template
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 favicon: favicon.svg
 thumbnail: screenshot-light.png
+authors:
+  - name: Roman Hauksson
+    url: https://roman.technology
+    institution: University of Texas at Dallas
+    notes: ["*", "†"]
+  - name: Author Two
+    institution: Institution Two
+    notes: ["*", "†"]
+  - name: Author Three
+    institution: Institution Three
+    notes: ["*"]
+  - name: Author Four
+    institution: Institution Four
+conference: Conference Name
+notes:
+  - symbol: "*"
+    text: "author note one"
+  - symbol: "†"
+    text: "author note two"
+links:
+  - name: Paper
+    url: ""
+    icon: "ri:file-pdf-2-line"
+  - name: Code
+    url: https://github.com/RomanHauksson/academic-project-astro-template
+    icon: "ri:github-line"
+  - name: arXiv
+    url: ""
+    icon: "academicons:arxiv"
+  - name: Bluesky
+    url: ""
+    icon: "ri:bluesky-line"
 ---
 
-import Header from "../components/Header.astro";
 import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
@@ -25,69 +56,8 @@ import Splat from "../components/Splat.tsx"
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
-
-import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
-export const components = {pre: CodeBlock, table: Table}
-
-<Header
-  title={frontmatter.title}
-  authors={[
-    {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "University of Texas at Dallas",
-      notes: ["*", "†"],
-    },
-    {
-      name: "Author Two",
-      institution: "Institution Two",
-      notes: ["*", "†"],
-    },
-    {
-      name: "Author Three",
-      institution: "Institution Three",
-      notes: ["†"],
-    },
-    {
-      name: "Author Four",
-      institution: "Institution Four",
-    },
-  ]}
-  conference="Conference Name"
-  notes={[
-    {
-      symbol: "*",
-      text: "author note one",
-    },
-    {
-      symbol: "†",
-      text: "author note two",
-    },
-  ]}
-  links={[
-    {
-      name: "Paper",
-      url: "",
-      icon: "ri:file-pdf-2-line",
-    },
-    {
-      name: "Code",
-      url: "https://github.com/RomanHauksson/academic-project-astro-template",
-      icon: "ri:github-line",
-    },
-    {
-      name: "arXiv",
-      url: "",
-      icon: "academicons:arxiv",
-    },
-    {
-      name: "Bluesky",
-      url: "",
-      icon: "ri:bluesky-line"
-    }
-  ]}
-  />
+export const components = {table: Table}
 
 <Video source={outside} />
 
@@ -162,6 +132,8 @@ You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.g
 | XLNet | 0.90 | 0.89 | 6.8 |
 
 ## BibTeX citation
+
+Use a code block to add an easily copyable BibTeX citation.
 
 ```bibtex
 @misc{roman2024academic,

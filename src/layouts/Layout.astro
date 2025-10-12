@@ -1,16 +1,34 @@
 ---
 import "../styles/global.css";
 
+import Links from "../components/Links.astro";
+import Authors from "../components/Authors.astro";
+import Notes from "../components/Notes.astro";
+import type { Author, Note, Link } from "../types/types";
+
 interface Props {
   frontmatter: {
     title: string;
+    authors: Author[];
+    conference?: string;
+    notes?: Note[];
+    links: Link[];
     description?: string;
     favicon: string;
     thumbnail?: string;
   };
 }
 
-const { title, description, favicon, thumbnail } = Astro.props.frontmatter;
+const {
+  title,
+  description,
+  favicon,
+  thumbnail,
+  authors,
+  conference,
+  notes,
+  links,
+} = Astro.props.frontmatter;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
@@ -46,16 +64,29 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="flex flex-col [&>*]:mt-[1em] items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem] text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
+    class="pt-12 pb-6 w-full flex flex-col items-center text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
   >
-    <slot />
-    <footer class="m-auto">
+    <header class="flex flex-col gap-10 items-center mb-6 mt-[1em] px-6">
+      <h1>{title}</h1>
+      <div class="flex flex-col gap-6 items-center">
+        <Authors authors={authors} />
+        {conference && <p class="text-center">{conference}</p>}
+        {notes && <Notes notes={notes} />}
+        {links && <Links links={links} />}
+      </div>
+    </header>
+    <main
+      class="w-full links flex flex-col [&>*]:mt-[1em] items-center [&>p]:text-lg [&>p]:w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem]"
+    >
+      <slot />
+    </main>
+    <footer class="m-auto mt-[1em] px-6">
       <p
-        class="text-zinc-500 dark:text-zinc-400 text-sm [&_a]:text-blue-500 dark:[&_a]:text-blue-300"
+        class="text-center text-zinc-500 dark:text-zinc-400 text-sm [&_a]:text-blue-500 dark:[&_a]:text-blue-300"
       >
         This page was built using <a
           href="https://github.com/RomanHauksson/academic-project-astro-template"
-          >this project page template</a
+          >Roman Hauksson's template</a
         >, adapted from <a
           href="https://github.com/eliahuhorwitz/Academic-project-page-template"
           >Eliahu Horwitz</a
