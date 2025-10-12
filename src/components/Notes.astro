@@ -1,4 +1,8 @@
 ---
+// The Astro VS Code extension uses Prettier to format Astro files, including this one. For some reason, formatting this file adds a new line in between `{note.symbol}` and `{note.text}`, even though, as far as I can tell, this shouldn't happen if it's in a `span` tag. This causes there to be a space in between the symbol and the text in the final HTML.
+// https://prettier.io/docs/options#html-whitespace-sensitivity
+// To get around this, either disable formatting on save or press `Cmd+Shift+P` and select "File: Save without Formatting".
+
 import type { Note } from "../types/types";
 
 interface Props {
@@ -6,17 +10,14 @@ interface Props {
 }
 
 const { notes } = Astro.props;
-// Saving this document with automatic formatting adds a line in between the note symbol in the `<sup>` element and the note text.
-// This adds a space in between the symbol and the text in the final HTML.
-// To preserve the lack of a space, save this file without formatting by pressing `Cmd+Shift+P` (in VS Code) and selecting `File: Save without formatting`.
 ---
 
-<p class="text-sm text-center">
+<div class="text-sm text-center">
   {
     notes.map((note, index, array) => (
-      <>
+      <span>
         <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
-      </>
+      </span>
     ))
   }
-</p>
+</div>
