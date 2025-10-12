@@ -57,7 +57,7 @@ import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
 import Table from "../components/Table.astro";
-export const components = {table: Table}
+export const components = { table: Table }
 
 <Video source={outside} />
 
@@ -83,7 +83,12 @@ Use the figure component to display images, videos, equations, or any other elem
 An interactive, accessible slider component with keyboard navigation.
 
 <Figure>
-  <ImageComparison slot="figure" client:load imageOne={dogsDiffc} imageTwo={dogsTrue} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
+  <ImageComparison
+    slot="figure" client:load
+    imageOne={dogsDiffc} imageTwo={dogsTrue}
+    altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm"
+    altTextTwo="Original photo of two dogs running side-by-side in shallow water"
+  />
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 

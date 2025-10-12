@@ -1,8 +1,21 @@
 ---
-
+/* 
+table {
+  @apply border-y-2 border-black dark:border-zinc-50;
+}
+thead {
+  @apply border-b border-black dark:border-zinc-50;
+}
+th,
+td {
+  @apply px-4;
+}
+*/
 ---
 
-<div class="px-6 w-full overflow-auto">
+<div
+  class="w-full overflow-auto prose-table:border-y-2 prose-table:border-black prose-table:dark:border-zinc-50 prose-thead:border-b prose-thead:border-black prose-thead:dark:border-zinc-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-tr:border-none prose-td:py-2"
+>
   <table class="w-full">
     <slot />
   </table>
