@@ -44,14 +44,12 @@ To use a custom icon:
 
 1. Search on [Iconify](https://icon-sets.iconify.design/) to find the icon you want. For example, the Hugging Face icon is `simple-icons:huggingface`, from the Simple Icons icon set.
 1. Install the corresponding icon set: `npm install @iconify-json/simple-icons`.
-1. If you're using the icon in one of the link buttons, add it in one of the objects in the `links` prop of the `<Header />` component in `index.mdx`:
+1. If you're using the icon in one of the link buttons, put the icon name in the value of the `icon` key, like this:
 
-```mdx
-    {
-      name: "Hugging Face",
-      url: "https://huggingface.co/",
-      icon: "simple-icons:huggingface"
-    }
+```yaml
+  - name: Hugging Face
+    url: https://huggingface.co/
+    icon: simple-icons:huggingface
 ```
 
 Or, to use it anywhere in an Astro component or MDX file:
