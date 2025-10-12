@@ -64,26 +64,22 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="pt-12 pb-6 w-full flex flex-col items-center text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
+    class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal max-w-[50rem] mx-auto pt-16 pb-6 px-6 bg-zinc-50 dark:bg-zinc-900"
   >
-    <header class="flex flex-col gap-10 items-center mb-6 mt-[1em] px-6">
-      <h1>{title}</h1>
+    <header>
+      <h1 class="text-5xl text-center font-medium">{title}</h1>
       <div class="flex flex-col gap-6 items-center">
         <Authors authors={authors} />
-        {conference && <p class="text-center">{conference}</p>}
+        {conference && <div>{conference}</div>}
         {notes && <Notes notes={notes} />}
         {links && <Links links={links} />}
       </div>
     </header>
-    <main
-      class="w-full links flex flex-col [&>*]:mt-[1em] items-center [&>p]:text-lg [&>p]:w-full [&>*]:px-6 [&>*]:max-w-[60rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[60rem]"
-    >
+    <main>
       <slot />
     </main>
-    <footer class="m-auto mt-[1em] px-6">
-      <p
-        class="text-center text-zinc-500 dark:text-zinc-400 text-sm [&_a]:text-blue-500 dark:[&_a]:text-blue-300"
-      >
+    <footer class="w-full flex justify-center">
+      <p class="text-center prose-sm">
         This page was built using <a
           href="https://github.com/RomanHauksson/academic-project-astro-template"
           >Roman Hauksson's template</a

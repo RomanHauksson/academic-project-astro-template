@@ -2,11 +2,13 @@
 
 ---
 
-<figure class="w-full flex flex-col gap-2 items-center">
-  <div class="*:max-h-[35rem] *:object-contain flex justify-center w-full">
+<figure>
+  <div
+    class="not-prose *:max-h-[35rem] *:object-contain flex justify-center w-full"
+  >
     <slot name="figure" />
   </div>
-  <figcaption class="text-center text-zinc-700 dark:text-zinc-300">
+  <figcaption class="text-center">
     <slot name="caption" />
   </figcaption>
 </figure>

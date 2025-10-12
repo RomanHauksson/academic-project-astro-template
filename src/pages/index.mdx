@@ -8,10 +8,10 @@ authors:
   - name: Roman Hauksson
     url: https://roman.technology
     institution: University of Texas at Dallas
-    notes: ["*", "†"]
+    notes: ["*", †]
   - name: Author Two
     institution: Institution Two
-    notes: ["*", "†"]
+    notes: ["*", †]
   - name: Author Three
     institution: Institution Three
     notes: ["*"]
@@ -20,22 +20,22 @@ authors:
 conference: Conference Name
 notes:
   - symbol: "*"
-    text: "author note one"
-  - symbol: "†"
-    text: "author note two"
+    text: author note one
+  - symbol: †
+    text: author note two
 links:
   - name: Paper
-    url: ""
-    icon: "ri:file-pdf-2-line"
+    url: https://github.com/RomanHauksson/academic-project-astro-template
+    icon: ri:file-pdf-2-line
   - name: Code
     url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: "ri:github-line"
+    icon: ri:github-line
   - name: arXiv
-    url: ""
-    icon: "academicons:arxiv"
+    url: https://github.com/RomanHauksson/academic-project-astro-template
+    icon: academicons:arxiv
   - name: Bluesky
-    url: ""
-    icon: "ri:bluesky-line"
+    url: https://github.com/RomanHauksson/academic-project-astro-template
+    icon: ri:bluesky-line
 ---
 
 import Video from "../components/Video.astro";
@@ -57,7 +57,7 @@ import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
 import Table from "../components/Table.astro";
-export const components = {table: Table}
+export const components = { table: Table }
 
 <Video source={outside} />
 
@@ -83,7 +83,12 @@ Use the figure component to display images, videos, equations, or any other elem
 An interactive, accessible slider component with keyboard navigation.
 
 <Figure>
-  <ImageComparison slot="figure" client:load imageOne={dogsDiffc} imageTwo={dogsTrue} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
+  <ImageComparison
+    slot="figure" client:load
+    imageOne={dogsDiffc} imageTwo={dogsTrue}
+    altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm"
+    altTextTwo="Original photo of two dogs running side-by-side in shallow water"
+  />
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
