@@ -19,6 +19,6 @@ export default defineConfig({
         shadowColor: 'transparent',
       }
     },
-    themeCssSelector: (theme) => (theme.name === 'github-dark' ? `[data-theme="dark"]` : `[data-theme="light"]`)
+    themeCssSelector: (theme) => (theme.type === 'dark' ? `[data-theme="dark"]` : `[data-theme="light"]`)
   }), mdx(), react()],
 });
