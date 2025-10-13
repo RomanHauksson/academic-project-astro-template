@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark {
+  &:where([data-theme="dark"] *) {
+    @slot;
+  }
+  &:where([data-theme="device"] *) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
+
 body {
   font-family: "Noto Sans", sans-serif;
 }
