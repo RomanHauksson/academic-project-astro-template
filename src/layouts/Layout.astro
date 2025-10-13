@@ -16,6 +16,7 @@ interface Props {
     description?: string;
     favicon: string;
     thumbnail?: string;
+    theme?: "device" | "light" | "dark";
   };
 }
 
@@ -28,13 +29,14 @@ const {
   conference,
   notes,
   links,
+  theme = "device",
 } = Astro.props.frontmatter;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={theme}>
   <head>
     <meta charset="UTF-8" />
     {description && <meta name="description" content={description} />}
