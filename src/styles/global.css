@@ -12,8 +12,8 @@
   }
 }
 
-body {
-  font-family: "Noto Sans", sans-serif;
+@theme inline {
+  --font-sans: var(--font-noto-sans);
 }
 
 .expressive-code {
