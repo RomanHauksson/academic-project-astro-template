@@ -6,7 +6,7 @@ interface Props {
   inline?: boolean;
 }
 
-const { formula = "", inline } = Astro.props;
+const { formula, inline = false } = Astro.props;
 const html = katex.renderToString(formula, { throwOnError: false });
 ---
 
