@@ -11,10 +11,11 @@ const { videoId, aspectRatio = 16 / 9 } = Astro.props;
   <iframe
     class="w-full h-full"
     loading="lazy"
-    src={"https://www.youtube.com/embed/" + videoId}
+    src={"https://www.youtube-nocookie.com/embed/" + videoId}
     title="YouTube video player"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 
 <style define:vars={{ aspectRatio }}>
