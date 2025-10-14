@@ -8,8 +8,8 @@ interface Props {
 const { source } = Astro.props;
 
 const pdfPath = "." + source;
-const outputPath = pdfPath + ".png";
-const webPath = source + ".png";
+const outputPath = pdfPath + ".webp";
+const webPath = source + ".webp";
 const data = new Uint8Array(fs.readFileSync(pdfPath));
 
 // Load the PDF file.
@@ -41,12 +41,12 @@ try {
   const renderTask = page.render(renderContext);
   await renderTask.promise;
   // Convert the canvas to an image buffer.
-  const image = canvasAndContext.canvas.toBuffer("image/png");
+  const image = canvasAndContext.canvas.toBuffer("image/webp");
   fs.writeFile(outputPath, image, function (error) {
     if (error) {
       console.error("Error: " + error);
     } else {
-      console.log(`Finished converting PDF to PNG: ${outputPath}`);
+      console.log(`Finished converting PDF to WebP: ${outputPath}`);
     }
   });
   // Release page resources.
@@ -56,4 +56,4 @@ try {
 }
 ---
 
-<img src={webPath} alt="PDF page rendered as image" />
+<img src={webPath} alt="PDF page rendered as image" width="100%" />
