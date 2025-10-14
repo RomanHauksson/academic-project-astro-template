@@ -62,7 +62,6 @@ import { MyThumbnailSwitcher, ThumbnailPage } from "../components/MyThumbnailSwi
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
-import Splat from "../components/Splat.tsx"
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
@@ -117,7 +116,6 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <Splat slot="figure" client:idle />
     <Fragment slot="caption">Now look at this [Gaussian splat](https://en.wikipedia.org/wiki/Gaussian_splatting), rendered with a React component.</Fragment>
   </Figure>
 </TwoColumns>
