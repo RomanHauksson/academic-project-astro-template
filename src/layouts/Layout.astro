@@ -55,11 +55,21 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <Font cssVariable="--font-noto-sans" preload />
 
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"
-      integrity="sha384-WsHMgfkABRyG494OmuiNmkAOk8nhO1qE+Y6wns6v+EoNoTNxrWxYpl5ZYWFOLPCM"
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
+      as="style"
+      integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
       crossorigin="anonymous"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
+        integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
+        crossorigin="anonymous"
+      /></noscript
+    >
 
     <title>{title}</title>
   </head>
