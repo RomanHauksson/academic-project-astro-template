@@ -56,6 +56,7 @@ import RenderPDF from "../components/RenderPDF.astro"
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
+import ThreeDimensional from "../components/ThreeDimensional.tsx";
 
 import { ImageComparison } from "../components/ImageComparison.tsx";
 import { MyThumbnailSwitcher, ThumbnailPage } from "../components/MyThumbnailSwitcher.tsx";
@@ -116,7 +117,8 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <Fragment slot="caption">Now look at this [Gaussian splat](https://en.wikipedia.org/wiki/Gaussian_splatting), rendered with a React component.</Fragment>
+    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:load />
+    <Fragment slot="caption">Now look at this cube, rendered with React Three Fiber.</Fragment>
   </Figure>
 </TwoColumns>
 
