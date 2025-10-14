@@ -52,6 +52,7 @@ import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
 import Image from "../components/Image.astro";
+import RenderPDF from "../components/RenderPDF.astro"
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
@@ -65,14 +66,8 @@ import Splat from "../components/Splat.tsx"
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
-import intro from "../../public/intro.pdf"
-
 import Table from "../components/Table.astro";
 export const components = { table: Table }
-
-import RenderPDF from "../components/RenderPDF.astro"
-
-<RenderPDF source={intro} />
 
 <Video source={outside} />
 
@@ -93,9 +88,14 @@ Use the figure component to display images, videos, equations, or any other elem
   <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
 </Figure>
 
-## Image comparison slider
+If you stored your figures as PDFs, copy them into `./src/assets/` and use the `RenderPDF` component to convert them into web-friendly images automatically.
 
-An interactive, accessible slider component with keyboard navigation.
+<Figure>
+  <RenderPDF slot="figure" filename="allstate-sparsity.pdf" altText="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." />
+  <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
+</Figure>
+
+Use the `ImageComparison` component to compare two images with an interactive slider.
 
 <Figure>
   <ImageComparison
@@ -122,18 +122,6 @@ Use the two columns component to display two columns of content. In this example
   </Figure>
 </TwoColumns>
 
-## Heading levels
-
-Use headings to divide your content into sections.
-
-### Heading 3
-
-Go down a level to heading 3...
-
-#### Heading 4
-
-...and down again to heading 4.
-
 ## LaTeX
 
 You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
@@ -142,7 +130,7 @@ You can also add LaTeX formulas, rendered during the build process using [KaTeX]
 
 ## Tables
 
-You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
+Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
 
 | Model | Accuracy | F1 score | Training time (hours) |
 | :--- | :---: | :---: | :---: |
@@ -153,7 +141,7 @@ You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.g
 
 ## BibTeX citation
 
-Use a code block to add an easily copyable BibTeX citation.
+Displaying your BibTeX citation in a code block makes it easy to copy and paste.
 
 ```bibtex
 @misc{roman2024academic,
