@@ -83,8 +83,10 @@ Use the figure component to display images, videos, equations, or any other elem
 
 If you stored your figures as PDFs, copy them into `./src/assets/` and use the `RenderPDF` component to convert them into web-friendly images automatically.
 
+import allstateSparsity from "../assets/allstate-sparsity.pdf";
+
 <Figure>
-  <RenderPDF slot="figure" filename="allstate-sparsity.pdf" altText="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
+  <Image slot="figure" src={allstateSparsity} alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
   <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
 </Figure>
 
