@@ -19,7 +19,7 @@ function Loader() {
   );
 }
 
-export default function ThreeDimensional({ filename }: { filename: string }) {
+export function ThreeDimensional({ filename }: { filename: string }) {
   function Scene() {
     const gltf = useLoader(GLTFLoader, `./${filename}`);
     return <primitive object={gltf.scene} />;
