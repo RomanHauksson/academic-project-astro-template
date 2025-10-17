@@ -133,4 +133,34 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Custom inline code styling - override Tailwind Typography defaults */
+  :not(pre) > code {
+    /* Remove backticks */
+    &::before,
+    &::after {
+      content: "" !important;
+    }
+
+    /* Background color */
+    background-color: oklch(0.95 0.002 286.3);
+    
+    /* Rounded edges */
+    border-radius: 0.25rem;
+    
+    /* Padding: small horizontal and tiny vertical */
+    padding: 0.125rem 0.375rem;
+    
+    /* Text color */
+    color: oklch(0.35 0.01 286.0);
+    
+    /* Remove bold weight from default typography */
+    font-weight: 400;
+  }
+
+  /* Dark mode styling for inline code */
+  .dark :not(pre) > code {
+    background-color: oklch(0.25 0.008 286.0);
+    color: oklch(0.85 0.005 286.0);
+  }
 }
