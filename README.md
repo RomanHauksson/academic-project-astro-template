@@ -36,36 +36,6 @@ Want help setting it up? Please schedule a call with me [here](https://cal.com/r
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRomanHauksson%2Facademic-project-astro-template)
 
-### Icons
-
-This template uses the [Astro Icon](https://www.astroicon.dev/) library.
-
-To use a custom icon:
-
-1. Search on [Iconify](https://icon-sets.iconify.design/) to find the icon you want. For example, the Hugging Face icon is `simple-icons:huggingface`, from the Simple Icons icon set.
-1. Install the corresponding icon set: `npm install @iconify-json/simple-icons`.
-1. If you're using the icon in one of the link buttons, put the icon name in the value of the `icon` key, like this:
-
-```yaml
-  - name: Hugging Face
-    url: https://huggingface.co/
-    icon: simple-icons:huggingface
-```
-
-Or, to use it anywhere in an Astro component or MDX file:
-
-```mdx
-import { Icon } from "astro-icon/components";
-
-<Icon name={"simple-icons:huggingface"} />
-```
-
-### Notes
-
-- If you're using VS Code, I recommend installing the [Astro extension](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode) to get IntelliSense, syntax highlighting, and other features.
-- When people share the link to your project on social media, it will often appear as a "link preview" based on the title, description, thumbnail, and favicon you configured. Double check that these previews look right using [this tool](https://linkpreview.xyz/).
-- The Nerfies page uses the Google Sans font, which is licensed by Google, so unfortunately, I had to change it to a different font instead (I picked Noto Sans).
-
 ## Alternative templates
 
 - [Clarity: A Minimalist Website Template for AI Research](https://shikun.io/projects/clarity) by Shikun Liu. Beautiful and careful design that's distinct from the original Nerfies page. Editable via an HTML template and SCSS.
