@@ -26,7 +26,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Noto Sans",
       cssVariable: "--font-noto-sans",
-      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      weights: "100 900",
     }]
   }
 });
