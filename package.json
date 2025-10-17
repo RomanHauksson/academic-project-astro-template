@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/react": "^4.4.0",
+    "@fontsource-variable/noto-sans": "^5.2.10",
     "@iconify-json/academicons": "^1.1.14",
     "@iconify-json/ri": "^1.2.3",
     "@radix-ui/react-progress": "^1.1.7",

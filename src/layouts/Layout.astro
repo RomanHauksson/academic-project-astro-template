@@ -1,6 +1,5 @@
 ---
-import { Font } from "astro:assets";
-
+import "@fontsource-variable/noto-sans/wght.css";
 import "../styles/global.css";
 
 import Links from "../components/Links.astro";
@@ -51,8 +50,6 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     {thumbnail && <meta property="og:image" content={prefix + thumbnail} />}
-
-    <Font cssVariable="--font-noto-sans" preload />
 
     <link
       rel="preload"
