@@ -26,7 +26,7 @@ export function ThreeDimensional({ filename }: { filename: string }) {
   }
 
   return (
-    <div className="w-full h-96 bg-zinc-300 dark:bg-zinc-800 rounded-lg">
+    <div className="w-full h-96 bg-zinc-200 dark:bg-zinc-800 rounded-lg">
       <Canvas>
         <Suspense fallback={<Loader />}>
           <Scene />

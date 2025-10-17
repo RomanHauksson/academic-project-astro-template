@@ -15,6 +15,9 @@ export default defineConfig({
   integrations: [icon(), astroExpressiveCode({
     styleOverrides: {
       width: '100%',
+      borderRadius: '0.5rem',
+      borderWidth: '0',
+      codeBackground: ({ theme }) => `var(--color-zinc-${theme.type === 'dark' ? '800' : '200'})`,
       frames: {
         shadowColor: 'transparent',
       }
