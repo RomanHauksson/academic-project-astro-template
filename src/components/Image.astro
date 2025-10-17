@@ -2,15 +2,16 @@
 import { Image as AstroImage } from "astro:assets";
 
 interface Props {
-  source: ImageMetadata;
-  altText: string;
+  src: ImageMetadata;
+  alt: string;
+  invertInDarkMode?: boolean;
 }
 
-const { source, altText } = Astro.props;
+const { src, alt, invertInDarkMode = false } = Astro.props;
 ---
 
 <AstroImage
-  class="rounded-lg max-h-[35rem] w-max object-contain !px-0"
-  src={source}
-  alt={altText}
+  class={`rounded-lg max-h-[35rem] w-max object-contain !px-0 ${invertInDarkMode && "dark:invert"}`}
+  src={src}
+  alt={alt}
 />

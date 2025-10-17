@@ -77,14 +77,14 @@ This is a live demo for a template you can use to create a simple project page f
 Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
 <Figure>
-  <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
+  <Image slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
   <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
 </Figure>
 
 If you stored your figures as PDFs, copy them into `./src/assets/` and use the `RenderPDF` component to convert them into web-friendly images automatically.
 
 <Figure>
-  <RenderPDF slot="figure" filename="allstate-sparsity.pdf" altText="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." />
+  <RenderPDF slot="figure" filename="allstate-sparsity.pdf" altText="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
   <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
 </Figure>
 

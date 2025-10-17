@@ -8,8 +8,14 @@ interface Props {
   filename: string;
   altText: string;
   ignorecache?: boolean;
+  invertInDarkMode?: boolean;
 }
-const { filename, altText, ignorecache = false } = Astro.props;
+const {
+  filename,
+  altText,
+  ignorecache = false,
+  invertInDarkMode = false,
+} = Astro.props;
 
 const outputFilename = filename + ".webp";
 const outputPath = `./public/converted-pdfs/${outputFilename}`;
@@ -25,7 +31,7 @@ const loadingTask = getDocument({
 });
 const pdfDocument = await loadingTask.promise;
 const page = await pdfDocument.getPage(1);
-const viewport = page.getViewport({ scale: 1 });
+const viewport = page.getViewport({ scale: 2 });
 const width = viewport.width;
 const height = viewport.height;
 
@@ -63,7 +69,7 @@ if (!ignorecache && fs.existsSync(outputPath)) {
 ---
 
 <Image
-  class="rounded-lg max-h-[35rem] w-max object-contain !px-0"
+  class={`rounded-lg max-h-[35rem] w-max object-contain !px-0 ${invertInDarkMode && "dark:invert"}`}
   src={"/converted-pdfs/" + outputFilename}
   alt={altText}
   width={width}
