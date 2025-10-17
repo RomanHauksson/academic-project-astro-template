@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 const outputFilename = filename + ".webp";
-const outputPath = `./public/converted-pdfs/${outputFilename}`;
+const outputPath = `./src/assets/converted-pdfs/${outputFilename}`;
 
 const data = new Uint8Array(fs.readFileSync(`./src/assets/${filename}`));
 
@@ -66,12 +66,17 @@ if (!ignorecache && fs.existsSync(outputPath)) {
     console.log(reason);
   }
 }
+
+const image: ImageMetadata = {
+  src: `/@fs/${outputPath}`,
+  width: width,
+  height: height,
+  format: "webp",
+};
 ---
 
 <Image
   class={`rounded-lg max-h-[35rem] w-max object-contain !px-0 ${invertInDarkMode && "dark:invert"}`}
-  src={"/converted-pdfs/" + outputFilename}
+  src={image}
   alt={altText}
-  width={width}
-  height={height}
 />
