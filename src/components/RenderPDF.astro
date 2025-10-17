@@ -4,15 +4,13 @@
 import fs from "fs";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { Image } from "astro:assets";
+
 interface Props {
   filename: string;
   altText: string;
-  ignorecache?: boolean;
 }
-const { filename, altText, ignorecache = false } = Astro.props;
 
-const outputFilename = filename + ".webp";
-const outputPath = `./public/converted-pdfs/${outputFilename}`;
+const { filename, altText } = Astro.props;
 
 const data = new Uint8Array(fs.readFileSync(`./src/assets/${filename}`));
 
@@ -29,43 +27,30 @@ const viewport = page.getViewport({ scale: 1 });
 const width = viewport.width;
 const height = viewport.height;
 
-// Check if the output file already exists.
-if (!ignorecache && fs.existsSync(outputPath)) {
-  page.cleanup();
-} else {
-  try {
-    // Render the page on a Node canvas with 100% scale.
-    const canvasFactory = pdfDocument.canvasFactory as any;
-    const canvasAndContext = canvasFactory.create(width, height);
-    const renderContext = {
-      canvasContext: canvasAndContext.context,
-      viewport,
-      canvas: canvasAndContext.canvas,
-    };
+// Render the page on a Node canvas with 100% scale.
+const canvasFactory = pdfDocument.canvasFactory as any;
+const canvasAndContext = canvasFactory.create(width, height);
+const renderContext = {
+  canvasContext: canvasAndContext.context,
+  viewport,
+  canvas: canvasAndContext.canvas,
+};
 
-    const renderTask = page.render(renderContext);
-    await renderTask.promise;
+const renderTask = page.render(renderContext);
+await renderTask.promise;
 
-    // Convert the canvas to an image buffer.
-    const image = canvasAndContext.canvas.toBuffer("image/webp");
-    fs.writeFile(outputPath, image, function (error) {
-      if (error) {
-        console.error("Error: " + error);
-      }
-    });
+// Convert the canvas to an image buffer and create data URI.
+const imageBuffer = canvasAndContext.canvas.toBuffer("image/png");
 
-    // Release page resources.
-    page.cleanup();
-  } catch (reason) {
-    console.log(reason);
-  }
-}
+// Release page resources.
+page.cleanup();
 ---
 
 <Image
   class="rounded-lg max-h-[35rem] w-max object-contain !px-0"
-  src={"/converted-pdfs/" + outputFilename}
+  src={`data:image/png;base64,${imageBuffer.toString("base64")}`}
   alt={altText}
   width={width}
   height={height}
+  layout="full-width"
 />
