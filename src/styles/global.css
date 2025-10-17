@@ -133,32 +133,4 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  /* Override Tailwind Typography inline code styling */
-  :is(.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl) :where(code):not(:where([class~="not-prose"] *)) {
-    background-color: oklch(0.95 0.002 286.3);
-    color: oklch(0.35 0.01 285.9);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-weight: 500;
-  }
-
-  /* Remove the default backticks and quotes */
-  :is(.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl) :where(code):not(:where([class~="not-prose"] *))::before,
-  :is(.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl) :where(code):not(:where([class~="not-prose"] *))::after {
-    content: "" !important;
-  }
-
-  /* Dark mode styling for inline code */
-  .dark :is(.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl) :where(code):not(:where([class~="not-prose"] *)) {
-    background-color: oklch(0.25 0.008 286.0);
-    color: oklch(0.85 0.005 286.1);
-  }
-
-  /* Ensure code blocks (inside pre) are not affected */
-  :is(.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl) :where(pre code):not(:where([class~="not-prose"] *)) {
-    background-color: transparent;
-    padding: 0;
-    border-radius: 0;
-  }
 }
