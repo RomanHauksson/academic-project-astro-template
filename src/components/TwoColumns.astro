@@ -2,11 +2,11 @@
 // TODO: when the page is narrow enough, figures with images don't have any horizontal padding
 ---
 
-<div class="flex flex-wrap gap-4 items-center w-full">
-  <div class="flex-1 min-w-[16rem]">
-    <slot name="left" />
-  </div>
-  <div class="flex-1 min-w-[16rem]">
-    <slot name="right" />
-  </div>
+<div class="flex w-full flex-wrap items-center gap-4">
+    <div class="min-w-[16rem] flex-1">
+        <slot name="left" />
+    </div>
+    <div class="min-w-[16rem] flex-1">
+        <slot name="right" />
+    </div>
 </div>

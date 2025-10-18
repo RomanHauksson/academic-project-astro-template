@@ -12,14 +12,14 @@ If you want to use a different font, consult the docs on [Astro's experimental F
 
 ```mjs
 experimental: {
-  fonts: [
-    {
-      provider: fontProviders.google(),
-      name: "Noto Sans",
-      cssVariable: "--font-noto-sans",
-      weights: ["100 900"],
-    },
-  ];
+    fonts: [
+        {
+            provider: fontProviders.google(),
+            name: 'Noto Sans',
+            cssVariable: '--font-noto-sans',
+            weights: ['100 900'],
+        },
+    ]
 }
 ```
 
@@ -57,9 +57,9 @@ To use a custom icon:
 Or, to use it anywhere in an Astro component or MDX file:
 
 ```mdx
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components'
 
-<Icon name={"simple-icons:huggingface"} />
+<Icon name={'simple-icons:huggingface'} />
 ```
 
 ### Notes

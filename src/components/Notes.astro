@@ -3,21 +3,23 @@
 // https://prettier.io/docs/options#html-whitespace-sensitivity
 // To get around this, either disable formatting on save or press `Cmd+Shift+P` and select "File: Save without Formatting".
 
-import type { Note } from "../types/types";
+import type { Note } from '../types/types'
 
 interface Props {
-  notes: Note[];
+    notes: Note[]
 }
 
-const { notes } = Astro.props;
+const { notes } = Astro.props
 ---
 
-<div class="text-sm text-center">
-  {
-    notes.map((note, index, array) => (
-      <span>
-        <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
-      </span>
-    ))
-  }
+<div class="text-center text-sm">
+    {
+        notes.map((note, index, array) => (
+            <span>
+                <sup>{note.symbol}</sup>
+                {note.text}
+                {index < array.length - 1 ? ',' : ''}
+            </span>
+        ))
+    }
 </div>

@@ -1,106 +1,111 @@
 ---
-import { Font } from "astro:assets";
+import { Font } from 'astro:assets'
 
-import "../styles/global.css";
+import '../styles/global.css'
 
-import Links from "../components/Links.astro";
-import Authors from "../components/Authors.astro";
-import Notes from "../components/Notes.astro";
-import type { Author, Note, Link } from "../types/types";
+import Links from '../components/Links.astro'
+import Authors from '../components/Authors.astro'
+import Notes from '../components/Notes.astro'
+import type { Author, Note, Link } from '../types/types'
 
 interface Props {
-  frontmatter: {
-    title: string;
-    authors: Author[];
-    conference?: string;
-    notes?: Note[];
-    links: Link[];
-    description?: string;
-    favicon: string;
-    thumbnail?: string;
-    theme?: "device" | "light" | "dark";
-  };
+    frontmatter: {
+        title: string
+        authors: Author[]
+        conference?: string
+        notes?: Note[]
+        links: Link[]
+        description?: string
+        favicon: string
+        thumbnail?: string
+        theme?: 'device' | 'light' | 'dark'
+    }
 }
 
 const {
-  title,
-  description,
-  favicon,
-  thumbnail,
-  authors,
-  conference,
-  notes,
-  links,
-  theme = "device",
-} = Astro.props.frontmatter;
-const baseUrl = import.meta.env.BASE_URL;
-const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+    title,
+    description,
+    favicon,
+    thumbnail,
+    authors,
+    conference,
+    notes,
+    links,
+    theme = 'device',
+} = Astro.props.frontmatter
+const baseUrl = import.meta.env.BASE_URL
+const prefix = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'
 ---
 
 <!doctype html>
 <html lang="en" data-theme={theme}>
-  <head>
-    <meta charset="UTF-8" />
-    {description && <meta name="description" content={description} />}
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+    <head>
+        <meta charset="UTF-8" />
+        {description && <meta name="description" content={description} />}
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
 
-    <link rel="icon" type="image/svg+xml" href={prefix + favicon} />
+        <link rel="icon" type="image/svg+xml" href={prefix + favicon} />
 
-    <meta property="og:title" content={title} />
-    {description && <meta property="og:description" content={description} />}
-    <meta property="og:type" content="website" />
-    {thumbnail && <meta property="og:image" content={prefix + thumbnail} />}
+        <meta property="og:title" content={title} />
+        {
+            description && (
+                <meta property="og:description" content={description} />
+            )
+        }
+        <meta property="og:type" content="website" />
+        {thumbnail && <meta property="og:image" content={prefix + thumbnail} />}
 
-    <Font cssVariable="--font-noto-sans" preload />
+        <Font cssVariable="--font-noto-sans" preload />
 
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
-      as="style"
-      integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
-      crossorigin="anonymous"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
-        integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
-        crossorigin="anonymous"
-      /></noscript
+        <link
+            rel="preload"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
+            as="style"
+            integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
+            crossorigin="anonymous"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript
+            ><link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css"
+                integrity="sha384-XqqnskmP1dvxUvvZ3AXYAFD9QfxyU22X7ZwX2TuTlO4Mn4+u3i2d0ypR7ooPKcYc"
+                crossorigin="anonymous"
+            /></noscript
+        >
+
+        <title>{title}</title>
+    </head>
+    <body
+        class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none mx-auto max-w-[50rem] bg-white px-6 pt-16 pb-6 dark:bg-zinc-900"
     >
-
-    <title>{title}</title>
-  </head>
-  <body
-    class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none max-w-[50rem] mx-auto pt-16 pb-6 px-6 bg-white dark:bg-zinc-900"
-  >
-    <header>
-      <h1 class="text-5xl text-center font-medium">{title}</h1>
-      <div class="flex flex-col gap-6 items-center">
-        <Authors authors={authors} />
-        {conference && <div>{conference}</div>}
-        {notes && <Notes notes={notes} />}
-        {links && <Links links={links} />}
-      </div>
-    </header>
-    <main>
-      <slot />
-    </main>
-    <footer class="w-full flex justify-center">
-      <p class="text-center prose-sm">
-        This page was built using <a
-          href="https://github.com/RomanHauksson/academic-project-astro-template"
-          >Roman Hauksson's template</a
-        >, adapted from <a
-          href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-          >Eliahu Horwitz</a
-        > and <a href="https://nerfies.github.io/">Keunhong Park</a>. Licensed
-        under <a href="http://creativecommons.org/licenses/by-sa/4.0/"
-          >CC BY-SA 4.0</a
-        >.
-      </p>
-    </footer>
-  </body>
+        <header>
+            <h1 class="text-center text-5xl font-medium">{title}</h1>
+            <div class="flex flex-col items-center gap-6">
+                <Authors authors={authors} />
+                {conference && <div>{conference}</div>}
+                {notes && <Notes notes={notes} />}
+                {links && <Links links={links} />}
+            </div>
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer class="flex w-full justify-center">
+            <p class="prose-sm text-center">
+                This page was built using <a
+                    href="https://github.com/RomanHauksson/academic-project-astro-template"
+                    >Roman Hauksson's template</a
+                >, adapted from <a
+                    href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                    >Eliahu Horwitz</a
+                > and <a href="https://nerfies.github.io/">Keunhong Park</a>.
+                Licensed under <a
+                    href="http://creativecommons.org/licenses/by-sa/4.0/"
+                    >CC BY-SA 4.0</a
+                >.
+            </p>
+        </footer>
+    </body>
 </html>
