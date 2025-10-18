@@ -4,12 +4,11 @@ import fs from "fs";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 
 export async function renderPDF(
-  inputFilePath: string,
-  ignorecache: boolean = false
+  inputFilePath: string
+  // ignorecache: boolean = false
 ): Promise<ImageMetadata> {
   const inputFileName = inputFilePath.split("/").pop();
-  const inputDirectory = inputFilePath.split("/").slice(0, -1).join("/");
-  const outputFilePath = `${inputDirectory}/converted-pdfs/${inputFileName}.webp`;
+  const outputFilePath = `./src/assets/converted-pdfs/${inputFileName}.avif`;
 
   const data = new Uint8Array(fs.readFileSync("." + inputFilePath));
 
@@ -23,46 +22,46 @@ export async function renderPDF(
   });
   const pdfDocument = await loadingTask.promise;
   const page = await pdfDocument.getPage(1);
-  const viewport = page.getViewport({ scale: 2 });
+  const viewport = page.getViewport({ scale: 4 });
   const width = viewport.width;
   const height = viewport.height;
 
   // Check if the output file already exists.
-  if (!ignorecache && fs.existsSync(outputFilePath)) {
-    page.cleanup();
-  } else {
-    try {
-      // Render the page on a Node canvas with 100% scale.
-      const canvasFactory = pdfDocument.canvasFactory as any;
-      const canvasAndContext = canvasFactory.create(width, height);
-      const renderContext = {
-        canvasContext: canvasAndContext.context,
-        viewport,
-        canvas: canvasAndContext.canvas,
-      };
+  // if (!ignorecache && fs.existsSync(outputFilePath)) {
+  //   page.cleanup();
+  // } else {
+  //   try {
+  // Render the page on a Node canvas with 100% scale.
+  const canvasFactory = pdfDocument.canvasFactory as any;
+  const canvasAndContext = canvasFactory.create(width, height);
+  const renderContext = {
+    canvasContext: canvasAndContext.context,
+    viewport,
+    canvas: canvasAndContext.canvas,
+  };
 
-      const renderTask = page.render(renderContext);
-      await renderTask.promise;
+  const renderTask = page.render(renderContext);
+  await renderTask.promise;
 
-      // Convert the canvas to an image buffer.
-      const image = canvasAndContext.canvas.toBuffer("image/webp");
-      fs.writeFile(outputFilePath, image, function (error) {
-        if (error) {
-          console.error("Error: " + error);
-        }
-      });
-
-      // Release page resources.
-      page.cleanup();
-    } catch (reason) {
-      console.log(reason);
+  // Convert the canvas to an image buffer.
+  const image = canvasAndContext.canvas.toBuffer("image/avif");
+  fs.writeFile(outputFilePath, image, function (error) {
+    if (error) {
+      console.error("Error: " + error);
     }
-  }
+  });
+
+  // Release page resources.
+  page.cleanup();
+  //   } catch (reason) {
+  //     console.log(reason);
+  //   }
+  // }
 
   return {
     src: `/@fs/${outputFilePath}`,
     width: width,
     height: height,
-    format: "webp",
+    format: "avif",
   };
 }

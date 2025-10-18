@@ -46,18 +46,19 @@ import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
-import Image from "../components/Image.astro";
+import Picture from "../components/Picture.astro";
 import RenderPDF from "../components/RenderPDF.astro"
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 import { ThreeDimensional } from "../components/ThreeDimensional.tsx";
-import { ImageComparison } from "../components/ImageComparison.tsx";
+import { Comparison } from "../components/Comparison.tsx";
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
+import allstateSparsity from "../assets/allstate-sparsity.pdf";
 
 import Table from "../components/Table.astro";
 export const components = { table: Table }
@@ -77,28 +78,24 @@ This is a live demo for a template you can use to create a simple project page f
 Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
 <Figure>
-  <Image slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
+  <Picture slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
   <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
 </Figure>
 
-If you stored your figures as PDFs, copy them into `./src/assets/` and use the `RenderPDF` component to convert them into web-friendly images automatically.
-
-import allstateSparsity from "../assets/allstate-sparsity.pdf";
+If you stored your figures as PDFs, the `Picture` component can convert them into web-friendly images automatically.
 
 <Figure>
-  <Image slot="figure" src={allstateSparsity} alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
+  <Picture slot="figure" src={allstateSparsity} alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
   <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
 </Figure>
 
-Use the `ImageComparison` component to compare two images with an interactive slider.
+Use the `Comparison` component to compare two elements with an interactive slider. It should work for any component or HTML element, including images, videos, and 3D models.
 
 <Figure>
-  <ImageComparison
-    slot="figure" client:load
-    imageOne={dogsDiffc} imageTwo={dogsTrue}
-    altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm"
-    altTextTwo="Original photo of two dogs running side-by-side in shallow water"
-  />
+  <Comparison slot="figure" client:idle >
+    <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+  </Comparison>
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
@@ -112,7 +109,7 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:load />
+    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:idle />
     <Fragment slot="caption">Now look at this cube, rendered with React Three Fiber.</Fragment>
   </Figure>
 </TwoColumns>

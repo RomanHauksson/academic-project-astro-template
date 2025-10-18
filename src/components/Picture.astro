@@ -21,10 +21,11 @@ if (typeof src === "string") {
 ---
 
 <AstroPicture
-  class={`rounded-lg max-h-[35rem] w-max object-contain !px-0 ${invertInDarkMode && "dark:invert"}`}
+  class={`rounded-lg max-h-[35rem] w-full ${invertInDarkMode && "dark:invert"}`}
   src={image}
   alt={alt}
-  layout="full-width"
+  layout="constrained"
   formats={["avif", "webp"]}
   priority={priority}
+  fit="scale-down"
 />
