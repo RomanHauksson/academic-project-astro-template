@@ -1,18 +1,18 @@
 ---
 interface Props {
-    source: string
+  source: string;
 }
 
-const { source } = Astro.props
+const { source } = Astro.props;
 ---
 
 <div class="flex w-full justify-center">
-    <video
-        class="aspect-video h-auto w-full rounded-lg"
-        controls
-        loop
-        playsinline
-    >
-        <source src={source} type="video/mp4" />
-    </video>
+  <video
+    class="aspect-video h-auto w-full rounded-lg"
+    controls
+    loop
+    playsinline
+  >
+    <source src={source} type="video/mp4" />
+  </video>
 </div>

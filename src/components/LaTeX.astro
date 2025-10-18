@@ -1,21 +1,21 @@
 ---
-import katex from 'katex'
+import katex from "katex";
 
 interface Props {
-    formula: string
-    inline?: boolean
+  formula: string;
+  inline?: boolean;
 }
 
-const { formula, inline = false } = Astro.props
-const html = katex.renderToString(formula, { throwOnError: false })
+const { formula, inline = false } = Astro.props;
+const html = katex.renderToString(formula, { throwOnError: false });
 ---
 
 {
-    inline ? (
-        <span set:html={html} />
-    ) : (
-        <div class="text-center">
-            <span set:html={html} />
-        </div>
-    )
+  inline ? (
+    <span set:html={html} />
+  ) : (
+    <div class="text-center">
+      <span set:html={html} />
+    </div>
+  )
 }

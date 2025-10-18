@@ -1,25 +1,25 @@
 ---
 interface Props {
-    videoId: string
-    aspectRatio?: number
+  videoId: string;
+  aspectRatio?: number;
 }
 
-const { videoId, aspectRatio = 16 / 9 } = Astro.props
+const { videoId, aspectRatio = 16 / 9 } = Astro.props;
 ---
 
 <div class="w-full overflow-hidden rounded-lg">
-    <iframe
-        class="h-full w-full"
-        loading="lazy"
-        src={'https://www.youtube-nocookie.com/embed/' + videoId}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <iframe
+    class="h-full w-full"
+    loading="lazy"
+    src={"https://www.youtube-nocookie.com/embed/" + videoId}
+    title="YouTube video player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 
 <style define:vars={{ aspectRatio }}>
-    div {
-        aspect-ratio: var(--aspectRatio);
-    }
+  div {
+    aspect-ratio: var(--aspectRatio);
+  }
 </style>
