@@ -8,9 +8,8 @@ export async function renderPDF(
   // ignorecache: boolean = false
 ): Promise<ImageMetadata> {
   const inputFileName = inputFilePath.split("/").pop();
-  const outputFilePath = `./src/assets/converted-pdfs/${inputFileName}.avif`;
 
-  const data = new Uint8Array(fs.readFileSync("." + inputFilePath));
+  const data = new Uint8Array(fs.readFileSync("./src/pages/" + inputFilePath));
 
   // Where the standard fonts are located.
   const STANDARD_FONT_DATA_URL =
@@ -45,7 +44,17 @@ export async function renderPDF(
 
   // Convert the canvas to an image buffer.
   const image = canvasAndContext.canvas.toBuffer("image/avif");
-  fs.writeFile(outputFilePath, image, function (error) {
+
+  // Ensure directories exist before writing the file
+  const outputDir = `./dist/_astro`;
+  if (!fs.existsSync("./dist")) {
+    fs.mkdirSync("./dist", { recursive: true });
+  }
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  fs.writeFile(`${outputDir}/${inputFileName}.avif`, image, function (error) {
     if (error) {
       console.error("Error: " + error);
     }
@@ -58,8 +67,21 @@ export async function renderPDF(
   //   }
   // }
 
+  let src: string;
+
+  // If running astro build, env.PROD is true
+  if (import.meta.env.PROD) {
+    src = `_astro/${inputFileName}.avif`;
+  } else {
+    src = `../dist/_astro/${inputFileName}.avif`;
+  }
+
+  console.log("Source: " + src);
+  console.log("Environment: " + import.meta.env.MODE);
+  console.log("Is build: " + import.meta.env.PROD);
+
   return {
-    src: `/@fs/${outputFilePath}`,
+    src: src,
     width: width,
     height: height,
     format: "avif",

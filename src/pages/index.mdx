@@ -58,7 +58,6 @@ import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
-import allstateSparsity from "../assets/allstate-sparsity.pdf";
 
 import Table from "../components/Table.astro";
 export const components = { table: Table }
@@ -85,7 +84,7 @@ Use the figure component to display images, videos, equations, or any other elem
 If you stored your figures as PDFs, the `Picture` component can convert them into web-friendly images automatically.
 
 <Figure>
-  <Picture slot="figure" src={allstateSparsity} alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
+  <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
   <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
 </Figure>
 
