@@ -8,7 +8,7 @@ If you discover into any bugs, imperfections, or features you'd like from this t
 
 If you want to use a different font, consult the docs on [Astro's experimental Fonts API](https://docs.astro.build/en/reference/experimental-flags/fonts/). You'll have to edit the following three files:
 
-`/astro.config.mjs`:
+`/astro.config.ts`:
 
 ```mjs
 experimental: {

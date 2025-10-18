@@ -16,7 +16,6 @@ export default defineConfig({
     icon(),
     astroExpressiveCode({
       styleOverrides: {
-        width: "100%",
         borderRadius: "0.5rem",
         borderWidth: "0",
         codeBackground: ({ theme }) =>
