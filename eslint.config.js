@@ -6,9 +6,11 @@ import eslintPluginAstro from "eslint-plugin-astro";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import css from "@eslint/css";
-import { defineConfig } from "eslint/config";
+import { tailwindSyntax } from "@eslint/css/syntax";
+import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
+  globalIgnores(["dist/*", ".astro/*", "package-lock.json"]),
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js },
@@ -18,7 +20,11 @@ export default defineConfig([
 
   tseslint.configs.recommended,
 
-  eslintPluginAstro.configs.recommended,
+  {
+    files: ["**/*.astro"],
+    plugins: { eslintPluginAstro },
+    extends: [eslintPluginAstro.configs.recommended],
+  },
   {
     files: ["**/*.json"],
     plugins: { json },
@@ -53,6 +59,9 @@ export default defineConfig([
     files: ["**/*.css"],
     plugins: { css },
     language: "css/css",
+    languageOptions: {
+      customSyntax: tailwindSyntax,
+    },
     extends: ["css/recommended"],
   },
 ]);
