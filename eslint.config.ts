@@ -6,7 +6,7 @@ import eslintPluginAstro from 'eslint-plugin-astro'
 import json from '@eslint/json'
 import markdown from '@eslint/markdown'
 import css from '@eslint/css'
-import { tailwindSyntax } from '@eslint/css/syntax'
+import { tailwind4 } from 'tailwind-csstree'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -59,9 +59,7 @@ export default defineConfig([
         files: ['**/*.css'],
         plugins: { css },
         language: 'css/css',
-        languageOptions: {
-            customSyntax: tailwindSyntax,
-        },
+        languageOptions: { customSyntax: tailwind4 },
         extends: ['css/recommended'],
     },
 ])
