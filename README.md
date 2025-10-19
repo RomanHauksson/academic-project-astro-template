@@ -10,7 +10,7 @@ This is a template you can use to build a project page for your research paper, 
 - Quick-to-load, works with mobile devices, accessible, SEO-friendly, and supports dark mode.
 - Includes out-of-the-box components for figures, LaTeX, code blocks (with syntax highlighting), videos, 3D objects, and a figure comparison slider.
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
-- Built with [Astro](https://astro.build/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [Typescript](https://www.typescriptlang.org/).
+- Built with [Astro](https://astro.build/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [TypeScript](https://www.typescriptlang.org/).
 
 ## Real-world examples
 
@@ -34,12 +34,12 @@ Want help setting it up? Please schedule a call with me [here](https://cal.com/r
 2. Clone your repository.
 3. [Install Node.js](https://nodejs.org/en/download/package-manager) if you haven't already. Make sure you're using version 24 or later, which you can check by running `node --version`. To manage versions, you can use [Node Version Manager](https://github.com/nvm-sh/nvm): `nvm install 24 && nvm use 24`.
 4. Run `npm install` from the root of the project to install the dependencies.
-5. Edit the content in `/src/pages/index.mdx`. You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I reccommend in `.vscode/extensions.json`.
+5. Edit the content in `/src/pages/index.mdx`. You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in `.vscode/extensions.json`.
 6. Run `npm run dev` to start the development server, then open `http://localhost:4321` in your browser to see a live preview of your page while you edit it.
 7. To deploy your site to the web, you need to enable GitHub Pages for the GitHub repository. Click on the **Settings** tab, then go to **Pages** (under the **Code and automation** section). Using the dropdown, change **Source** from "Deploy from a branch" to "GitHub Actions".
-8. Whenever you push to the `main` branch, the GitHub Action in `.github/workflows/astro.yml` will automatically trigger, building and deploying your site to `https://<username>.github.io/<repository>/`. No other configuration is necessary!
+8. Whenever you push to the `main` branch, the GitHub Actions workflow in `.github/workflows/astro.yml` will automatically build and deploy your site to `https://<username>.github.io/<repository>/`. No other configuration is necessary!
 
-For more more documentation, consult [`./documentation.md`](./documentation.md).
+For more documentation, consult [`./documentation.md`](./documentation.md).
 
 ## Alternative templates
 

@@ -47,7 +47,6 @@
     "@eslint/js": "^9.38.0",
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.4.0",
-    "@iconify/react": "^5.2.0",
     "@tailwindcss/typography": "^0.5.15",
     "@typescript-eslint/parser": "^8.46.1",
     "eslint": "^9.38.0",

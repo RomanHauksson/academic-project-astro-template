@@ -21,7 +21,7 @@ if (typeof src === "string") {
 ---
 
 <AstroPicture
-  class={`rounded-lg max-h-[35rem] w-full ${invertInDarkMode && "dark:invert"}`}
+  class={`rounded-lg max-h-[35rem] w-full ${invertInDarkMode ? "dark:invert" : ""}`}
   src={image}
   alt={alt}
   layout="constrained"

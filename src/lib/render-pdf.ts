@@ -3,10 +3,7 @@
 import fs from "fs";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 
-export async function renderPDF(
-  inputFilePath: string,
-  // ignorecache: boolean = false
-): Promise<ImageMetadata> {
+export async function renderPDF(inputFilePath: string): Promise<ImageMetadata> {
   const inputFileName = inputFilePath.split("/").pop();
 
   const data = new Uint8Array(fs.readFileSync("./src/pages/" + inputFilePath));
@@ -25,12 +22,7 @@ export async function renderPDF(
   const width = viewport.width;
   const height = viewport.height;
 
-  // Check if the output file already exists.
-  // if (!ignorecache && fs.existsSync(outputFilePath)) {
-  //   page.cleanup();
-  // } else {
-  //   try {
-  // Render the page on a Node canvas with 100% scale.
+  // Render the page on a Node canvas with 400% scale.
   const canvasFactory = pdfDocument.canvasFactory as any;
   const canvasAndContext = canvasFactory.create(width, height);
   const renderContext = {
@@ -43,7 +35,7 @@ export async function renderPDF(
   await renderTask.promise;
 
   // Convert the canvas to an image buffer.
-  const image = canvasAndContext.canvas.toBuffer("image/avif");
+  const image = canvasAndContext.canvas.toBuffer("image/png");
 
   // Ensure directories exist before writing the file
   const outputDir = `./dist/_astro`;
@@ -54,7 +46,7 @@ export async function renderPDF(
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  fs.writeFile(`${outputDir}/${inputFileName}.avif`, image, function (error) {
+  fs.writeFile(`${outputDir}/${inputFileName}.png`, image, function (error) {
     if (error) {
       console.error("Error: " + error);
     }
@@ -62,28 +54,20 @@ export async function renderPDF(
 
   // Release page resources.
   page.cleanup();
-  //   } catch (reason) {
-  //     console.log(reason);
-  //   }
-  // }
 
   let src: string;
 
   // If running astro build, env.PROD is true
   if (import.meta.env.PROD) {
-    src = `_astro/${inputFileName}.avif`;
+    src = `_astro/${inputFileName}.png`;
   } else {
-    src = `../dist/_astro/${inputFileName}.avif`;
+    src = `../dist/_astro/${inputFileName}.png`;
   }
-
-  console.log("Source: " + src);
-  console.log("Environment: " + import.meta.env.MODE);
-  console.log("Is build: " + import.meta.env.PROD);
 
   return {
     src: src,
     width: width,
     height: height,
-    format: "avif",
+    format: "png",
   };
 }
