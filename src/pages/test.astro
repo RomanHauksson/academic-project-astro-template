@@ -1,0 +1,75 @@
+---
+import { Font } from "astro:assets";
+import { createFontStack } from "@capsizecss/core";
+import notoSans from "@capsizecss/metrics/notoSans";
+import arial from "@capsizecss/metrics/arial";
+const { fontFamily, fontFaces } = createFontStack([notoSans, arial]);
+console.log(fontFamily);
+console.log(fontFaces);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <Font cssVariable="--font-noto-sans" preload />
+    <style>
+      /* This comes from Astro's Fonts API (check index.html in dist) */
+      @font-face {
+        font-family: "Arial fallback test";
+        src: local("Arial");
+        font-display: swap;
+        font-weight: 100 900;
+        font-style: normal;
+        size-adjust: 122.9249%;
+        ascent-override: 86.9637%;
+        descent-override: 23.8357%;
+        line-gap-override: 0%;
+      }
+      /* this comes from Capsize CSS */
+      @font-face {
+        font-family: "Capsize Noto Sans Fallback";
+        src: local("Arial"), local("ArialMT");
+        ascent-override: 100.5403%;
+        descent-override: 27.5569%;
+        line-gap-override: 0%;
+        size-adjust: 106.3255%;
+      }
+      .parent {
+        position: relative;
+      }
+      .both {
+        position: absolute;
+        font-size: 6rem;
+      }
+      .noto {
+        font-family: var(--font-noto-sans);
+      }
+      .fallback {
+        font-family: "Arial fallback test";
+        color: red;
+      }
+      .capsize {
+        font-family: "Capsize Noto Sans Fallback";
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="parent">
+      <div class="noto both">
+        This is some test text. This is some test text. This is some test text.
+        This is some test text. This is some test text.
+      </div>
+      <div class="fallback both">
+        This is some test text. This is some test text. This is some test text.
+        This is some test text. This is some test text.
+      </div>
+    </div> -->
+    <div class="parent">
+      <div class="noto both">abcdefghijklmnopqrstuvwxyz</div>
+      <div class="fallback both">abcdefghijklmnopqrstuvwxyz</div>
+      <div class="capsize both">abcdefghijklmnopqrstuvwxyz</div>
+    </div>
+  </body>
+</html>
