@@ -11,7 +11,7 @@ function Loader() {
   const { progress } = useProgress();
   return (
     <Html center>
-      <div className="w-[200px] flex flex-col gap-2 items-center">
+      <div className="flex w-[200px] flex-col items-center gap-2">
         <Progress value={progress} className="w-full" />
         <p className="text-sm">Loading... {progress.toFixed(0)}%</p>
       </div>
@@ -26,7 +26,7 @@ export function ThreeDimensional({ filename }: { filename: string }) {
   }
 
   return (
-    <div className="w-full h-96 bg-zinc-300 dark:bg-zinc-800 rounded-lg">
+    <div className="h-96 w-full rounded-lg bg-zinc-200 dark:bg-zinc-800">
       <Canvas>
         <Suspense fallback={<Loader />}>
           <Scene />

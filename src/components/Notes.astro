@@ -12,11 +12,13 @@ interface Props {
 const { notes } = Astro.props;
 ---
 
-<div class="text-sm text-center">
+<div class="text-center text-sm">
   {
     notes.map((note, index, array) => (
       <span>
-        <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
+        <sup>{note.symbol}</sup>
+        {note.text}
+        {index < array.length - 1 ? "," : ""}
       </span>
     ))
   }

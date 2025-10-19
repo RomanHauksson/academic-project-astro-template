@@ -22,6 +22,3 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-# stress test
-src/pages/stress-test.mdx

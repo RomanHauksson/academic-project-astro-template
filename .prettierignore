@@ -1,0 +1,3 @@
+# As of 2025-10-18, Prettier only supports MDX v1.0.
+# See https://github.com/prettier/prettier/issues/12209 for updates.
+*.mdx

@@ -10,7 +10,7 @@ This is a template you can use to build a project page for your research paper, 
 - Quick-to-load, works with mobile devices, accessible, SEO-friendly, and supports dark mode.
 - Includes out-of-the-box components for figures, LaTeX, code blocks (with syntax highlighting), videos, 3D objects, and a figure comparison slider.
 - Add custom components using HTML or even other web frameworks like React, Vue, or Svelte.
-- Built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [Typescript](https://www.typescriptlang.org/).
+- Built with [Astro](https://astro.build/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [TypeScript](https://www.typescriptlang.org/).
 
 ## Real-world examples
 
@@ -27,44 +27,19 @@ This is a template you can use to build a project page for your research paper, 
 
 Want help setting it up? Please schedule a call with me [here](https://cal.com/romanhauksson/meeting), and I'll personally walk you through making your project page live! I want to talk to potential users to figure out pain points and features to add.
 
-1. [Install Node.js](https://nodejs.org/en/download/package-manager).
-1. Click "Use this template" to make a copy of this repository and then clone it, or just clone it directly.
-1. Run `npm install` from the root of the project to install dependencies.
-1. Edit the content in `/src/pages/index.mdx`, and remember to update the favicon and social link thumbnail (optional). In the frontmatter in `index.mdx`, they are set to `favicon.svg` and `screenshot-light.png` respectively, which refer to files in `/public/`.
-1. Run `npm run dev` to see a live preview of your page while you edit it.
-1. Host the website using [GitHub Pages](https://pages.github.com/), [Vercel](https://vercel.com), [Netlify](https://www.netlify.com/), or any other static site hosting service.
+1. Click "Use this template" to make a copy of this repository in your GitHub account. Alternatively, you can click one of the buttons below to quickly begin deploying a copy with Vercel or Netlify. To use GitHub Pages instead (recommended), see step 7.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRomanHauksson%2Facademic-project-astro-template)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRomanHauksson%2Facademic-project-astro-template) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/romanhauksson/academic-project-astro-template)
 
-### Icons
+2. Clone your repository.
+3. [Install Node.js](https://nodejs.org/en/download/package-manager) if you haven't already. Make sure you're using version 24 or later, which you can check by running `node --version`. To manage versions, you can use [Node Version Manager](https://github.com/nvm-sh/nvm): `nvm install 24 && nvm use 24`.
+4. Run `npm install` from the root of the project to install the dependencies.
+5. Edit the content in `/src/pages/index.mdx`. You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in `.vscode/extensions.json`.
+6. Run `npm run dev` to start the development server, then open `http://localhost:4321` in your browser to see a live preview of your page while you edit it.
+7. To deploy your site to the web, you need to enable GitHub Pages for the GitHub repository. Click on the **Settings** tab, then go to **Pages** (under the **Code and automation** section). Using the dropdown, change **Source** from "Deploy from a branch" to "GitHub Actions".
+8. Whenever you push to the `main` branch, the GitHub Actions workflow in `.github/workflows/astro.yml` will automatically build and deploy your site to `https://<username>.github.io/<repository>/`. No other configuration is necessary!
 
-This template uses the [Astro Icon](https://www.astroicon.dev/) library.
-
-To use a custom icon:
-
-1. Search on [Iconify](https://icon-sets.iconify.design/) to find the icon you want. For example, the Hugging Face icon is `simple-icons:huggingface`, from the Simple Icons icon set.
-1. Install the corresponding icon set: `npm install @iconify-json/simple-icons`.
-1. If you're using the icon in one of the link buttons, put the icon name in the value of the `icon` key, like this:
-
-```yaml
-  - name: Hugging Face
-    url: https://huggingface.co/
-    icon: simple-icons:huggingface
-```
-
-Or, to use it anywhere in an Astro component or MDX file:
-
-```mdx
-import { Icon } from "astro-icon/components";
-
-<Icon name={"simple-icons:huggingface"} />
-```
-
-### Notes
-
-- If you're using VS Code, I recommend installing the [Astro extension](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode) to get IntelliSense, syntax highlighting, and other features.
-- When people share the link to your project on social media, it will often appear as a "link preview" based on the title, description, thumbnail, and favicon you configured. Double check that these previews look right using [this tool](https://linkpreview.xyz/).
-- The Nerfies page uses the Google Sans font, which is licensed by Google, so unfortunately, I had to change it to a different font instead (I picked Noto Sans).
+For more documentation, consult [`./documentation.md`](./documentation.md).
 
 ## Alternative templates
 

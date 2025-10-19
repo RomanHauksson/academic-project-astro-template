@@ -7,9 +7,9 @@ interface Props {
 const { videoId, aspectRatio = 16 / 9 } = Astro.props;
 ---
 
-<div class="rounded-lg overflow-hidden w-full">
+<div class="w-full overflow-hidden rounded-lg">
   <iframe
-    class="w-full h-full"
+    class="h-full w-full"
     loading="lazy"
     src={"https://www.youtube-nocookie.com/embed/" + videoId}
     title="YouTube video player"

@@ -30,19 +30,14 @@ links:
   - name: arXiv
     url: https://github.com/RomanHauksson/academic-project-astro-template
     icon: academicons:arxiv
-  - name: Bluesky
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: ri:bluesky-line
 
-# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system).
-# Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
+# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
 theme: device
 
 # This is the icon that appears in the user's browser tab. To customize, change the favicon.svg file in /public/, or add your own file to /public/ and change the filename here.
 favicon: favicon.svg
 
-# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail.
-# After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
+# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 thumbnail: screenshot-light.png
 ---
@@ -51,13 +46,12 @@ import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
-import Image from "../components/Image.astro";
-import RenderPDF from "../components/RenderPDF.astro"
+import Picture from "../components/Picture.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 import { ThreeDimensional } from "../components/ThreeDimensional.tsx";
-import { ImageComparison } from "../components/ImageComparison.tsx";
+import { Comparison } from "../components/Comparison.tsx";
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
@@ -82,26 +76,24 @@ This is a live demo for a template you can use to create a simple project page f
 Use the figure component to display images, videos, equations, or any other element, with an optional caption.
 
 <Figure>
-  <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
+  <Picture slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
   <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
 </Figure>
 
-If you stored your figures as PDFs, copy them into `./src/assets/` and use the `RenderPDF` component to convert them into web-friendly images automatically.
+If you stored your figures as PDFs, the `Picture` component can convert them into web-friendly images automatically.
 
 <Figure>
-  <RenderPDF slot="figure" filename="allstate-sparsity.pdf" altText="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." />
+  <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
   <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
 </Figure>
 
-Use the `ImageComparison` component to compare two images with an interactive slider.
+Use the `Comparison` component to compare two elements with an interactive slider. It should work for any component or HTML element, including images, videos, and 3D models.
 
 <Figure>
-  <ImageComparison
-    slot="figure" client:load
-    imageOne={dogsDiffc} imageTwo={dogsTrue}
-    altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm"
-    altTextTwo="Original photo of two dogs running side-by-side in shallow water"
-  />
+  <Comparison slot="figure" client:idle >
+    <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+  </Comparison>
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
@@ -115,7 +107,7 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:load />
+    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:idle />
     <Fragment slot="caption">Now look at this cube, rendered with React Three Fiber.</Fragment>
   </Figure>
 </TwoColumns>

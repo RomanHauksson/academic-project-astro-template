@@ -4,5 +4,5 @@
     "unifiedjs.vscode-mdx",
     "bradlc.vscode-tailwindcss"
   ],
-  "unwantedRecommendations": []
+  "unwantedRecommendations": ["DavidAnson.vscode-markdownlint"]
 }
