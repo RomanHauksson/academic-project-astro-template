@@ -3,6 +3,14 @@
 
 @plugin "tailwindcss-animate";
 
+@font-face {
+  font-family: "Noto Sans Fallback";
+  src: local("Arial"), local("ArialMT");
+  ascent-override: 100.5403%;
+  descent-override: 27.5569%;
+  line-gap-override: 0%;
+  size-adjust: 106.3255%;
+}
 @custom-variant dark {
   &:where([data-theme="dark"] *) {
     @slot;

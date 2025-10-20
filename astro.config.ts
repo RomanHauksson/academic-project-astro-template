@@ -37,6 +37,8 @@ export default defineConfig({
         name: "Noto Sans",
         cssVariable: "--font-noto-sans",
         weights: ["100 900"],
+        optimizedFallbacks: false,
+        fallbacks: ["Noto Sans Fallback", "sans-serif"],
       },
     ],
   },
