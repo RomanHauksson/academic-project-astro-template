@@ -47,10 +47,10 @@ import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
 import Picture from "../components/Picture.astro";
+import ModelViewer from "../components/ModelViewer.astro"
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
-import { ThreeDimensional } from "../components/ThreeDimensional.tsx";
 import { Comparison } from "../components/Comparison.tsx";
 
 import outside from "../assets/outside.mp4";
@@ -107,8 +107,8 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:idle />
-    <Fragment slot="caption">Now look at this cube, rendered with React Three Fiber.</Fragment>
+    <ModelViewer slot="figure" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
+    <Fragment slot="caption">Now look at this cube, rendered with the `<model-viewer>` web component.</Fragment>
   </Figure>
 </TwoColumns>
 
