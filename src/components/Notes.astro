@@ -16,9 +16,7 @@ const { notes } = Astro.props;
   {
     notes.map((note, index, array) => (
       <span>
-        <sup>{note.symbol}</sup>
-        {note.text}
-        {index < array.length - 1 ? "," : ""}
+        <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
       </span>
     ))
   }
