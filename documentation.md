@@ -15,7 +15,7 @@ Note that `autoplay` is set to false – autoplaying a video with audio is bad f
 You can disable the controls to make your video appear like a GIF would. Do this instead of literally using a GIF; it's much more performant.
 
 ```mdx
-<Video src={outside} controls={false} />
+<Video src={...} controls={false} />
 ```
 
 For longer videos, you probably want to use a hosted video service, like YouTube:
