@@ -2,15 +2,39 @@
 
 If you discover any bugs, imperfections, or features you'd like from this template, I would super-duper appreciate it if you [filed an issue](https://github.com/RomanHauksson/academic-project-astro-template/issues/new), even if you eventually figure it out yourself. You can even book a call with me using [my meeting scheduler](https://cal.com/romanhauksson/meeting), during which I can help you debug something or give you a tour of the repository.
 
-## Font
+## Videos
 
-[The original Nerfies project page](https://nerfies.github.io/) uses the Google Sans font, which is technically [licensed by Google and unavailable for public use](https://developers.google.com/fonts/faq#can_i_use_the_product_sans_or_google_sans_fonts). Instead, I choose to use [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans), which looks similar, supports a wide range of glyphs, and is a [variable font](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide).
+By default, videos displayed using the `Video` component will be muted and play automatically. To display a video that contains audio, I recommend the following settings:
 
-If you want to use a different font, consult the docs on [Astro's experimental Fonts API](https://docs.astro.build/en/reference/experimental-flags/fonts/). You'll have to edit the following three files:
+```mdx
+<Video src={...} muted={false} autoplay={false} playsinline={false} />
+```
 
-`/astro.config.ts`:
+Note that `autoplay` is set to false – autoplaying a video with audio is bad form, and most modern browsers won't even let you do it anyway. `playsinline` is also set to false, so when the user begins playing the video on mobile, it will go fullscreen.
 
-```mjs
+You can disable the controls to make your video appear like a GIF would. Do this instead of literally using a GIF; it's much more performant.
+
+```mdx
+<Video src={outside} controls={false} />
+```
+
+For longer videos, you probably want to use a hosted video service, like YouTube:
+
+```mdx
+<YouTubeVideo videoId="..." />
+```
+
+(Or [Mux](https://docs.astro.build/en/guides/media/mux/), if you're feeling fancy or want more control.)
+
+## Fonts
+
+[The original Nerfies project page](https://nerfies.github.io/) uses the Google Sans font, which is technically [licensed by Google and unavailable for public use](https://developers.google.com/fonts/faq#can_i_use_the_product_sans_or_google_sans_fonts). Instead, I choose to use [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans), which looks similar, supports a wide range of glyphs, and is a [variable font](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide) (so it loads faster).
+
+If you want to use a different font, consult the docs on [Astro's experimental Fonts API](https://docs.astro.build/en/reference/experimental-flags/fonts/). You'll have to edit the following lines. If you're using a [Google Font](https://fonts.google.com/), it's simple as editing the font name.
+
+In `/astro.config.ts`:
+
+```ts
 experimental: {
   fonts: [
     {
@@ -23,19 +47,14 @@ experimental: {
 }
 ```
 
-`/src/layouts/Layout.astro`:
+In `/src/layouts/Layout.astro`:
 
 ```astro
 <Font cssVariable="--font-noto-sans" preload />
-```
 
-`/src/styles/global.css`:
+...
 
-```css
-@theme inline {
-  --font-sans: var(--font-noto-sans);
-  ...
-}
+<body class="font-(family-name:--font-noto-sans) ...">
 ```
 
 ## Icons
