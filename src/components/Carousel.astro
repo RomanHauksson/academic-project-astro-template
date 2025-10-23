@@ -3,7 +3,7 @@ import "swiper/css";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="swiper my-8">
+<div class="swiper my-8 max-w-screen! w-full">
   <div class="w-fit mx-auto flex items-center gap-2 mb-4">
     <Icon
       name="ri:arrow-left-s-line"
@@ -17,10 +17,8 @@ import { Icon } from "astro-icon/components";
       size={32}
     />
   </div>
-  <div class="swiper-wrapper not-prose">
-    <img class="swiper-slide" src="/screenshot-light.png" />
-    <img class="swiper-slide" src="/screenshot-light.png" />
-    <img class="swiper-slide" src="/screenshot-light.png" />
+  <div class="swiper-wrapper max-w-screen!">
+    <slot />
   </div>
 </div>
 
@@ -80,6 +78,7 @@ import { Icon } from "astro-icon/components";
     modules: [Navigation, Pagination],
     cssMode: true,
     spaceBetween: 16,
+    slidesPerView: 2,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -88,6 +87,24 @@ import { Icon } from "astro-icon/components";
       addIcons: false,
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      "@0.00": {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      "@0.75": {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      "@1.00": {
+        slidesPerView: 3,
+        spaceBetween: 40,
+      },
+      "@1.50": {
+        slidesPerView: 4,
+        spaceBetween: 50,
+      },
     },
   });
 </script>

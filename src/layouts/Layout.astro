@@ -58,7 +58,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="font-(family-name:--font-noto-sans) prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none mx-auto max-w-[50rem] bg-white px-6 pt-16 pb-6 dark:bg-zinc-900"
+    class="flex flex-col items-center font-(family-name:--font-noto-sans) **:max-w-[50rem] max-w-screen w-full prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none mx-auto bg-white px-6 pt-16 pb-6 dark:bg-zinc-900"
   >
     <header>
       <h1 class="text-center text-5xl font-medium">{title}</h1>
@@ -69,7 +69,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
         {links && <Links links={links} />}
       </div>
     </header>
-    <main>
+    <main class="max-w-screen! w-full flex flex-col items-center">
       <slot />
     </main>
     <footer class="flex w-full justify-center">
