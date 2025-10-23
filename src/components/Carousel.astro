@@ -3,17 +3,17 @@ import "swiper/css";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="swiper my-8 max-w-screen! w-full">
-  <div class="w-fit mx-auto flex items-center gap-2 mb-4">
+<div class="swiper col-span-full! my-8 max-w-screen!">
+  <div class="mx-auto mb-4 flex w-fit items-center gap-2">
     <Icon
       name="ri:arrow-left-s-line"
-      class="swiper-button-prev cursor-pointer hover:scale-140 transition text-zinc-300"
+      class="swiper-button-prev cursor-pointer text-zinc-300 transition hover:scale-140"
       size={32}
     />
     <div class="swiper-pagination flex"></div>
     <Icon
       name="ri:arrow-right-s-line"
-      class="swiper-button-next cursor-pointer hover:scale-140 transition text-zinc-300"
+      class="swiper-button-next cursor-pointer text-zinc-300 transition hover:scale-140"
       size={32}
     />
   </div>
@@ -78,7 +78,15 @@ import { Icon } from "astro-icon/components";
     modules: [Navigation, Pagination],
     cssMode: true,
     spaceBetween: 16,
+    // slidesPerView: "auto",
     slidesPerView: 2,
+    slidesOffsetAfter: 24,
+    slidesOffsetBefore: 24,
+    // slidesPerGroup: 1,
+    watchOverflow: true,
+    centeredSlides: true,
+    // centerInsufficientSlides: true,
+    centeredSlidesBounds: true,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -87,24 +95,6 @@ import { Icon } from "astro-icon/components";
       addIcons: false,
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      "@0.00": {
-        slidesPerView: 1,
-        spaceBetween: 10,
-      },
-      "@0.75": {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-      "@1.00": {
-        slidesPerView: 3,
-        spaceBetween: 40,
-      },
-      "@1.50": {
-        slidesPerView: 4,
-        spaceBetween: 50,
-      },
     },
   });
 </script>
