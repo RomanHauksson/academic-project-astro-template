@@ -1,0 +1,250 @@
+---
+// ClaudeCarousel.astro
+---
+
+<div class="claude-carousel-container">
+  <div class="claude-carousel-controls">
+    <button
+      class="claude-carousel-nav-button claude-carousel-prev-btn"
+      aria-label="Previous">‹</button
+    >
+    <div class="claude-carousel-dots-container"></div>
+    <button
+      class="claude-carousel-nav-button claude-carousel-next-btn"
+      aria-label="Next">›</button
+    >
+  </div>
+  <div class="claude-carousel-wrapper">
+    <div class="claude-carousel-track">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .claude-carousel-container {
+    width: 100%;
+    max-width: 100% !important;
+    background: white;
+    overflow: hidden;
+    grid-column: 1 / -1;
+  }
+
+  .claude-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .claude-carousel-dots-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .claude-carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #d0d0d0;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .claude-carousel-dot:hover {
+    background: #b0b0b0;
+    transform: scale(1.1);
+  }
+
+  .claude-carousel-dot.active {
+    background: #4a90e2;
+    transform: scale(1.2);
+  }
+
+  .claude-carousel-nav-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #4a90e2;
+    background: white;
+    color: #4a90e2;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .claude-carousel-nav-button:hover:not(:disabled) {
+    background: #4a90e2;
+    color: white;
+  }
+
+  .claude-carousel-nav-button:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  .claude-carousel-nav-button:disabled {
+    border-color: #d0d0d0;
+    color: #d0d0d0;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .claude-carousel-wrapper {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .claude-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .claude-carousel-track {
+    display: flex;
+    gap: 20px;
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const containers = document.querySelectorAll(".claude-carousel-container");
+
+    containers.forEach((container) => {
+      const wrapper = container.querySelector(".claude-carousel-wrapper");
+      const dotsContainer = container.querySelector(
+        ".claude-carousel-dots-container",
+      );
+      const prevBtn = container.querySelector(".claude-carousel-prev-btn");
+      const nextBtn = container.querySelector(".claude-carousel-next-btn");
+      const slides = container.querySelectorAll(".claude-carousel-slide");
+      const slideCount = slides.length;
+
+      if (
+        !wrapper ||
+        !dotsContainer ||
+        !prevBtn ||
+        !nextBtn ||
+        slideCount === 0
+      )
+        return;
+
+      const SLIDE_WIDTH = 320; // 20rem in pixels
+      const GAP = 20;
+
+      let currentPage = 0;
+      let pageCount = 1;
+      let dots = [];
+
+      // Calculate how many pages we need based on viewport width
+      function calculatePages() {
+        const viewportWidth = wrapper.offsetWidth;
+        const slideWithGap = SLIDE_WIDTH + GAP;
+        const totalContentWidth =
+          slideCount * SLIDE_WIDTH + (slideCount - 1) * GAP;
+        const visibleContentWidth = viewportWidth;
+
+        const scrollableWidth = totalContentWidth - visibleContentWidth;
+        pageCount = Math.max(1, Math.ceil(scrollableWidth / slideWithGap) + 1);
+
+        return pageCount;
+      }
+
+      // Create dots based on page count
+      function createDots() {
+        dotsContainer.innerHTML = "";
+        dots = [];
+        const pages = calculatePages();
+
+        for (let i = 0; i < pages; i++) {
+          const dot = document.createElement("button");
+          dot.classList.add("claude-carousel-dot");
+          dot.setAttribute("aria-label", `Go to page ${i + 1}`);
+          dot.addEventListener("click", () => goToPage(i));
+          dotsContainer.appendChild(dot);
+          dots.push(dot);
+        }
+
+        updateActiveDot();
+      }
+
+      // Update button states
+      function updateButtonStates() {
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === pageCount - 1;
+      }
+
+      // Update active dot based on scroll position
+      function updateActiveDot() {
+        const scrollLeft = wrapper.scrollLeft;
+        const viewportWidth = wrapper.offsetWidth;
+        const maxScroll = wrapper.scrollWidth - viewportWidth;
+        let newPage;
+
+        if (scrollLeft <= 10) {
+          newPage = 0;
+        } else if (scrollLeft >= maxScroll - 10) {
+          newPage = pageCount - 1;
+        } else {
+          newPage = Math.round((scrollLeft / maxScroll) * (pageCount - 1));
+        }
+
+        if (newPage !== currentPage) {
+          currentPage = newPage;
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentPage);
+          });
+          updateButtonStates();
+        }
+      }
+
+      // Go to specific page
+      function goToPage(pageIndex) {
+        const viewportWidth = wrapper.offsetWidth;
+        const maxScroll = wrapper.scrollWidth - viewportWidth;
+
+        if (pageIndex === 0) {
+          wrapper.scrollLeft = 0;
+        } else if (pageIndex === pageCount - 1) {
+          wrapper.scrollLeft = maxScroll;
+        } else {
+          wrapper.scrollLeft = (pageIndex / (pageCount - 1)) * maxScroll;
+        }
+
+        currentPage = pageIndex;
+        updateButtonStates();
+      }
+
+      // Previous button
+      prevBtn.addEventListener("click", () => {
+        const newPage = Math.max(0, currentPage - 1);
+        goToPage(newPage);
+      });
+
+      // Next button
+      nextBtn.addEventListener("click", () => {
+        const newPage = Math.min(pageCount - 1, currentPage + 1);
+        goToPage(newPage);
+      });
+
+      // Listen to scroll events
+      wrapper.addEventListener("scroll", updateActiveDot);
+
+      // Recalculate on resize
+      window.addEventListener("resize", () => {
+        createDots();
+      });
+
+      // Initialize
+      createDots();
+    });
+  });
+</script>

@@ -82,6 +82,21 @@ import CarouselSlide from "../components/CarouselSlide.astro";
   </CarouselSlide>
 </Carousel>
 
+import ClaudeCarousel from "../components/ClaudeCarousel.astro";
+import ClaudeCarouselSlide from "../components/ClaudeCarouselSlide.astro";
+
+<ClaudeCarousel>
+  <ClaudeCarouselSlide>
+    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+  </ClaudeCarouselSlide>
+  <ClaudeCarouselSlide>
+    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+  </ClaudeCarouselSlide>
+  <ClaudeCarouselSlide>
+    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+  </ClaudeCarouselSlide>
+</ClaudeCarousel>
+
 <Video src={outside} />
 
 <div>

@@ -1,0 +1,46 @@
+---
+// ClaudeCarouselSlide.astro
+---
+
+<div class="claude-carousel-slide">
+    <div class="claude-carousel-slide-inner">
+        <slot />
+    </div>
+</div>
+
+<style>
+    .claude-carousel-slide {
+        min-width: 20rem;
+        width: 20rem;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 400px;
+    }
+
+    .claude-carousel-slide:first-child {
+        padding-left: 20px;
+    }
+
+    .claude-carousel-slide:last-child {
+        padding-right: 20px;
+    }
+
+    .claude-carousel-slide-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Allow content to fill the inner container */
+    .claude-carousel-slide-inner :global(img),
+    .claude-carousel-slide-inner :global(video) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
