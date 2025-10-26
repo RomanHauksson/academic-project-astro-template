@@ -9,7 +9,7 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic HTML Page</title>
   </head>
-  <body class="grid grid-cols-[1fr_min(42rem,100%)_1fr] *:col-start-2 *:mx-6">
+  <body class="grid grid-cols-[1fr_min(42rem,100%)_1fr] *:col-start-2 *:px-6">
     <h1>Welcome to the Test Page</h1>
     <p>
       This test page demonstrates a collection of paragraphs to help verify
@@ -17,8 +17,16 @@ import "../styles/global.css";
       lengths and structures, suitable for spotting spacing issues, font
       inconsistencies, or any unexpected overflow.
     </p>
+    <button id="prev-btn">Previous</button>
+    <ul>
+      <li>Page 1</li>
+      <li>Page 2</li>
+      <li>Page 3</li>
+      <li>Page 4</li>
+    </ul>
+    <button id="next-btn">Next</button>
     <div
-      class="carousel col-span-full flex snap-x snap-mandatory gap-6 overflow-scroll"
+      class="carousel col-span-full flex snap-x snap-mandatory gap-6 overflow-scroll px-0!"
     >
       <div class="slide">
         <img src="/screenshot-dark.png" />
@@ -56,13 +64,101 @@ import "../styles/global.css";
   </body>
 </html>
 
+<script>
+  const listItems = document.querySelectorAll("ul li");
+  const carousel = document.querySelector(".carousel")!;
+  const slides = document.querySelectorAll(".slide");
+  const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
+  const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
+
+  let currentIndex = 0;
+
+  // Update button states based on current index
+  function updateButtonStates() {
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === slides.length - 1;
+  }
+
+  // Navigate to a specific slide
+  function goToSlide(index: number) {
+    if (index >= 0 && index < slides.length) {
+      currentIndex = index;
+      slides[currentIndex].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+      updateButtonStates();
+    }
+  }
+
+  // Previous button
+  prevBtn.addEventListener("click", () => {
+    goToSlide(currentIndex - 1);
+  });
+
+  // Next button
+  nextBtn.addEventListener("click", () => {
+    goToSlide(currentIndex + 1);
+  });
+
+  // List items
+  listItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      goToSlide(index);
+    });
+  });
+
+  // Update button states when user manually scrolls
+  carousel.addEventListener("scroll", () => {
+    // Find which slide is currently in view
+    const scrollLeft = carousel.scrollLeft;
+    const scrollPadding = parseFloat(
+      getComputedStyle(carousel).scrollPaddingLeft,
+    );
+
+    slides.forEach((slide, index) => {
+      const htmlSlide = slide as HTMLElement;
+      const slideLeft = htmlSlide.offsetLeft - scrollPadding;
+      const slideRight = slideLeft + htmlSlide.offsetWidth;
+
+      if (scrollLeft >= slideLeft - 10 && scrollLeft < slideRight - 10) {
+        currentIndex = index;
+      }
+    });
+
+    updateButtonStates();
+  });
+
+  // Initialize button states
+  updateButtonStates();
+</script>
+
 <style>
   :root {
-    --carousel-item-width: 20rem;
-    --text-max-width: 42rem;
     --body-padding: 1.5rem;
-    --text-margin: max(calc((100vw - var(--text-max-width)) / 2), 0px);
+    --minimum-slide-width: 14rem;
+    --middle-column-width: min(42rem, 100%);
+    --text-max-width: calc(
+      var(--middle-column-width) - var(--body-padding) * 2
+    );
+    --carousel-item-width-full: var(--text-max-width);
+    --carousel-item-width-half: calc(
+      (var(--text-max-width) - var(--body-padding)) / 2
+    );
+    --carousel-item-width-third: calc(
+      (var(--text-max-width) - 2 * var(--body-padding)) / 3
+    );
+    --carousel-item-width: var(--carousel-item-width-half);
+    --text-margin: max(calc((100vw - var(--middle-column-width)) / 2), 0px);
   }
+
+  @media screen and (width < calc(3 * 1.5rem + 2 * 14rem)) {
+    :root {
+      --carousel-item-width: var(--carousel-item-width-full);
+    }
+  }
+
   .slide {
     flex: 0 0 var(--carousel-item-width);
     scroll-snap-align: start;
@@ -70,12 +166,22 @@ import "../styles/global.css";
   .carousel {
     scroll-padding-left: calc(var(--text-margin) + var(--body-padding));
   }
+  .carousel > :first-child,
+  :last-child {
+    flex-basis: calc(
+      var(--text-margin) + var(--body-padding) + var(--carousel-item-width)
+    );
+  }
   .carousel > :first-child {
-    flex-basis: calc(var(--text-margin) + var(--carousel-item-width));
-    padding-left: var(--text-margin);
+    padding-left: calc(var(--text-margin) + var(--body-padding));
   }
   .carousel > :last-child {
-    flex-basis: calc(var(--text-margin) + var(--carousel-item-width));
-    padding-right: var(--text-margin);
+    padding-right: calc(var(--text-margin) + var(--body-padding));
+  }
+
+  #prev-btn:disabled,
+  #next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 </style>
