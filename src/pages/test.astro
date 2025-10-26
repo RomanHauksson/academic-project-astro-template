@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic HTML Page</title>
+  </head>
+  <body class="grid grid-cols-[1fr_min(42rem,100%)_1fr] *:col-start-2 *:mx-6">
+    <h1>Welcome to the Test Page</h1>
+    <p>
+      This test page demonstrates a collection of paragraphs to help verify
+      layout and text rendering. Here you will find text blocks of various
+      lengths and structures, suitable for spotting spacing issues, font
+      inconsistencies, or any unexpected overflow.
+    </p>
+    <div
+      class="carousel col-span-full flex snap-x snap-mandatory gap-6 overflow-scroll"
+    >
+      <div class="slide">
+        <img src="/screenshot-dark.png" />
+      </div>
+      <div class="slide">
+        <img src="/screenshot-dark.png" />
+      </div>
+      <div class="slide">
+        <img src="/screenshot-dark.png" />
+      </div>
+      <div class="slide">
+        <img src="/screenshot-dark.png" />
+      </div>
+      <div class="slide">
+        <img src="/screenshot-dark.png" />
+      </div>
+    </div>
+    <p>
+      Astro enables developers to quickly scaffold static and dynamic sites by
+      offering a simple authoring experience and blazing fast performance. With
+      its island architecture, Astro allows you to use your favorite JavaScript
+      libraries only where interactive components are required, minimizing
+      unnecessary resource usage.
+    </p>
+    <p>
+      This longer paragraph is meant to thoroughly test how extended text
+      content wraps, aligns, and flows within the browser window. If there are
+      any problems with the CSS rules applied to paragraphs, such as margin,
+      line height, or font size, the following lines of text should reveal them.
+      It's important to populate test pages with real-looking information, as
+      short placeholder text can sometimes fail to surface layout bugs or edge
+      cases. By examining these longer segments, you can be confident that
+      actual content will display as expected once your site is live.
+    </p>
+  </body>
+</html>
+
+<style>
+  :root {
+    --carousel-item-width: 20rem;
+    --text-max-width: 42rem;
+    --body-padding: 1.5rem;
+    --text-margin: max(calc((100vw - var(--text-max-width)) / 2), 0px);
+  }
+  .slide {
+    flex: 0 0 var(--carousel-item-width);
+    scroll-snap-align: start;
+  }
+  .carousel {
+    scroll-padding-left: calc(var(--text-margin) + var(--body-padding));
+  }
+  .carousel > :first-child {
+    flex-basis: calc(var(--text-margin) + var(--carousel-item-width));
+    padding-left: var(--text-margin);
+  }
+  .carousel > :last-child {
+    flex-basis: calc(var(--text-margin) + var(--carousel-item-width));
+    padding-right: var(--text-margin);
+  }
+</style>
