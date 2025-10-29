@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { MyCarousel } from "../components/MyCarousel.tsx";
 ---
 
 <!doctype html>
@@ -17,15 +18,17 @@ import "../styles/global.css";
       lengths and structures, suitable for spotting spacing issues, font
       inconsistencies, or any unexpected overflow.
     </p>
-    <button id="prev-btn">Previous</button>
-    <ul>
-      <li>Page 1</li>
-      <li>Page 2</li>
-      <li>Page 3</li>
-      <li>Page 4</li>
-    </ul>
-    <button id="next-btn">Next</button>
-    <div
+    <!-- <div class="flex items-center justify-center gap-2">
+      <button id="prev-btn">Previous</button>
+      <ul class="flex gap-2">
+        <li class="cursor-pointer">Page 1</li>
+        <li class="cursor-pointer">Page 2</li>
+        <li class="cursor-pointer">Page 3</li>
+        <li class="cursor-pointer">Page 4</li>
+      </ul>
+      <button id="next-btn">Next</button>
+    </div> -->
+    <!-- <div
       class="carousel col-span-full flex snap-x snap-mandatory gap-6 overflow-scroll px-0!"
     >
       <div class="slide">
@@ -43,7 +46,7 @@ import "../styles/global.css";
       <div class="slide">
         <img src="/screenshot-dark.png" />
       </div>
-    </div>
+    </div> -->
     <p>
       Astro enables developers to quickly scaffold static and dynamic sites by
       offering a simple authoring experience and blazing fast performance. With
@@ -51,6 +54,7 @@ import "../styles/global.css";
       libraries only where interactive components are required, minimizing
       unnecessary resource usage.
     </p>
+    <MyCarousel />
     <p>
       This longer paragraph is meant to thoroughly test how extended text
       content wraps, aligns, and flows within the browser window. If there are
@@ -73,10 +77,22 @@ import "../styles/global.css";
 
   let currentIndex = 0;
 
+  // Update page indicators
+  function updatePageIndicators() {
+    listItems.forEach((item, index) => {
+      if (index === currentIndex) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+  }
+
   // Update button states based on current index
   function updateButtonStates() {
     prevBtn.disabled = currentIndex === 0;
     nextBtn.disabled = currentIndex === slides.length - 1;
+    updatePageIndicators();
   }
 
   // Navigate to a specific slide
@@ -111,7 +127,7 @@ import "../styles/global.css";
 
   // Update button states when user manually scrolls
   carousel.addEventListener("scroll", () => {
-    // Find which slide is currently in view
+    // Find which slide is currently in view based on scroll position
     const scrollLeft = carousel.scrollLeft;
     const scrollPadding = parseFloat(
       getComputedStyle(carousel).scrollPaddingLeft,
@@ -122,7 +138,7 @@ import "../styles/global.css";
       const slideLeft = htmlSlide.offsetLeft - scrollPadding;
       const slideRight = slideLeft + htmlSlide.offsetWidth;
 
-      if (scrollLeft >= slideLeft - 10 && scrollLeft < slideRight - 10) {
+      if (scrollLeft >= slideLeft && scrollLeft < slideRight) {
         currentIndex = index;
       }
     });
@@ -183,5 +199,9 @@ import "../styles/global.css";
   #next-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  ul li.active {
+    font-weight: bold;
   }
 </style>
