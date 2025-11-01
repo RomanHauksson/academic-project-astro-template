@@ -1,9 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
-import type { Link } from "../types/types";
 
 interface Props {
-  links: Link[];
+  links: {
+    url: string;
+    name: string;
+    icon?: string;
+  }[];
 }
 
 const { links } = Astro.props;

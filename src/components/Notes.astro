@@ -1,8 +1,9 @@
 ---
-import type { Note } from "../types/types";
-
 interface Props {
-  notes: Note[];
+  notes: {
+    symbol: string;
+    text: string;
+  }[];
 }
 
 const { notes } = Astro.props;
@@ -14,7 +15,7 @@ const { notes } = Astro.props;
       // prettier-ignore
       <span>
         <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
-      </span>
+      </span>,
     )
   }
 </div>

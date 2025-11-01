@@ -1,8 +1,11 @@
 ---
-import type { Author } from "../types/types";
-
 interface Props {
-  authors: Author[];
+  authors: {
+    name: string;
+    url?: string;
+    institution?: string;
+    notes?: string[];
+  }[];
 }
 
 const { authors } = Astro.props;
