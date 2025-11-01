@@ -39,5 +39,6 @@ export default defineConfig({
         weights: ["100 900"],
       },
     ],
+    contentIntellisense: true,
   },
 });
