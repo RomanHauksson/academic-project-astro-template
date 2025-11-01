@@ -1,5 +1,6 @@
 ---
 import katex from "katex";
+import "katex/dist/katex-swap.css";
 
 interface Props {
   formula: string;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { formula, inline = false } = Astro.props;
-const html = katex.renderToString(formula, { throwOnError: false });
+const html = katex.renderToString(formula);
 ---
 
 {
