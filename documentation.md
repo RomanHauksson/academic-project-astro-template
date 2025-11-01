@@ -4,7 +4,7 @@ If you discover any bugs, imperfections, or features you'd like from this templa
 
 ## Working with AI tools
 
-If you're a student or researcher at an educational instutition, [you can get free access to GitHub Copilot Pro](https://docs.github.com/en/copilot/how-tos/manage-your-account/get-free-access-to-copilot-pro).
+If you're a student or researcher at an educational institution, [you can get free access to GitHub Copilot Pro](https://docs.github.com/en/copilot/how-tos/manage-your-account/get-free-access-to-copilot-pro).
 
 To get a quick draft started, try copying the TeX source of your paper into some subdirectory and asking Copilot to turn it into a project page. Here's an example of a prompt you could use:
 
