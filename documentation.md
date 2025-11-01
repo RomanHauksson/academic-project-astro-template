@@ -2,6 +2,20 @@
 
 If you discover any bugs, imperfections, or features you'd like from this template, I would super-duper appreciate it if you [filed an issue](https://github.com/RomanHauksson/academic-project-astro-template/issues/new), even if you eventually figure it out yourself. You can even book a call with me using [my meeting scheduler](https://cal.com/romanhauksson/meeting), during which I can help you debug something or give you a tour of the repository.
 
+## Working with AI tools
+
+If you're a student or researcher at an educational institution, [you can get free access to GitHub Copilot Pro](https://docs.github.com/en/copilot/how-tos/manage-your-account/get-free-access-to-copilot-pro).
+
+To get a quick draft started, try copying the TeX source of your paper into some subdirectory and asking Copilot to turn it into a project page. Here's an example of a prompt you could use:
+
+```
+Use the website template in this directory to make a project page for my research paper. You can find the TeX source of the paper in `/<directory>/`. Copy the abstract verbatim, but the rest of the project page should be a summary to show off my key results and figures. Use bullet points sparingly. Copy any images you use for the page into `/src/assets/`. At the end, give me a few suggestions for figures I could make that were not in the TeX source or interactive elements I could add to the page.
+```
+
+I've already generated an outline of the repository for GitHub Copilot in `/.github/copilot-instructions.md`, configured an MCP server to give it access to Astro's documentation in `/.vscode/mcp.json`, and configured [ESLint](https://eslint.org/) to catch simple errors quickly. None of these should need any further configuration on your part, and they'll help Copilot perform better.
+
+For more guidance on using AI tools with this repository, see [Astro's guide](https://docs.astro.build/en/guides/build-with-ai/).
+
 ## Videos
 
 By default, videos displayed using the `Video` component will be muted and play automatically. To display a video that contains audio, I recommend the following settings:
@@ -54,7 +68,7 @@ In `/src/layouts/Layout.astro`:
 
 ...
 
-<body class="font-(family-name:--font-noto-sans) ...">
+<body class="font-(family-name:--font-noto-sans) ..."></body>
 ```
 
 ## Icons
