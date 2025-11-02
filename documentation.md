@@ -61,14 +61,14 @@ experimental: {
 }
 ```
 
-In `/src/layouts/Layout.astro`:
+In `/src/pages/index.astro`:
 
 ```astro
 <Font cssVariable="--font-noto-sans" preload />
 
 ...
 
-<body class="font-(family-name:--font-noto-sans) ..."></body>
+<body class="...font-(family-name:--font-noto-sans)..."></body>
 ```
 
 ## Icons
