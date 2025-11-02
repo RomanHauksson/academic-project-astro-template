@@ -6,34 +6,37 @@ import Authors from "../components/Authors.astro";
 import Notes from "../components/Notes.astro";
 import type { Author, Note, Link } from "../types/types";
 
+import Table from "../components/Table.astro";
+
 import "../styles/global.css";
 import "katex/dist/katex-swap.css";
 
-interface Props {
-  frontmatter: {
-    title: string;
-    authors: Author[];
-    conference?: string;
-    notes?: Note[];
-    links?: Link[];
-    description?: string;
-    favicon: string;
-    thumbnail?: string;
-    theme?: "device" | "light" | "dark";
-  };
+import { Content, frontmatter } from "../paper.mdx";
+
+interface Frontmatter {
+  title: string;
+  authors: Author[];
+  conference?: string;
+  notes?: Note[];
+  links?: Link[];
+  description?: string;
+  favicon: string;
+  thumbnail?: string;
+  theme?: "device" | "light" | "dark";
 }
 
 const {
   title,
-  description,
-  favicon,
-  thumbnail,
   authors,
   conference,
   notes,
   links,
+  description,
+  favicon,
+  thumbnail,
   theme = "device",
-} = Astro.props.frontmatter;
+} = frontmatter as Frontmatter;
+
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
@@ -58,7 +61,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <title>{title}</title>
   </head>
   <body
-    class="font-(family-name:--font-noto-sans) prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none mx-auto max-w-[50rem] bg-white px-6 pt-16 pb-6 dark:bg-zinc-900"
+    class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-500 prose-a:dark:text-blue-300 prose-a:no-underline prose-a:hover:underline prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none mx-auto max-w-[50rem] bg-white px-6 pt-16 pb-6 font-(family-name:--font-noto-sans) dark:bg-zinc-900"
   >
     <header>
       <h1 class="text-center text-5xl font-medium">{title}</h1>
@@ -70,7 +73,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
       </div>
     </header>
     <main>
-      <slot />
+      <Content components={{ table: Table }} />
     </main>
     <footer class="flex w-full justify-center">
       <p class="prose-sm text-center">

@@ -1,5 +1,4 @@
 ---
-layout: ../layouts/Layout.astro
 title: Research Project Page Template
 authors:
   - name: Roman Hauksson
@@ -42,24 +41,21 @@ description: Simple project page template for your research paper, built with As
 thumbnail: screenshot-light.png
 ---
 
-import Video from "../components/Video.astro";
-import HighlightedSection from "../components/HighlightedSection.astro";
-import SmallCaps from "../components/SmallCaps.astro";
-import Figure from "../components/Figure.astro";
-import Picture from "../components/Picture.astro";
-import ModelViewer from "../components/ModelViewer.astro"
-import TwoColumns from "../components/TwoColumns.astro";
-import YouTubeVideo from "../components/YouTubeVideo.astro";
-import LaTeX from "../components/LaTeX.astro";
-import { Comparison } from "../components/Comparison.tsx";
+import Video from "./components/Video.astro";
+import HighlightedSection from "./components/HighlightedSection.astro";
+import SmallCaps from "./components/SmallCaps.astro";
+import Figure from "./components/Figure.astro";
+import Picture from "./components/Picture.astro";
+import ModelViewer from "./components/ModelViewer.astro"
+import TwoColumns from "./components/TwoColumns.astro";
+import YouTubeVideo from "./components/YouTubeVideo.astro";
+import LaTeX from "./components/LaTeX.astro";
+import { Comparison } from "./components/Comparison.tsx";
 
-import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
-import dogsDiffc from "../assets/dogs-diffc.png"
-import dogsTrue from "../assets/dogs-true.png"
-
-import Table from "../components/Table.astro";
-export const components = { table: Table }
+import outside from "./assets/outside.mp4";
+import transformer from "./assets/transformer.webp";
+import dogsDiffc from "./assets/dogs-diffc.png"
+import dogsTrue from "./assets/dogs-true.png"
 
 <Video src={outside} />
 
