@@ -39,7 +39,7 @@ npm run dev
 
 While the development server is running, you can open `http://localhost:4321` in your browser to see a live preview of your page.
 
-8. Edit the content in `/src/pages/index.mdx`. You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in `.vscode/extensions.json`. Every time you save a file, the development server will automatically reload and display the updated version of the page.
+8. Edit the content in `/src/paper.mdx`. You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in `.vscode/extensions.json`. Every time you save a file, the development server will automatically reload and display the updated version of the page.
 
 9. To deploy your site to the web, you need to enable GitHub Pages for the GitHub repository. Click on the **Settings** tab, then go to **Pages** (under the **Code and automation** section). Using the dropdown, change **Source** from "Deploy from a branch" to "GitHub Actions".
 10. Whenever you push to the `main` branch, the GitHub Actions workflow in `.github/workflows/astro.yml` will automatically build and deploy your site to `https://<username>.github.io/<repository>/`. No other configuration is necessary!
