@@ -53,7 +53,7 @@ For more documentation, consult [`./documentation.md`](./documentation.md).
 - Includes out-of-the-box components for figures, LaTeX, code blocks (with syntax highlighting), videos, 3D objects, and a figure comparison slider.
 - Can automatically convert figures stored as PDFs into web-friendly images.
 - Add custom components using HTML or Javascript frameworks like React, Vue, or Svelte.
-- Built with [Astro](https://astro.build/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [TypeScript](https://www.typescriptlang.org/).
+- Built with [Astro](https://astro.build/), [React](https://react.dev/), [Tailwind](https://tailwindcss.com/), [MDX](https://mdxjs.com/), and [TypeScript](https://www.typescriptlang.org/).
 
 ## Real-world examples
 
