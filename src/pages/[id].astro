@@ -1,6 +1,6 @@
 ---
 import { Font } from "astro:assets";
-import { getEntry, render } from "astro:content";
+import { getEntry, render, getCollection } from "astro:content";
 
 import Links from "../components/Links.astro";
 import Authors from "../components/Authors.astro";
@@ -10,11 +10,16 @@ import Table from "../components/Table.astro";
 
 import "../styles/global.css";
 
-const entry = await getEntry("papers", "index");
-if (!entry) {
-  throw new Error('Could not find entry "index" in collection "papers".');
+export async function getStaticPaths() {
+  const papers = await getCollection("papers");
+  return papers.map((paper) => ({
+    params: { id: paper.id },
+    props: { paper },
+  }));
 }
-const { Content } = await render(entry);
+
+const { paper } = Astro.props;
+const { Content } = await render(paper);
 
 const {
   title,
@@ -26,7 +31,7 @@ const {
   notes,
   links,
   theme,
-} = entry.data;
+} = paper.data;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
