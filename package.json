@@ -22,11 +22,12 @@
     "astro-expressive-code": "^0.41.3",
     "astro-icon": "^1.1.0",
     "canvas": "^3.2.0",
-    "katex": "^0.16.25",
     "pdfjs-dist": "^5.4.296",
     "react": "^19.2.0",
     "react-compare-slider": "^3.1.0",
     "react-dom": "^19.2.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.7.3"
   },
