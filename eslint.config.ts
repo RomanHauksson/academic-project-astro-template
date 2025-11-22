@@ -30,7 +30,7 @@ export default defineConfig([
     files: ["**/*.json"],
     plugins: { json },
     language: "json/json",
-    extends: ["json/recommended"],
+    extends: [json.configs.recommended],
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
@@ -55,7 +55,7 @@ export default defineConfig([
     plugins: { css },
     language: "css/css",
     languageOptions: { customSyntax: tailwind4 },
-    extends: ["css/recommended"],
+    extends: [css.configs.recommended],
     rules: {
       // Disable rules that don't work well with Tailwind v4 syntax
       "css/no-invalid-at-rules": "off",
