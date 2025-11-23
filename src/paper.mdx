@@ -1,5 +1,4 @@
 ---
-layout: ../layouts/Layout.astro
 title: Research Project Page Template
 authors:
   - name: Roman Hauksson
@@ -38,36 +37,32 @@ theme: device
 favicon: favicon.svg
 
 # These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
-description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+description: Simple project page template for your research paper, built with Astro and Tailwind
 thumbnail: screenshot-light.png
 ---
 
-import Video from "../components/Video.astro";
-import HighlightedSection from "../components/HighlightedSection.astro";
-import SmallCaps from "../components/SmallCaps.astro";
-import Figure from "../components/Figure.astro";
-import Picture from "../components/Picture.astro";
-import TwoColumns from "../components/TwoColumns.astro";
-import YouTubeVideo from "../components/YouTubeVideo.astro";
-import LaTeX from "../components/LaTeX.astro";
-import { ThreeDimensional } from "../components/ThreeDimensional.tsx";
-import { Comparison } from "../components/Comparison.tsx";
+import Video from "./components/Video.astro";
+import HighlightedSection from "./components/HighlightedSection.astro";
+import SmallCaps from "./components/SmallCaps.astro";
+import Figure from "./components/Figure.astro";
+import Picture from "./components/Picture.astro";
+import ModelViewer from "./components/ModelViewer.astro"
+import TwoColumns from "./components/TwoColumns.astro";
+import YouTubeVideo from "./components/YouTubeVideo.astro";
+import { Comparison } from "./components/Comparison.tsx";
 
-import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
-import dogsDiffc from "../assets/dogs-diffc.png"
-import dogsTrue from "../assets/dogs-true.png"
+import outside from "./assets/outside.mp4";
+import transformer from "./assets/transformer.webp";
+import dogsDiffc from "./assets/dogs-diffc.png"
+import dogsTrue from "./assets/dogs-true.png"
 
-import Table from "../components/Table.astro";
-export const components = { table: Table }
-
-<Video source={outside} />
+<Video src={outside} />
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
 </HighlightedSection>
 
@@ -107,16 +102,18 @@ Use the two columns component to display two columns of content. In this example
     <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
   </Figure>
   <Figure slot="right">
-    <ThreeDimensional slot="figure" filename="BoxVertexColors.glb" client:idle />
-    <Fragment slot="caption">Now look at this cube, rendered with React Three Fiber.</Fragment>
+    <ModelViewer slot="figure" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
+    <Fragment slot="caption">Now look at this cube, rendered with the `<model-viewer>` web component.</Fragment>
   </Figure>
 </TwoColumns>
 
 ## LaTeX
 
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
+You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: $a^2 + b^2 = c^2$. Or, you can write them as a block:
 
-<LaTeX formula="\int_a^b f(x) dx" />
+$$
+\int_a^b f(x) dx
+$$
 
 ## Tables
 

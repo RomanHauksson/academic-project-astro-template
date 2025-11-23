@@ -1,8 +1,6 @@
-/**
- * @see https://prettier.io/docs/configuration
- * @type {import("prettier").Config & import('prettier-plugin-tailwindcss').PluginOptions}
- */
-const config = {
+import { type Config } from "prettier";
+
+const config: Config = {
   plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
   overrides: [{ files: "*.astro", options: { parser: "astro" } }],
 };
