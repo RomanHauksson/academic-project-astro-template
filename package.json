@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/react": "^4.4.0",
+    "@google/model-viewer": "^4.1.0",
     "@iconify-json/academicons": "^1.1.14",
     "@iconify-json/ri": "^1.2.3",
     "@tailwindcss/vite": "^4.1.14",
@@ -29,6 +30,7 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.14",
+    "three": "^0.172.0",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
