@@ -47,4 +47,7 @@ export default defineConfig({
       },
     ],
   },
+  image: {
+    responsiveStyles: true,
+  }
 });
