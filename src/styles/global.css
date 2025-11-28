@@ -17,6 +17,7 @@
 }
 
 html {
+  /* Enables container query units (e.g., 100cqw) for layout calculations in main. */
   container-type: inline-size;
 }
 
