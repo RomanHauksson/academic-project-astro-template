@@ -1,0 +1,238 @@
+---
+
+---
+
+<div
+  class="compare-container relative aspect-video w-full cursor-ew-resize touch-none overflow-hidden rounded-lg select-none"
+  id="mySlider"
+  role="slider"
+  aria-label="Comparison Slider"
+  aria-valuenow="50"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  tabindex="0"
+>
+  <div
+    class="compare-layer layer-one pointer-none absolute top-0 left-0 h-full w-full"
+  >
+    <slot name="before" />
+  </div>
+
+  <div
+    class="compare-layer layer-two pointer-none absolute top-0 left-0 h-full w-full"
+  >
+    <slot name="after" />
+  </div>
+
+  <div class="compare-handle">
+    <div class="handle-line"></div>
+    <div class="handle-circle">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="15 18 9 12 15 6"></polyline></svg
+      >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="9 18 15 12 9 6"></polyline></svg
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Reset & Basics */
+  /* * {
+    box-sizing: border-box;
+  } */
+
+  .compare-container {
+    /* Variable to track slider position (0% to 100%) */
+    --pos: 50%;
+  }
+
+  /* Ensure content fills the layers */
+  .compare-layer > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crucial for images/video */
+    display: block;
+  }
+
+  /* Layer Two: The Magic */
+  .compare-layer.layer-two {
+    /* inset(top right bottom left)
+       We clip the RIGHT side based on the slider position.
+       calc(100% - var(--pos)) converts the left-position into right-inset
+    */
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+    z-index: 2;
+  }
+
+  /* The Handle */
+  .compare-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos); /* Moves with the variable */
+    width: 2px; /* Thickness of line */
+    background: rgba(255, 255, 255, 1);
+    box-shadow: #333 0 0 5px;
+    transform: translateX(-50%); /* Center the line on the cursor */
+    z-index: 3;
+    pointer-events: none; /* Ignore clicks on the handle itself */
+  }
+
+  /* Handle Decoration (The Circle) */
+  .handle-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+  }
+
+  .handle-circle svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* Focus state for Keyboard Accessibility */
+  .compare-container:focus-visible .handle-line {
+    background: #00d2ff;
+    /* box-shadow: 0 0 0 2px #00d2ff; */
+  }
+</style>
+
+<script>
+  class CompareSlider {
+    private container: HTMLElement;
+    private isDragging: boolean = false;
+
+    constructor(elementId: string) {
+      const el = document.getElementById(elementId);
+      if (!el) throw new Error(`Element with id ${elementId} not found`);
+      this.container = el;
+
+      this.init();
+    }
+
+    private init(): void {
+      // Mouse Events
+      this.container.addEventListener("mousedown", this.startDrag.bind(this));
+      window.addEventListener("mouseup", this.stopDrag.bind(this));
+      window.addEventListener("mousemove", this.onMove.bind(this));
+
+      // Touch Events (Mobile)
+      this.container.addEventListener("touchstart", this.startDrag.bind(this), {
+        passive: false,
+      });
+      window.addEventListener("touchend", this.stopDrag.bind(this));
+      window.addEventListener("touchmove", this.onMove.bind(this), {
+        passive: false,
+      });
+
+      // Keyboard Accessibility
+      this.container.addEventListener("keydown", this.handleKeyDown.bind(this));
+    }
+
+    private startDrag(e: MouseEvent | TouchEvent): void {
+      this.isDragging = true;
+      // Immediate update on click/tap
+      this.updatePosition(e);
+    }
+
+    private stopDrag(): void {
+      this.isDragging = false;
+    }
+
+    private onMove(e: MouseEvent | TouchEvent): void {
+      if (!this.isDragging) return;
+
+      // Prevent default behavior on touch to stop scrolling while sliding
+      if (e.type === "touchmove") {
+        // e.preventDefault();
+        // Note: browser might ignore preventDefault on passive listeners,
+        // but we handled 'touch-action: none' in CSS.
+      }
+
+      this.updatePosition(e);
+    }
+
+    private updatePosition(e: MouseEvent | TouchEvent): void {
+      // Get dimensions of the container
+      const rect = this.container.getBoundingClientRect();
+
+      // Normalize X coordinate
+      let clientX: number;
+
+      if (window.TouchEvent && e instanceof TouchEvent) {
+        clientX = e.touches[0].clientX;
+      } else {
+        clientX = (e as MouseEvent).clientX;
+      }
+
+      // Calculate percentage (0 to 100)
+      // We subtract rect.left to get position relative to container
+      let x = clientX - rect.left;
+
+      // Clamp values to stay within container bounds
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+
+      const percentage = (x / rect.width) * 100;
+
+      // Update CSS variable
+      this.container.style.setProperty("--pos", `${percentage}%`);
+
+      // Update ARIA for accessibility
+      this.container.setAttribute(
+        "aria-valuenow",
+        Math.round(percentage).toString(),
+      );
+    }
+
+    private handleKeyDown(e: KeyboardEvent): void {
+      const currentPos =
+        parseFloat(
+          getComputedStyle(this.container).getPropertyValue("--pos"),
+        ) || 50;
+      let newPos = currentPos;
+
+      if (e.key === "ArrowLeft") {
+        newPos = Math.max(0, currentPos - 5);
+      } else if (e.key === "ArrowRight") {
+        newPos = Math.min(100, currentPos + 5);
+      } else {
+        return; // Exit if not arrow key
+      }
+
+      this.container.style.setProperty("--pos", `${newPos}%`);
+      this.container.setAttribute(
+        "aria-valuenow",
+        Math.round(newPos).toString(),
+      );
+    }
+  }
+
+  // Initialize
+  new CompareSlider("mySlider");
+</script>

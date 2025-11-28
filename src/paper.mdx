@@ -49,7 +49,7 @@ import Picture from "./components/Picture.astro";
 import ModelViewer from "./components/ModelViewer.astro"
 import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
-import { Comparison } from "./components/Comparison.tsx";
+import Comparison from "./components/Comparison.astro";
 
 import outside from "./assets/outside.mp4";
 import transformer from "./assets/transformer.webp";
@@ -85,9 +85,9 @@ If you stored your figures as PDFs, the `Picture` component can convert them int
 Use the `Comparison` component to compare two elements with an interactive slider. It should work for any component or HTML element, including images, videos, and 3D models.
 
 <Figure>
-  <Comparison slot="figure" client:idle >
-    <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+  <Comparison slot="figure" >
+    <Picture slot="before" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+    <Picture slot="after" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
   </Comparison>
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
