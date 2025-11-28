@@ -3,6 +3,9 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+
 import react from "@astrojs/react";
 
 import astroExpressiveCode from "astro-expressive-code";
@@ -14,6 +17,10 @@ export default defineConfig({
     ssr: {
       noExternal: ['swiper'],
     }
+  },
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
   },
   integrations: [
     icon(),
@@ -43,4 +50,7 @@ export default defineConfig({
       },
     ],
   },
+  image: {
+    responsiveStyles: true,
+  }
 });

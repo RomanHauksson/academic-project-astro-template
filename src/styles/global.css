@@ -15,3 +15,33 @@
 .expressive-code {
   width: 100%;
 }
+
+html {
+  /* Enables container query units (e.g., 100cqw) for layout calculations in main. */
+  container-type: inline-size;
+}
+
+main {
+  --maximum-text-width: 50rem;
+  --minimum-inline-margin: 1.5rem;
+  --actual-margin: max(
+    var(--minimum-inline-margin),
+    (100cqw - var(--maximum-text-width)) / 2
+  );
+  margin-inline: var(--actual-margin);
+}
+
+.full-bleed,
+main .katex-display {
+  margin-inline: calc(var(--actual-margin) * -1);
+}
+
+.katex-display {
+  overflow: auto hidden;
+}
+
+.katex-display > .katex > .katex-html {
+  padding-inline: 1.5rem;
+  width: max-content;
+  margin-inline: auto;
+}
