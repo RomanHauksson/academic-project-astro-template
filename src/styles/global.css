@@ -31,8 +31,8 @@ main {
 }
 
 .full-bleed,
-.katex-display {
-  margin-inline: calc(var(--actual-margin) * -1) !important;
+main .katex-display {
+  margin-inline: calc(var(--actual-margin) * -1);
 }
 
 .katex-display {
