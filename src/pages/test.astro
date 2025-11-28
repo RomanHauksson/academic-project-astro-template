@@ -10,65 +10,71 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic HTML Page</title>
   </head>
-  <body class="grid grid-cols-[1fr_min(42rem,100%)_1fr] *:col-start-2 *:px-6">
+  <body class="">
     <h1>Welcome to the Test Page</h1>
-    <p>
-      This test page demonstrates a collection of paragraphs to help verify
-      layout and text rendering. Here you will find text blocks of various
-      lengths and structures, suitable for spotting spacing issues, font
-      inconsistencies, or any unexpected overflow.
-    </p>
-    <!-- <div class="flex items-center justify-center gap-2">
-      <button id="prev-btn">Previous</button>
-      <ul class="flex gap-2">
-        <li class="cursor-pointer">Page 1</li>
-        <li class="cursor-pointer">Page 2</li>
-        <li class="cursor-pointer">Page 3</li>
-        <li class="cursor-pointer">Page 4</li>
-      </ul>
-      <button id="next-btn">Next</button>
-    </div> -->
-    <!-- <div
-      class="carousel col-span-full flex snap-x snap-mandatory gap-6 overflow-scroll px-0!"
-    >
-      <div class="slide">
-        <img src="/screenshot-dark.png" />
+    <main>
+      <p>
+        This test page demonstrates a collection of paragraphs to help verify
+        layout and text rendering. Here you will find text blocks of various
+        lengths and structures, suitable for spotting spacing issues, font
+        inconsistencies, or any unexpected overflow.
+      </p>
+      <div class="flex items-center justify-center gap-2">
+        <button id="prev-btn">Previous</button>
+        <ul class="flex gap-2">
+          <li class="cursor-pointer">Page 1</li>
+          <li class="cursor-pointer">Page 2</li>
+          <li class="cursor-pointer">Page 3</li>
+          <li class="cursor-pointer">Page 4</li>
+          <li class="cursor-pointer">Page 5</li>
+        </ul>
+        <button id="next-btn">Next</button>
       </div>
-      <div class="slide">
-        <img src="/screenshot-dark.png" />
+      <div
+        class="carousel full-bleed flex snap-x snap-mandatory gap-6 overflow-scroll"
+      >
+        <div class="slide">
+          <img src="/screenshot-dark.png" />
+        </div>
+        <div class="slide">
+          <img src="/screenshot-dark.png" />
+        </div>
+        <div class="slide">
+          <img src="/screenshot-dark.png" />
+        </div>
+        <div class="slide">
+          <img src="/screenshot-dark.png" />
+        </div>
+        <div class="slide">
+          <img src="/screenshot-dark.png" />
+        </div>
       </div>
-      <div class="slide">
-        <img src="/screenshot-dark.png" />
-      </div>
-      <div class="slide">
-        <img src="/screenshot-dark.png" />
-      </div>
-      <div class="slide">
-        <img src="/screenshot-dark.png" />
-      </div>
-    </div> -->
-    <p>
-      Astro enables developers to quickly scaffold static and dynamic sites by
-      offering a simple authoring experience and blazing fast performance. With
-      its island architecture, Astro allows you to use your favorite JavaScript
-      libraries only where interactive components are required, minimizing
-      unnecessary resource usage.
-    </p>
-    <MyCarousel />
-    <p>
-      This longer paragraph is meant to thoroughly test how extended text
-      content wraps, aligns, and flows within the browser window. If there are
-      any problems with the CSS rules applied to paragraphs, such as margin,
-      line height, or font size, the following lines of text should reveal them.
-      It's important to populate test pages with real-looking information, as
-      short placeholder text can sometimes fail to surface layout bugs or edge
-      cases. By examining these longer segments, you can be confident that
-      actual content will display as expected once your site is live.
-    </p>
+      <p>
+        Astro enables developers to quickly scaffold static and dynamic sites by
+        offering a simple authoring experience and blazing fast performance.
+        With its island architecture, Astro allows you to use your favorite
+        JavaScript libraries only where interactive components are required,
+        minimizing unnecessary resource usage.
+      </p>
+      <!-- <MyCarousel /> -->
+      <p>
+        This longer paragraph is meant to thoroughly test how extended text
+        content wraps, aligns, and flows within the browser window. If there are
+        any problems with the CSS rules applied to paragraphs, such as margin,
+        line height, or font size, the following lines of text should reveal
+        them. It's important to populate test pages with real-looking
+        information, as short placeholder text can sometimes fail to surface
+        layout bugs or edge cases. By examining these longer segments, you can
+        be confident that actual content will display as expected once your site
+        is live.
+      </p>
+    </main>
   </body>
 </html>
 
 <script>
+  import { slide } from "astro:transitions";
+
   const listItems = document.querySelectorAll("ul li");
   const carousel = document.querySelector(".carousel")!;
   const slides = document.querySelectorAll(".slide");
@@ -98,8 +104,13 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
   // Navigate to a specific slide
   function goToSlide(index: number) {
     if (index >= 0 && index < slides.length) {
-      currentIndex = index;
-      slides[currentIndex].scrollIntoView({
+      // currentIndex = index;
+      // slides[currentIndex].scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "nearest",
+      //   inline: "start",
+      // });
+      slides[index].scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "start",
@@ -133,66 +144,102 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
       getComputedStyle(carousel).scrollPaddingLeft,
     );
 
-    slides.forEach((slide, index) => {
-      const htmlSlide = slide as HTMLElement;
+    for (let i = 0; i < slides.length; i++) {
+      const htmlSlide = slides[i] as HTMLElement;
       const slideLeft = htmlSlide.offsetLeft - scrollPadding;
       const slideRight = slideLeft + htmlSlide.offsetWidth;
-
       if (scrollLeft >= slideLeft && scrollLeft < slideRight) {
-        currentIndex = index;
+        currentIndex = i;
+        break;
       }
-    });
+    }
 
     updateButtonStates();
   });
 
   // Initialize button states
   updateButtonStates();
+
+  function testCallback(
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver,
+  ) {
+    entries.forEach((entry) => {
+      console.log("Entry:", entry);
+      if (entry.isIntersecting) {
+        console.log("Slide in view:", entry.target);
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(testCallback, {
+    root: carousel,
+    // rootMargin: "0px",
+    // scrollMargin: "0px",
+    threshold: 1.0,
+  });
+  slides.forEach((slide) => observer.observe(slide));
 </script>
 
 <style>
   :root {
-    --body-padding: 1.5rem;
-    --minimum-slide-width: 14rem;
+    --maximum-text-width: 50rem;
+    --minimum-inline-margin: 1.5rem;
+    --actual-inline-margin: max(
+      var(--minimum-inline-margin),
+      (100cqw - var(--maximum-text-width)) / 2
+    );
+    --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+    /* --minimum-slide-width: 14rem;
     --middle-column-width: min(42rem, 100%);
     --text-max-width: calc(
-      var(--middle-column-width) - var(--body-padding) * 2
+      var(--middle-column-width) - var(--minimum-inline-margin) * 2
     );
     --carousel-item-width-full: var(--text-max-width);
     --carousel-item-width-half: calc(
-      (var(--text-max-width) - var(--body-padding)) / 2
+      (var(--text-max-width) - var(--minimum-inline-margin)) / 2
     );
     --carousel-item-width-third: calc(
-      (var(--text-max-width) - 2 * var(--body-padding)) / 3
+      (var(--text-max-width) - 2 * var(--minimum-inline-margin)) / 3
     );
     --carousel-item-width: var(--carousel-item-width-half);
-    --text-margin: max(calc((100vw - var(--middle-column-width)) / 2), 0px);
+    --text-margin: max(calc((100vw - var(--middle-column-width)) / 2), 0px); */
   }
 
-  @media screen and (width < calc(3 * 1.5rem + 2 * 14rem)) {
+  html {
+    container-type: inline-size;
+  }
+
+  main {
+    margin-inline: var(--actual-inline-margin);
+  }
+
+  .full-bleed {
+    margin-inline: calc(var(--actual-inline-margin) * -1);
+  }
+
+  /* @media screen and (width < calc(3 * 1.5rem + 2 * 14rem)) {
     :root {
       --carousel-item-width: var(--carousel-item-width-full);
     }
-  }
+  } */
 
   .slide {
-    flex: 0 0 var(--carousel-item-width);
+    flex: 0 0 var(--actual-text-width);
     scroll-snap-align: start;
   }
   .carousel {
-    scroll-padding-left: calc(var(--text-margin) + var(--body-padding));
+    scroll-padding-left: var(--actual-inline-margin);
   }
   .carousel > :first-child,
   :last-child {
-    flex-basis: calc(
-      var(--text-margin) + var(--body-padding) + var(--carousel-item-width)
-    );
+    flex-basis: calc(var(--actual-text-width) + var(--actual-inline-margin));
   }
   .carousel > :first-child {
-    padding-left: calc(var(--text-margin) + var(--body-padding));
+    padding-left: var(--actual-inline-margin);
   }
   .carousel > :last-child {
-    padding-right: calc(var(--text-margin) + var(--body-padding));
+    padding-right: var(--actual-inline-margin);
   }
 
   #prev-btn:disabled,
