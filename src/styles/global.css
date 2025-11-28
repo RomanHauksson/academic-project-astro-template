@@ -37,13 +37,6 @@ main .katex-display {
 
 .katex-display {
   overflow: auto hidden;
-  padding-inline: 0;
-}
-
-.katex-display,
-.katex-display > .katex,
-.katex-display > .katex > .katex-html {
-  max-width: none;
 }
 
 .katex-display > .katex > .katex-html {
