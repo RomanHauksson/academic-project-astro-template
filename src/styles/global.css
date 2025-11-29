@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* eslint-disable css/use-baseline -- It's alright to use selector nesting here */
 @custom-variant dark {
   &:where([data-theme="dark"] *) {
     @slot;
@@ -11,6 +12,7 @@
     }
   }
 }
+/* eslint-enable css/use-baseline */
 
 .expressive-code {
   width: 100%;
