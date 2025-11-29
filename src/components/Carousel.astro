@@ -18,21 +18,31 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 ---
 
 <div>
-  <div class="flex items-center justify-center gap-2">
-    <button class="cursor-pointer" id="prev-btn"
-      ><Icon name="ri:arrow-left-s-line" /></button
+  <div class="not-prose mb-1 flex items-center justify-center">
+    <button
+      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      id="prev-btn"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        name="ri:arrow-drop-left-line"
+      /></button
     >
-    <ul class="flex">
+    <ul class="flex list-none">
       {
         Array.from({ length: numSlides }).map(() => (
-          <li class="page-button">
-            <div />
+          <li class="page-button h-[3rem] w-[3rem] cursor-pointer content-center">
+            <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black dark:bg-zinc-200" />
           </li>
         ))
       }
     </ul>
-    <button class="cursor-pointer" id="next-btn"
-      ><Icon name="ri:arrow-right-s-line" /></button
+    <button
+      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      id="next-btn"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        name="ri:arrow-drop-right-line"
+      /></button
     >
   </div>
   <div class="carousel-viewport">
@@ -128,15 +138,15 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 
 <style>
   :root {
-    --maximum-text-width: 50rem;
-    --minimum-inline-margin: 1.5rem;
-    --actual-inline-margin: max(
+    /* --maximum-text-width: 50rem; */
+    /* --minimum-inline-margin: 1.5rem; */
+    /* --actual-inline-margin: max(
       var(--minimum-inline-margin),
       (100cqw - var(--maximum-text-width)) / 2
-    );
-    --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+    ); */
+    /* --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin)); */
 
-    --slide-gap: 2rem;
+    --slide-gap: 1rem;
   }
 
   .carousel {
@@ -148,38 +158,17 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     display: none;
   }
 
-  .carousel-viewport {
-    margin-inline: calc(var(--slide-gap) / -2);
+  .carousel {
+    /* margin-inline: calc(var(--slide-gap) / -2); */
     padding-inline: calc(var(--slide-gap) / 2);
   }
 
-  .carousel-viewport > :first-child {
+  .carousel:first-child {
     padding-left: var(--actual-inline-margin);
   }
 
-  .carousel > :last-child {
+  .carousel:last-child {
     padding-right: var(--actual-inline-margin);
-  }
-
-  #prev-btn:disabled,
-  #next-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .page-button {
-    cursor: pointer;
-    width: 3rem;
-    height: 3rem;
-    align-content: center;
-  }
-
-  .page-button > div {
-    background-color: black;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    margin: auto;
   }
 
   .page-button.active > div,
@@ -189,9 +178,14 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     transition: all 0.1s ease;
   }
 
+  .navigation-button:hover:not(:disabled) > svg {
+    color: red;
+    scale: 1.4;
+    transition: all 0.1s ease;
+  }
+
   @media (hover: none) and (pointer: coarse) {
-    #prev-btn,
-    #next-btn {
+    .navigation-button {
       display: none;
     }
   }

@@ -60,11 +60,20 @@ import Carousel from "./components/Carousel.astro";
 import CarouselSlide from "./components/CarouselSlide.astro";
 
 <Carousel>
-  <CarouselSlide />
-  <CarouselSlide />
-  <CarouselSlide />
-  <CarouselSlide />
-  <CarouselSlide />
+  <CarouselSlide>
+    <Picture src={dogsDiffc} alt="dogs" />
+  </CarouselSlide>
+  <CarouselSlide>
+    
+    This is some text. I can even use $LaTeX$!
+
+  </CarouselSlide>
+  <CarouselSlide>
+    <Figure>
+      <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
+      <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
+    </Figure>
+  </CarouselSlide>
 </Carousel>
 
 <Video src={outside} />
