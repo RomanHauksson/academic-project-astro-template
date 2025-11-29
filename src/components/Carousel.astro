@@ -1,8 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import { parseHTML } from "linkedom";
-// const carousel = document.querySelector(".carousel")!;
-
 // https://cassidysmith.dev/posts/modify-astro-slot-children
 
 const html = await Astro.slots.render("default");
@@ -17,11 +15,10 @@ children.forEach((child, index) => {
 const slidesHtml = children.map((child) => child.outerHTML).join("");
 ---
 
-<div>
+<div class="carousel-wrapper">
   <div class="not-prose mb-4 flex items-center justify-center">
     <button
-      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
-      id="prev-btn"
+      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
         name="ri:arrow-drop-left-line"
@@ -37,8 +34,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
       }
     </ul>
     <button
-      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
-      id="next-btn"
+      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
         name="ri:arrow-drop-right-line"
@@ -53,87 +49,91 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 </div>
 
 <script>
-  const listItems = document.querySelectorAll("ul li");
-  const carouselViewport = document.querySelector(".carousel-viewport")!;
-  const slides = document.querySelectorAll(".slide");
-  const slideViewports = document.querySelectorAll(".slide-viewport");
-  const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
-  const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
+  const carousels = document.querySelectorAll(".carousel-wrapper");
 
-  let currentIndex = 0;
+  carousels.forEach((wrapper) => {
+    const listItems = wrapper.querySelectorAll("ul li");
+    const carouselViewport = wrapper.querySelector(".carousel-viewport");
+    const slides = wrapper.querySelectorAll(".slide");
+    const slideViewports = wrapper.querySelectorAll(".slide-viewport");
+    const prevBtn = wrapper.querySelector(".prev-button") as HTMLButtonElement;
+    const nextBtn = wrapper.querySelector(".next-button") as HTMLButtonElement;
 
-  // Update button states based on current index
-  function updateButtonStates() {
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === slides.length - 1;
-    listItems.forEach((item, index) => {
-      if (index === currentIndex) {
-        item.classList.add("active");
-      } else {
-        item.classList.remove("active");
+    if (!carouselViewport || !prevBtn || !nextBtn || slides.length === 0) {
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function updateButtonStates() {
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === slides.length - 1;
+      listItems.forEach((item, index) => {
+        item.classList.toggle("active", index === currentIndex);
+      });
+    }
+
+    function goToSlide(index: number) {
+      if (index < 0 || index >= slides.length) {
+        return;
       }
-    });
-  }
 
-  // Navigate to a specific slide
-  function goToSlide(index: number) {
-    if (index >= 0 && index < slides.length) {
       slides[index].scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "start",
       });
-    }
-  }
-
-  // Previous button
-  prevBtn.addEventListener("click", () => {
-    goToSlide(currentIndex - 1);
-  });
-
-  // Next button
-  nextBtn.addEventListener("click", () => {
-    goToSlide(currentIndex + 1);
-  });
-
-  // List items
-  listItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      goToSlide(index);
-    });
-  });
-
-  // Initialize button states
-  updateButtonStates();
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      console.log(entries);
-      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-      if (visibleEntries.length === 0) {
-        return;
-      }
-
-      const mostVisible = visibleEntries.reduce((prev, current) =>
-        current.intersectionRatio > prev.intersectionRatio ? current : prev,
-      );
-
-      const target = mostVisible.target as HTMLElement;
-      const nextIndex = Number(target.dataset.index ?? "-1");
-      if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
-        return;
-      }
-
-      currentIndex = nextIndex;
       updateButtonStates();
-    },
-    {
-      root: carouselViewport,
-      threshold: 0.5,
-    },
-  );
+    }
 
-  slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
+    prevBtn.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+
+    listItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        goToSlide(index);
+      });
+    });
+
+    updateButtonStates();
+
+    if (slideViewports.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+        if (visibleEntries.length === 0) {
+          return;
+        }
+
+        const mostVisible = visibleEntries.reduce((prev, current) =>
+          current.intersectionRatio > prev.intersectionRatio ? current : prev,
+        );
+
+        const target = mostVisible.target as HTMLElement;
+        const nextIndex = Number(target.dataset.index ?? "-1");
+        if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
+          return;
+        }
+
+        currentIndex = nextIndex;
+        updateButtonStates();
+      },
+      {
+        root: carouselViewport,
+        threshold: 0.5,
+      },
+    );
+
+    slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
+  });
 </script>
 
 <style>
