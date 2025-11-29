@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { MyCarousel } from "../components/MyCarousel.tsx";
+import { Icon } from "astro-icon/components";
 ---
 
 <!doctype html>
@@ -20,15 +20,19 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
         inconsistencies, or any unexpected overflow.
       </p>
       <div class="flex items-center justify-center gap-2">
-        <button id="prev-btn">Previous</button>
-        <ul class="flex gap-2">
-          <li class="cursor-pointer">Page 1</li>
-          <li class="cursor-pointer">Page 2</li>
-          <li class="cursor-pointer">Page 3</li>
-          <li class="cursor-pointer">Page 4</li>
-          <li class="cursor-pointer">Page 5</li>
+        <button class="cursor-pointer" id="prev-btn"
+          ><Icon name="ri:arrow-left-s-line" /></button
+        >
+        <ul class="flex">
+          <li class="page-button"><div></div></li>
+          <li class="page-button"><div></div></li>
+          <li class="page-button"><div></div></li>
+          <li class="page-button"><div></div></li>
+          <li class="page-button"><div></div></li>
         </ul>
-        <button id="next-btn">Next</button>
+        <button class="cursor-pointer" id="next-btn"
+          ><Icon name="ri:arrow-right-s-line" /></button
+        >
       </div>
       <div class="carousel-viewport">
         <div
@@ -85,7 +89,6 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
 
 <script>
   const listItems = document.querySelectorAll("ul li");
-  const carousel = document.querySelector(".carousel")!;
   const carouselViewport = document.querySelector(".carousel-viewport")!;
   const slides = document.querySelectorAll(".slide");
   const slideViewports = document.querySelectorAll(".slide-viewport");
@@ -198,26 +201,24 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
   }
 
   .slide {
-    /* flex: 0 0 var(--actual-text-width); */
     scroll-snap-align: start;
-    opacity: 0.5;
     width: var(--actual-text-width);
   }
 
   .carousel {
     scroll-padding-left: var(--actual-inline-margin);
+    scrollbar-width: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
   }
 
   .carousel-viewport {
-    background-color: rgba(255, 37, 37, 0.526);
     margin-inline: calc(var(--slide-gap) / -2);
     padding-inline: calc(var(--slide-gap) / 2);
   }
 
-  /* .carousel > :first-child,
-  :last-child {
-    flex-basis: calc(var(--actual-text-width) + var(--actual-inline-margin));
-  } */
   .carousel-viewport > :first-child {
     padding-left: var(--actual-inline-margin);
   }
@@ -232,7 +233,32 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     cursor: not-allowed;
   }
 
-  ul li.active {
-    font-weight: bold;
+  .page-button {
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    align-content: center;
+  }
+
+  .page-button > div {
+    background-color: black;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin: auto;
+  }
+
+  .page-button.active > div,
+  .page-button:hover > div {
+    background-color: red;
+    scale: 1.4;
+    transition: all 0.1s ease;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    #prev-btn,
+    #next-btn {
+      display: none;
+    }
   }
 </style>
