@@ -49,32 +49,14 @@ import Picture from "./components/Picture.astro";
 import ModelViewer from "./components/ModelViewer.astro"
 import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
+import Carousel from "./components/Carousel.astro";
+import CarouselSlide from "./components/CarouselSlide.astro";
 import { Comparison } from "./components/Comparison.tsx";
 
 import outside from "./assets/outside.mp4";
 import transformer from "./assets/transformer.webp";
 import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
-
-import Carousel from "./components/Carousel.astro";
-import CarouselSlide from "./components/CarouselSlide.astro";
-
-<Carousel>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="dogs" />
-  </CarouselSlide>
-  <CarouselSlide>
-    
-    This is some text. I can even use $LaTeX$!
-
-  </CarouselSlide>
-  <CarouselSlide>
-    <Figure>
-      <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
-      <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
-    </Figure>
-  </CarouselSlide>
-</Carousel>
 
 <Video src={outside} />
 
@@ -107,10 +89,26 @@ Use the `Comparison` component to compare two elements with an interactive slide
 <Figure>
   <Comparison slot="figure" client:idle >
     <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+    <Picture slot="itemTwo" src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
   </Comparison>
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
+
+## Carousels
+
+Carousels are useful for situations where you'd like to display a collection of visuals, but you don't want it to take up that much space and you're okay with the reader not seeing every visual. I designed a carousel component specifically for this template because I wasn't satisfied with the existing carousel libraries. You can put arbitrary elements in each slide.
+
+<Carousel>
+  <CarouselSlide>
+    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
+  </CarouselSlide>
+  <CarouselSlide>
+    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+  </CarouselSlide>
+  <CarouselSlide>
+    Since this text isn't part of a component, it will be interpreted as **Markdown**.
+  </CarouselSlide>
+</Carousel>
 
 ## Two columns
 
