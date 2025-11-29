@@ -96,7 +96,7 @@ Use the `Comparison` component to compare two elements with an interactive slide
 
 ## Carousels
 
-Carousels are useful for situations where you'd like to display a collection of visuals, but you don't want it to take up that much space and you're okay with the reader not seeing every visual. I designed a carousel component specifically for this template because I wasn't satisfied with the existing carousel libraries. You can put arbitrary elements in each slide.
+Carousels are useful for situations where you'd like to display a collection of visuals without taking up much space and you're okay with the reader not seeing every visual. I rolled my own carousel component for this template because I wasn't satisfied with the existing carousel libraries. You can put arbitrary elements in each slide.
 
 <Carousel>
   <CarouselSlide>
@@ -106,7 +106,10 @@ Carousels are useful for situations where you'd like to display a collection of 
     <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
   </CarouselSlide>
   <CarouselSlide>
-    Since this text isn't part of a component, it will be interpreted as **Markdown**.
+    Since this text isn't part of a component, it will be _interpreted_ as **Markdown**. Here's some more text to fill up the rest of the line in this slide.
+  </CarouselSlide>
+  <CarouselSlide>
+    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
   </CarouselSlide>
 </Carousel>
 
