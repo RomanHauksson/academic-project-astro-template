@@ -1,0 +1,182 @@
+---
+import { Icon } from "astro-icon/components";
+import { parseHTML } from "linkedom";
+// https://cassidysmith.dev/posts/modify-astro-slot-children
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const children = Array.from(document.children);
+const numSlides = children.length;
+
+children.forEach((child, index) => {
+  child.setAttribute("data-index", String(index));
+});
+
+const slidesHtml = children.map((child) => child.outerHTML).join("");
+---
+
+<div class="carousel-wrapper">
+  <div class="not-prose mb-4 flex items-center justify-center">
+    <button
+      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        name="ri:arrow-drop-left-line"
+      /></button
+    >
+    <ul class="flex list-none">
+      {
+        Array.from({ length: numSlides }).map(() => (
+          <li class="page-button h-[3rem] w-[3rem] cursor-pointer content-center [&.active>div,&:hover>div]:bg-orange-600 dark:[&.active>div,&:hover>div]:bg-orange-300">
+            <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black dark:bg-zinc-200" />
+          </li>
+        ))
+      }
+    </ul>
+    <button
+      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        name="ri:arrow-drop-right-line"
+      /></button
+    >
+  </div>
+  <div class="carousel-viewport">
+    <div class="carousel full-bleed flex snap-x snap-mandatory overflow-scroll">
+      <Fragment set:html={slidesHtml} />
+    </div>
+  </div>
+</div>
+
+<script>
+  const carousels = document.querySelectorAll(".carousel-wrapper");
+
+  carousels.forEach((wrapper) => {
+    const listItems = wrapper.querySelectorAll("ul li");
+    const carouselViewport = wrapper.querySelector(".carousel-viewport");
+    const slides = wrapper.querySelectorAll(".slide");
+    const slideViewports = wrapper.querySelectorAll(".slide-viewport");
+    const prevBtn = wrapper.querySelector(".prev-button") as HTMLButtonElement;
+    const nextBtn = wrapper.querySelector(".next-button") as HTMLButtonElement;
+
+    if (!carouselViewport || !prevBtn || !nextBtn || slides.length === 0) {
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function updateButtonStates() {
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === slides.length - 1;
+      listItems.forEach((item, index) => {
+        item.classList.toggle("active", index === currentIndex);
+      });
+    }
+
+    function goToSlide(index: number) {
+      if (index < 0 || index >= slides.length) {
+        return;
+      }
+
+      slides[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+      updateButtonStates();
+    }
+
+    prevBtn.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+
+    listItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        goToSlide(index);
+      });
+    });
+
+    updateButtonStates();
+
+    if (slideViewports.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+        if (visibleEntries.length === 0) {
+          return;
+        }
+
+        const mostVisible = visibleEntries.reduce((prev, current) =>
+          current.intersectionRatio > prev.intersectionRatio ? current : prev,
+        );
+
+        const target = mostVisible.target as HTMLElement;
+        const nextIndex = Number(target.dataset.index ?? "-1");
+        if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
+          return;
+        }
+
+        currentIndex = nextIndex;
+        updateButtonStates();
+      },
+      {
+        root: carouselViewport,
+        threshold: 0.5,
+      },
+    );
+
+    slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
+  });
+</script>
+
+<style>
+  :root {
+    --slide-gap: 1rem;
+  }
+
+  .carousel {
+    scroll-padding-left: var(--actual-inline-margin);
+    scrollbar-width: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel {
+    /* margin-inline: calc(var(--slide-gap) / -2); */
+    padding-inline: calc(var(--slide-gap) / 2);
+  }
+
+  .carousel:first-child {
+    padding-left: var(--actual-inline-margin);
+  }
+
+  .carousel:last-child {
+    padding-right: var(--actual-inline-margin);
+  }
+
+  .page-button.active > div,
+  .page-button:hover > div {
+    scale: 1.4;
+    transition: all 0.1s ease;
+  }
+
+  .navigation-button:hover:not(:disabled) > svg {
+    scale: 1.4;
+    transition: all 0.1s ease;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .navigation-button {
+      display: none;
+    }
+  }
+</style>

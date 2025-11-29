@@ -8,7 +8,7 @@ If you're a student or researcher at an educational institution, [you can get fr
 
 To get a quick draft started, try copying the TeX source of your paper into some subdirectory and asking Copilot to turn it into a project page. Here's an example of a prompt you could use:
 
-```
+```text
 Use the website template in this directory to make a project page for my research paper. You can find the TeX source of the paper in `/<directory>/`. Copy the abstract verbatim, but the rest of the project page should be a summary to show off my key results and figures. Use bullet points sparingly. Copy any images you use for the page into `/src/assets/`. At the end, give me a few suggestions for figures I could make that were not in the TeX source or interactive elements I could add to the page.
 ```
 
