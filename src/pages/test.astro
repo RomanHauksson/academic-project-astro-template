@@ -30,54 +30,57 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
         </ul>
         <button id="next-btn">Next</button>
       </div>
-      <div
-        class="carousel full-bleed flex snap-x snap-mandatory gap-6 overflow-scroll"
-      >
-        <div class="slide">
-          <img src="/screenshot-dark.png" />
-        </div>
-        <div class="slide">
-          <img src="/screenshot-dark.png" />
-        </div>
-        <div class="slide">
-          <img src="/screenshot-dark.png" />
-        </div>
-        <div class="slide">
-          <img src="/screenshot-dark.png" />
-        </div>
-        <div class="slide">
-          <img src="/screenshot-dark.png" />
+      <div class="carousel-viewport">
+        <div
+          class="carousel full-bleed flex snap-x snap-mandatory overflow-scroll"
+        >
+          <div class="slide">
+            <img src="/screenshot-dark.png" />
+          </div>
+          <div class="slide">
+            <img src="/screenshot-dark.png" />
+          </div>
+          <div class="slide">
+            <img src="/screenshot-dark.png" />
+          </div>
+          <div class="slide">
+            <img src="/screenshot-dark.png" />
+          </div>
+          <div class="slide">
+            <img src="/screenshot-dark.png" />
+          </div>
         </div>
       </div>
-      <p>
-        Astro enables developers to quickly scaffold static and dynamic sites by
-        offering a simple authoring experience and blazing fast performance.
-        With its island architecture, Astro allows you to use your favorite
-        JavaScript libraries only where interactive components are required,
-        minimizing unnecessary resource usage.
-      </p>
-      <!-- <MyCarousel /> -->
-      <p>
-        This longer paragraph is meant to thoroughly test how extended text
-        content wraps, aligns, and flows within the browser window. If there are
-        any problems with the CSS rules applied to paragraphs, such as margin,
-        line height, or font size, the following lines of text should reveal
-        them. It's important to populate test pages with real-looking
-        information, as short placeholder text can sometimes fail to surface
-        layout bugs or edge cases. By examining these longer segments, you can
-        be confident that actual content will display as expected once your site
-        is live.
-      </p>
     </main>
+    <p>
+      Astro enables developers to quickly scaffold static and dynamic sites by
+      offering a simple authoring experience and blazing fast performance. With
+      its island architecture, Astro allows you to use your favorite JavaScript
+      libraries only where interactive components are required, minimizing
+      unnecessary resource usage.
+    </p>
+    <!-- <MyCarousel /> -->
+    <p>
+      This longer paragraph is meant to thoroughly test how extended text
+      content wraps, aligns, and flows within the browser window. If there are
+      any problems with the CSS rules applied to paragraphs, such as margin,
+      line height, or font size, the following lines of text should reveal them.
+      It's important to populate test pages with real-looking information, as
+      short placeholder text can sometimes fail to surface layout bugs or edge
+      cases. By examining these longer segments, you can be confident that
+      actual content will display as expected once your site is live.
+    </p>
   </body>
 </html>
 
 <script>
-  import { slide } from "astro:transitions";
-
   const listItems = document.querySelectorAll("ul li");
   const carousel = document.querySelector(".carousel")!;
+  const carouselViewport = document.querySelector(".carousel-viewport")!;
   const slides = document.querySelectorAll(".slide");
+  slides.forEach((slide, index) => {
+    (slide as HTMLElement).dataset.index = index.toString();
+  });
   const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
   const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
 
@@ -104,18 +107,12 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
   // Navigate to a specific slide
   function goToSlide(index: number) {
     if (index >= 0 && index < slides.length) {
-      // currentIndex = index;
-      // slides[currentIndex].scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "nearest",
-      //   inline: "start",
-      // });
       slides[index].scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "start",
       });
-      updateButtonStates();
+      // updateButtonStates();
     }
   }
 
@@ -136,48 +133,36 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     });
   });
 
-  // Update button states when user manually scrolls
-  carousel.addEventListener("scroll", () => {
-    // Find which slide is currently in view based on scroll position
-    const scrollLeft = carousel.scrollLeft;
-    const scrollPadding = parseFloat(
-      getComputedStyle(carousel).scrollPaddingLeft,
-    );
-
-    for (let i = 0; i < slides.length; i++) {
-      const htmlSlide = slides[i] as HTMLElement;
-      const slideLeft = htmlSlide.offsetLeft - scrollPadding;
-      const slideRight = slideLeft + htmlSlide.offsetWidth;
-      if (scrollLeft >= slideLeft && scrollLeft < slideRight) {
-        currentIndex = i;
-        break;
-      }
-    }
-
-    updateButtonStates();
-  });
-
   // Initialize button states
   updateButtonStates();
 
-  function testCallback(
-    entries: IntersectionObserverEntry[],
-    observer: IntersectionObserver,
-  ) {
-    entries.forEach((entry) => {
-      console.log("Entry:", entry);
-      if (entry.isIntersecting) {
-        console.log("Slide in view:", entry.target);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+      if (visibleEntries.length === 0) {
+        return;
       }
-    });
-  }
 
-  const observer = new IntersectionObserver(testCallback, {
-    root: carousel,
-    // rootMargin: "0px",
-    // scrollMargin: "0px",
-    threshold: 1.0,
-  });
+      const mostVisible = visibleEntries.reduce((prev, current) =>
+        current.intersectionRatio > prev.intersectionRatio ? current : prev,
+      );
+
+      const target = mostVisible.target as HTMLElement;
+      const nextIndex = Number(target.dataset.index ?? "-1");
+      if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
+        return;
+      }
+
+      currentIndex = nextIndex;
+      updateButtonStates();
+    },
+    {
+      root: carouselViewport,
+      // rootMargin: "0px -24px 0px -24px",
+      threshold: 0.5,
+    },
+  );
+
   slides.forEach((slide) => observer.observe(slide));
 </script>
 
@@ -190,20 +175,6 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
       (100cqw - var(--maximum-text-width)) / 2
     );
     --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
-    /* --minimum-slide-width: 14rem;
-    --middle-column-width: min(42rem, 100%);
-    --text-max-width: calc(
-      var(--middle-column-width) - var(--minimum-inline-margin) * 2
-    );
-    --carousel-item-width-full: var(--text-max-width);
-    --carousel-item-width-half: calc(
-      (var(--text-max-width) - var(--minimum-inline-margin)) / 2
-    );
-    --carousel-item-width-third: calc(
-      (var(--text-max-width) - 2 * var(--minimum-inline-margin)) / 3
-    );
-    --carousel-item-width: var(--carousel-item-width-half);
-    --text-margin: max(calc((100vw - var(--middle-column-width)) / 2), 0px); */
   }
 
   html {
@@ -218,26 +189,29 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     margin-inline: calc(var(--actual-inline-margin) * -1);
   }
 
-  /* @media screen and (width < calc(3 * 1.5rem + 2 * 14rem)) {
-    :root {
-      --carousel-item-width: var(--carousel-item-width-full);
-    }
-  } */
-
   .slide {
     flex: 0 0 var(--actual-text-width);
     scroll-snap-align: start;
+    opacity: 0.5;
   }
+
   .carousel {
     scroll-padding-left: var(--actual-inline-margin);
   }
-  .carousel > :first-child,
+
+  .carousel-viewport {
+    background-color: rgba(255, 37, 37, 0.526);
+    /* margin-inline: var(--actual-inline-margin); */
+  }
+
+  /* .carousel > :first-child,
   :last-child {
     flex-basis: calc(var(--actual-text-width) + var(--actual-inline-margin));
-  }
-  .carousel > :first-child {
+  } */
+  .carousel-viewport > :first-child {
     padding-left: var(--actual-inline-margin);
   }
+
   .carousel > :last-child {
     padding-right: var(--actual-inline-margin);
   }
