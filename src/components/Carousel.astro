@@ -20,7 +20,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 <div>
   <div class="not-prose mb-1 flex items-center justify-center">
     <button
-      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
       id="prev-btn"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
@@ -30,14 +30,14 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     <ul class="flex list-none">
       {
         Array.from({ length: numSlides }).map(() => (
-          <li class="page-button h-[3rem] w-[3rem] cursor-pointer content-center">
+          <li class="page-button h-[3rem] w-[3rem] cursor-pointer content-center [&.active>div,&:hover>div]:bg-orange-600 dark:[&.active>div,&:hover>div]:bg-orange-300">
             <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black dark:bg-zinc-200" />
           </li>
         ))
       }
     </ul>
     <button
-      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      class="navigation-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
       id="next-btn"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
@@ -165,13 +165,11 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 
   .page-button.active > div,
   .page-button:hover > div {
-    background-color: red;
     scale: 1.4;
     transition: all 0.1s ease;
   }
 
   .navigation-button:hover:not(:disabled) > svg {
-    color: red;
     scale: 1.4;
     transition: all 0.1s ease;
   }
