@@ -14,9 +14,6 @@ import astroExpressiveCode from "astro-expressive-code";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
-    ssr: {
-      noExternal: ['swiper'],
-    }
   },
   markdown: {
     remarkPlugins: [remarkMath],

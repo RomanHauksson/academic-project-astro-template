@@ -56,63 +56,26 @@ import transformer from "./assets/transformer.webp";
 import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
 
-// import Carousel from "../components/Carousel.astro";
-// import CarouselSlide from "../components/CarouselSlide.astro";
+import Carousel from "./components/Carousel.astro";
+import CarouselSlide from "./components/CarouselSlide.astro";
 
-{/* <Carousel>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={transformer} alt="Diagram of the transformer deep learning architecture." />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Figure>
-      <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
-      <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
-    </Figure>
-  </CarouselSlide>
-</Carousel> */}
-
-import { ClaudeCarousel } from "../components/ClaudeCarousel.tsx";
-import { ClaudeCarouselSlide } from "../components/ClaudeCarouselSlide.tsx";
-
-<ClaudeCarousel client:load>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-  <ClaudeCarouselSlide>
-    <Picture src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </ClaudeCarouselSlide>
-</ClaudeCarousel>
+<Carousel>
+  <CarouselSlide />
+  <CarouselSlide />
+  <CarouselSlide />
+  <CarouselSlide />
+  <CarouselSlide />
+</Carousel>
 
 <Video src={outside} />
 
-<div>
+<HighlightedSection>
 
 ## Abstract
 
 This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
-</div>
+</HighlightedSection>
 
 ## Figures
 

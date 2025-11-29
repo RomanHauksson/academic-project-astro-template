@@ -1,0 +1,198 @@
+---
+import { Icon } from "astro-icon/components";
+import { parseHTML } from "linkedom";
+// const carousel = document.querySelector(".carousel")!;
+
+// https://cassidysmith.dev/posts/modify-astro-slot-children
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const children = Array.from(document.children);
+const numSlides = children.length;
+
+children.forEach((child, index) => {
+  child.setAttribute("data-index", String(index));
+});
+
+const slidesHtml = children.map((child) => child.outerHTML).join("");
+---
+
+<div>
+  <div class="flex items-center justify-center gap-2">
+    <button class="cursor-pointer" id="prev-btn"
+      ><Icon name="ri:arrow-left-s-line" /></button
+    >
+    <ul class="flex">
+      {
+        Array.from({ length: numSlides }).map(() => (
+          <li class="page-button">
+            <div />
+          </li>
+        ))
+      }
+    </ul>
+    <button class="cursor-pointer" id="next-btn"
+      ><Icon name="ri:arrow-right-s-line" /></button
+    >
+  </div>
+  <div class="carousel-viewport">
+    <div class="carousel full-bleed flex snap-x snap-mandatory overflow-scroll">
+      <Fragment set:html={slidesHtml} />
+    </div>
+  </div>
+</div>
+
+<script>
+  const listItems = document.querySelectorAll("ul li");
+  const carouselViewport = document.querySelector(".carousel-viewport")!;
+  const slides = document.querySelectorAll(".slide");
+  const slideViewports = document.querySelectorAll(".slide-viewport");
+  const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
+  const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
+
+  let currentIndex = 0;
+
+  // Update button states based on current index
+  function updateButtonStates() {
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === slides.length - 1;
+    listItems.forEach((item, index) => {
+      if (index === currentIndex) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+  }
+
+  // Navigate to a specific slide
+  function goToSlide(index: number) {
+    if (index >= 0 && index < slides.length) {
+      slides[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
+  }
+
+  // Previous button
+  prevBtn.addEventListener("click", () => {
+    goToSlide(currentIndex - 1);
+  });
+
+  // Next button
+  nextBtn.addEventListener("click", () => {
+    goToSlide(currentIndex + 1);
+  });
+
+  // List items
+  listItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      goToSlide(index);
+    });
+  });
+
+  // Initialize button states
+  updateButtonStates();
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      console.log(entries);
+      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+      if (visibleEntries.length === 0) {
+        return;
+      }
+
+      const mostVisible = visibleEntries.reduce((prev, current) =>
+        current.intersectionRatio > prev.intersectionRatio ? current : prev,
+      );
+
+      const target = mostVisible.target as HTMLElement;
+      const nextIndex = Number(target.dataset.index ?? "-1");
+      if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
+        return;
+      }
+
+      currentIndex = nextIndex;
+      updateButtonStates();
+    },
+    {
+      root: carouselViewport,
+      threshold: 0.5,
+    },
+  );
+
+  slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
+</script>
+
+<style>
+  :root {
+    --maximum-text-width: 50rem;
+    --minimum-inline-margin: 1.5rem;
+    --actual-inline-margin: max(
+      var(--minimum-inline-margin),
+      (100cqw - var(--maximum-text-width)) / 2
+    );
+    --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+
+    --slide-gap: 2rem;
+  }
+
+  .carousel {
+    scroll-padding-left: var(--actual-inline-margin);
+    scrollbar-width: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-viewport {
+    margin-inline: calc(var(--slide-gap) / -2);
+    padding-inline: calc(var(--slide-gap) / 2);
+  }
+
+  .carousel-viewport > :first-child {
+    padding-left: var(--actual-inline-margin);
+  }
+
+  .carousel > :last-child {
+    padding-right: var(--actual-inline-margin);
+  }
+
+  #prev-btn:disabled,
+  #next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .page-button {
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    align-content: center;
+  }
+
+  .page-button > div {
+    background-color: black;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin: auto;
+  }
+
+  .page-button.active > div,
+  .page-button:hover > div {
+    background-color: red;
+    scale: 1.4;
+    transition: all 0.1s ease;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    #prev-btn,
+    #next-btn {
+      display: none;
+    }
+  }
+</style>
