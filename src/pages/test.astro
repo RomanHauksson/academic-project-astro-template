@@ -34,20 +34,30 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
         <div
           class="carousel full-bleed flex snap-x snap-mandatory overflow-scroll"
         >
-          <div class="slide">
-            <img src="/screenshot-dark.png" />
+          <div class="slide-viewport" data-index="0">
+            <div class="slide">
+              <img src="/screenshot-dark.png" />
+            </div>
           </div>
-          <div class="slide">
-            <img src="/screenshot-dark.png" />
+          <div class="slide-viewport" data-index="1">
+            <div class="slide">
+              <img src="/screenshot-dark.png" />
+            </div>
           </div>
-          <div class="slide">
-            <img src="/screenshot-dark.png" />
+          <div class="slide-viewport" data-index="2">
+            <div class="slide">
+              <img src="/screenshot-dark.png" />
+            </div>
           </div>
-          <div class="slide">
-            <img src="/screenshot-dark.png" />
+          <div class="slide-viewport" data-index="3">
+            <div class="slide">
+              <img src="/screenshot-dark.png" />
+            </div>
           </div>
-          <div class="slide">
-            <img src="/screenshot-dark.png" />
+          <div class="slide-viewport" data-index="4">
+            <div class="slide">
+              <img src="/screenshot-dark.png" />
+            </div>
           </div>
         </div>
       </div>
@@ -78,16 +88,16 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
   const carousel = document.querySelector(".carousel")!;
   const carouselViewport = document.querySelector(".carousel-viewport")!;
   const slides = document.querySelectorAll(".slide");
-  slides.forEach((slide, index) => {
-    (slide as HTMLElement).dataset.index = index.toString();
-  });
+  const slideViewports = document.querySelectorAll(".slide-viewport");
   const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
   const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
 
   let currentIndex = 0;
 
-  // Update page indicators
-  function updatePageIndicators() {
+  // Update button states based on current index
+  function updateButtonStates() {
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === slides.length - 1;
     listItems.forEach((item, index) => {
       if (index === currentIndex) {
         item.classList.add("active");
@@ -95,13 +105,6 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
         item.classList.remove("active");
       }
     });
-  }
-
-  // Update button states based on current index
-  function updateButtonStates() {
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === slides.length - 1;
-    updatePageIndicators();
   }
 
   // Navigate to a specific slide
@@ -112,7 +115,6 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
         block: "nearest",
         inline: "start",
       });
-      // updateButtonStates();
     }
   }
 
@@ -138,6 +140,7 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
 
   const observer = new IntersectionObserver(
     (entries) => {
+      console.log(entries);
       const visibleEntries = entries.filter((entry) => entry.isIntersecting);
       if (visibleEntries.length === 0) {
         return;
@@ -158,12 +161,11 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     },
     {
       root: carouselViewport,
-      // rootMargin: "0px -24px 0px -24px",
       threshold: 0.5,
     },
   );
 
-  slides.forEach((slide) => observer.observe(slide));
+  slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
 </script>
 
 <style>
@@ -175,6 +177,8 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
       (100cqw - var(--maximum-text-width)) / 2
     );
     --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+
+    --slide-gap: 2rem;
   }
 
   html {
@@ -189,10 +193,15 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
     margin-inline: calc(var(--actual-inline-margin) * -1);
   }
 
+  .slide-viewport {
+    padding-inline: calc(var(--slide-gap) / 2);
+  }
+
   .slide {
-    flex: 0 0 var(--actual-text-width);
+    /* flex: 0 0 var(--actual-text-width); */
     scroll-snap-align: start;
     opacity: 0.5;
+    width: var(--actual-text-width);
   }
 
   .carousel {
@@ -201,7 +210,8 @@ import { MyCarousel } from "../components/MyCarousel.tsx";
 
   .carousel-viewport {
     background-color: rgba(255, 37, 37, 0.526);
-    /* margin-inline: var(--actual-inline-margin); */
+    margin-inline: calc(var(--slide-gap) / -2);
+    padding-inline: calc(var(--slide-gap) / 2);
   }
 
   /* .carousel > :first-child,
