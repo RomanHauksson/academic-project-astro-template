@@ -1,20 +1,5 @@
-<div class="slide-viewport">
-  <div class="slide [&>*]:my-0">
+<div class="slide-viewport snap-start px-[calc(var(--slide-gap)/2)]">
+  <div class="slide w-[var(--actual-text-width)] first:mt-0 last:mb-0">
     <slot />
   </div>
 </div>
-
-<style>
-  :root {
-    --slide-gap: 1rem;
-  }
-
-  .slide-viewport {
-    padding-inline: calc(var(--slide-gap) / 2);
-  }
-
-  .slide {
-    scroll-snap-align: start;
-    width: var(--actual-text-width);
-  }
-</style>

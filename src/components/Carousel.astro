@@ -18,57 +18,83 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 <div class="carousel-wrapper">
   <div class="not-prose mb-4 flex items-center justify-center">
     <button
-      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
+      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      type="button"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
         name="ri:arrow-drop-left-line"
       /></button
     >
-    <ul class="flex list-none">
+    <div class="flex">
       {
         Array.from({ length: numSlides }).map(() => (
-          <li class="page-button h-[3rem] w-[3rem] cursor-pointer content-center [&.active>div,&:hover>div]:bg-orange-600 dark:[&.active>div,&:hover>div]:bg-orange-300">
-            <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black dark:bg-zinc-200" />
-          </li>
+          <button
+            class="page-button h-[3rem] w-[3rem] cursor-pointer content-center"
+            type="button"
+          >
+            <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black transition dark:bg-zinc-200" />
+          </button>
         ))
       }
-    </ul>
+    </div>
     <button
-      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 [&:hover:not(:disabled)>svg]:text-orange-600 dark:[&:hover:not(:disabled)>svg]:text-orange-300"
+      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      type="button"
       ><Icon
-        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        class="mx-auto h-[2rem] w-[2rem] transition dark:text-zinc-200"
         name="ri:arrow-drop-right-line"
       /></button
     >
   </div>
   <div class="carousel-viewport">
-    <div class="carousel full-bleed flex snap-x snap-mandatory overflow-scroll">
+    <div
+      class="carousel full-bleed flex snap-x snap-mandatory scroll-pl-[var(--actual-inline-margin)] overflow-scroll px-[calc(var(--slide-gap)/2)] [scrollbar-width:none]"
+    >
       <Fragment set:html={slidesHtml} />
     </div>
   </div>
 </div>
 
 <script>
-  const carousels = document.querySelectorAll(".carousel-wrapper");
+  const carousels = document.querySelectorAll(
+    "div.carousel-wrapper",
+  ) as NodeListOf<HTMLDivElement>;
 
   carousels.forEach((wrapper) => {
-    const listItems = wrapper.querySelectorAll("ul li");
-    const carouselViewport = wrapper.querySelector(".carousel-viewport");
-    const slides = wrapper.querySelectorAll(".slide");
-    const slideViewports = wrapper.querySelectorAll(".slide-viewport");
-    const prevBtn = wrapper.querySelector(".prev-button") as HTMLButtonElement;
-    const nextBtn = wrapper.querySelector(".next-button") as HTMLButtonElement;
+    const carouselViewport = wrapper.querySelector(
+      "div.carousel-viewport",
+    ) as HTMLDivElement;
+    const slides = wrapper.querySelectorAll(
+      "div.slide",
+    ) as NodeListOf<HTMLDivElement>;
+    const slideViewports = wrapper.querySelectorAll(
+      "div.slide-viewport",
+    ) as NodeListOf<HTMLDivElement>;
+    const prevButton = wrapper.querySelector(
+      "button.prev-button",
+    ) as HTMLButtonElement;
+    const nextButton = wrapper.querySelector(
+      "button.next-button",
+    ) as HTMLButtonElement;
+    const paginationButtons = wrapper.querySelectorAll(
+      "button.page-button",
+    ) as NodeListOf<HTMLButtonElement>;
 
-    if (!carouselViewport || !prevBtn || !nextBtn || slides.length === 0) {
+    if (
+      !carouselViewport ||
+      !prevButton ||
+      !nextButton ||
+      slides.length === 0
+    ) {
       return;
     }
 
     let currentIndex = 0;
 
     function updateButtonStates() {
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex === slides.length - 1;
-      listItems.forEach((item, index) => {
+      prevButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex === slides.length - 1;
+      paginationButtons.forEach((item, index) => {
         item.classList.toggle("active", index === currentIndex);
       });
     }
@@ -86,15 +112,15 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
       updateButtonStates();
     }
 
-    prevBtn.addEventListener("click", () => {
+    prevButton.addEventListener("click", () => {
       goToSlide(currentIndex - 1);
     });
 
-    nextBtn.addEventListener("click", () => {
+    nextButton.addEventListener("click", () => {
       goToSlide(currentIndex + 1);
     });
 
-    listItems.forEach((item, index) => {
+    paginationButtons.forEach((item, index) => {
       item.addEventListener("click", () => {
         goToSlide(index);
       });
@@ -137,22 +163,9 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 </script>
 
 <style>
+  @reference "../styles/global.css";
   :root {
     --slide-gap: 1rem;
-  }
-
-  .carousel {
-    scroll-padding-left: var(--actual-inline-margin);
-    scrollbar-width: none;
-  }
-
-  .carousel::-webkit-scrollbar {
-    display: none;
-  }
-
-  .carousel {
-    /* margin-inline: calc(var(--slide-gap) / -2); */
-    padding-inline: calc(var(--slide-gap) / 2);
   }
 
   .carousel:first-child {
@@ -163,20 +176,23 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     padding-right: var(--actual-inline-margin);
   }
 
-  .page-button.active > div,
-  .page-button:hover > div {
-    scale: 1.4;
-    transition: all 0.1s ease;
-  }
-
-  .navigation-button:hover:not(:disabled) > svg {
-    scale: 1.4;
-    transition: all 0.1s ease;
-  }
-
   @media (hover: none) and (pointer: coarse) {
     .navigation-button {
       display: none;
+    }
+  }
+
+  .page-button.active > div {
+    @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
+  }
+
+  @media (hover: hover) {
+    .page-button:hover > div {
+      @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
+    }
+
+    .navigation-button:hover:not(:disabled) > svg {
+      @apply scale-[1.4] text-orange-600 dark:text-orange-300;
     }
   }
 </style>
