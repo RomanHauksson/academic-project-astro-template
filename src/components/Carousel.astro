@@ -1,0 +1,192 @@
+---
+import { Icon } from "astro-icon/components";
+import { parseHTML } from "linkedom";
+// https://cassidysmith.dev/posts/modify-astro-slot-children
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const children = Array.from(document.children);
+const numSlides = children.length;
+
+children.forEach((child, index) => {
+  child.setAttribute("data-index", String(index));
+});
+
+const slidesHtml = children.map((child) => child.outerHTML).join("");
+---
+
+<div class="carousel-wrapper">
+  <div class="not-prose mb-4 flex items-center justify-center">
+    <button
+      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      type="button"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
+        name="ri:arrow-drop-left-line"
+      /></button
+    >
+    <div class="flex">
+      {
+        Array.from({ length: numSlides }).map(() => (
+          <button
+            class="page-button h-[3rem] w-[3rem] cursor-pointer content-center"
+            type="button"
+          >
+            <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black transition dark:bg-zinc-200" />
+          </button>
+        ))
+      }
+    </div>
+    <button
+      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      type="button"
+      ><Icon
+        class="mx-auto h-[2rem] w-[2rem] transition dark:text-zinc-200"
+        name="ri:arrow-drop-right-line"
+      /></button
+    >
+  </div>
+  <div
+    class="carousel-viewport mx-[calc(var(--slide-gap)/-2)] w-[calc(var(--actual-text-width)+var(--slide-gap))]"
+  >
+    <div
+      class="carousel mx-[calc(var(--actual-inline-margin)*-1+var(--slide-gap)/2)] flex snap-x snap-mandatory scroll-pl-[calc(var(--actual-inline-margin)-var(--slide-gap)/2)] overflow-scroll px-[var(--actual-inline-margin)] [scrollbar-width:none]"
+    >
+      <Fragment set:html={slidesHtml} />
+    </div>
+  </div>
+</div>
+
+<script>
+  const carousels = document.querySelectorAll(
+    "div.carousel-wrapper",
+  ) as NodeListOf<HTMLDivElement>;
+
+  carousels.forEach((wrapper) => {
+    const carouselViewport = wrapper.querySelector(
+      "div.carousel-viewport",
+    ) as HTMLDivElement;
+    const slides = wrapper.querySelectorAll(
+      "div.slide",
+    ) as NodeListOf<HTMLDivElement>;
+    const slideViewports = wrapper.querySelectorAll(
+      "div.slide-viewport",
+    ) as NodeListOf<HTMLDivElement>;
+    const prevButton = wrapper.querySelector(
+      "button.prev-button",
+    ) as HTMLButtonElement;
+    const nextButton = wrapper.querySelector(
+      "button.next-button",
+    ) as HTMLButtonElement;
+    const paginationButtons = wrapper.querySelectorAll(
+      "button.page-button",
+    ) as NodeListOf<HTMLButtonElement>;
+
+    if (
+      !carouselViewport ||
+      !prevButton ||
+      !nextButton ||
+      slides.length === 0
+    ) {
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function updateButtonStates() {
+      prevButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex === slides.length - 1;
+      paginationButtons.forEach((item, index) => {
+        item.classList.toggle("active", index === currentIndex);
+      });
+    }
+
+    function goToSlide(index: number) {
+      if (index < 0 || index >= slides.length) {
+        return;
+      }
+
+      slideViewports[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+      updateButtonStates();
+    }
+
+    prevButton.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+
+    nextButton.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+
+    paginationButtons.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        goToSlide(index);
+      });
+    });
+
+    updateButtonStates();
+
+    if (slideViewports.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+        if (visibleEntries.length === 0) {
+          return;
+        }
+
+        const mostVisible = visibleEntries.reduce((prev, current) =>
+          current.intersectionRatio > prev.intersectionRatio ? current : prev,
+        );
+
+        const target = mostVisible.target as HTMLElement;
+        const nextIndex = Number(target.dataset.index ?? "-1");
+        if (Number.isNaN(nextIndex) || nextIndex === currentIndex) {
+          return;
+        }
+
+        currentIndex = nextIndex;
+        updateButtonStates();
+      },
+      {
+        root: carouselViewport,
+        threshold: 0.5,
+      },
+    );
+
+    slideViewports.forEach((slideViewport) => observer.observe(slideViewport));
+  });
+</script>
+
+<style>
+  @reference "../styles/global.css";
+  :root {
+    --slide-gap: 1rem;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .navigation-button {
+      display: none;
+    }
+  }
+
+  .page-button.active > div {
+    @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
+  }
+
+  @media (hover: hover) {
+    .page-button:hover > div {
+      @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
+    }
+
+    .navigation-button:hover:not(:disabled) > svg {
+      @apply scale-[1.4] text-orange-600 dark:text-orange-300;
+    }
+  }
+</style>

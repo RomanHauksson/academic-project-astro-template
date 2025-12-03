@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* eslint-disable css/use-baseline -- It's alright to use selector nesting here */
 @custom-variant dark {
   &:where([data-theme="dark"] *) {
     @slot;
@@ -11,6 +12,7 @@
     }
   }
 }
+/* eslint-enable css/use-baseline */
 
 .expressive-code {
   width: 100%;
@@ -21,19 +23,23 @@ html {
   container-type: inline-size;
 }
 
-main {
+:root {
   --maximum-text-width: 50rem;
   --minimum-inline-margin: 1.5rem;
-  --actual-margin: max(
+  --actual-inline-margin: max(
     var(--minimum-inline-margin),
     (100cqw - var(--maximum-text-width)) / 2
   );
-  margin-inline: var(--actual-margin);
+  --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+}
+
+main {
+  margin-inline: var(--actual-inline-margin);
 }
 
 .full-bleed,
 main .katex-display {
-  margin-inline: calc(var(--actual-margin) * -1);
+  margin-inline: calc(var(--actual-inline-margin) * -1);
 }
 
 .katex-display {

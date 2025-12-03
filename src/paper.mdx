@@ -49,6 +49,8 @@ import Picture from "./components/Picture.astro";
 import ModelViewer from "./components/ModelViewer.astro"
 import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
+import Carousel from "./components/Carousel.astro";
+import CarouselSlide from "./components/CarouselSlide.astro";
 import { Comparison } from "./components/Comparison.tsx";
 
 import outside from "./assets/outside.mp4";
@@ -87,10 +89,29 @@ Use the `Comparison` component to compare two elements with an interactive slide
 <Figure>
   <Comparison slot="figure" client:idle >
     <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
+    <Picture slot="itemTwo" src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
   </Comparison>
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
+
+## Carousels
+
+Carousels are useful for situations in which you'd like to display a collection of visuals without taking up much space and you're okay with the reader not seeing every visual. I created my own carousel component for this template because I wasn't satisfied with the existing carousel libraries; please [file an issue](https://github.com/RomanHauksson/academic-project-astro-template/issues/new) if you run into any bugs!
+
+<Carousel>
+  <CarouselSlide>
+    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
+  </CarouselSlide>
+  <CarouselSlide>
+    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+  </CarouselSlide>
+  <CarouselSlide>
+    You can put any element in each carousel slide, not just pictures. Since this text isn't part of a component, it will be _interpreted_ as **Markdown**.
+  </CarouselSlide>
+  <CarouselSlide>
+    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
+  </CarouselSlide>
+</Carousel>
 
 ## Two columns
 
