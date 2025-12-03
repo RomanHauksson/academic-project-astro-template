@@ -106,7 +106,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
         return;
       }
 
-      slides[index].scrollIntoView({
+      slideViewports[index].scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "start",
@@ -169,14 +169,6 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
   :root {
     --slide-gap: 1rem;
   }
-
-  /* .carousel:first-child {
-    padding-left: var(--actual-inline-margin);
-  }
-
-  .carousel:last-child {
-    padding-right: var(--actual-inline-margin);
-  } */
 
   @media (hover: none) and (pointer: coarse) {
     .navigation-button {
