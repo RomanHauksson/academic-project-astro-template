@@ -46,9 +46,11 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
       /></button
     >
   </div>
-  <div class="carousel-viewport">
+  <div
+    class="carousel-viewport mx-[calc(var(--slide-gap)/-2)] w-[calc(var(--actual-text-width)+var(--slide-gap))]"
+  >
     <div
-      class="carousel full-bleed flex snap-x snap-mandatory scroll-pl-[var(--actual-inline-margin)] overflow-scroll px-[calc(var(--slide-gap)/2)] [scrollbar-width:none]"
+      class="carousel mx-[calc(var(--actual-inline-margin)*-1+var(--slide-gap)/2)] flex snap-x snap-mandatory scroll-pl-[calc(var(--actual-inline-margin)-var(--slide-gap)/2)] overflow-scroll px-[var(--actual-inline-margin)] [scrollbar-width:none]"
     >
       <Fragment set:html={slidesHtml} />
     </div>
@@ -168,13 +170,13 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     --slide-gap: 1rem;
   }
 
-  .carousel:first-child {
+  /* .carousel:first-child {
     padding-left: var(--actual-inline-margin);
   }
 
   .carousel:last-child {
     padding-right: var(--actual-inline-margin);
-  }
+  } */
 
   @media (hover: none) and (pointer: coarse) {
     .navigation-button {
