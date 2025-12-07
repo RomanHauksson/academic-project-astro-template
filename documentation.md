@@ -12,7 +12,7 @@ To get a quick draft started, try copying the TeX source of your paper into some
 Use the website template in this directory to make a project page for my research paper. You can find the TeX source of the paper in `/<directory>/`. Copy the abstract verbatim, but the rest of the project page should be a summary to show off my key results and figures. Use bullet points sparingly. Copy any images you use for the page into `/src/assets/`. At the end, give me a few suggestions for figures I could make that were not in the TeX source or interactive elements I could add to the page.
 ```
 
-I've already generated an outline of the repository for GitHub Copilot in `/.github/copilot-instructions.md`, configured an MCP server to give it access to Astro's documentation in `/.vscode/mcp.json`, and configured [ESLint](https://eslint.org/) to catch simple errors quickly. None of these should need any further configuration on your part, and they'll help Copilot perform better.
+I've already generated an outline of the repository for GitHub Copilot in [`/.github/copilot-instructions.md`](./.github/copilot-instructions.md), configured an MCP server to give it access to Astro's documentation in [`/.vscode/mcp.json`](./.vscode/mcp.json), and configured [ESLint](https://eslint.org/) to catch simple errors quickly. None of these should need any further configuration on your part, and they'll help Copilot perform better.
 
 For more guidance on using AI tools with this repository, see [Astro's guide](https://docs.astro.build/en/guides/build-with-ai/).
 
@@ -46,7 +46,7 @@ For longer videos, you probably want to use a hosted video service, like YouTube
 
 If you want to use a different font, consult the docs on [Astro's experimental Fonts API](https://docs.astro.build/en/reference/experimental-flags/fonts/). You'll have to edit the following lines. If you're using a [Google Font](https://fonts.google.com/), it's simple as editing the font name.
 
-In `/astro.config.ts`:
+In [`/astro.config.ts`](./astro.config.ts):
 
 ```ts
 experimental: {
@@ -61,14 +61,30 @@ experimental: {
 }
 ```
 
-In `/src/pages/index.astro`:
+In [`/src/pages/index.astro`](./src/pages/index.astro):
 
 ```astro
-<Font cssVariable="--font-noto-sans" preload />
+<Font
+  cssVariable="--font-noto-sans"
+  preload={[{ subset: "latin", style: "normal" }]}
+/>
 
 ...
 
 <body class="...font-(family-name:--font-noto-sans)..."></body>
+```
+
+Note that by default, the page only preloads the font file for the normal (non-italic), Latin subset of Google Noto. If your page is written in a language with a non-Latin alphabet, or the header contains text with italics, consider changing the default settings to decrease initial page load times.
+
+```astro
+<!-- Preload the Cyrillic subset instead of Latin -->
+<Font
+  cssVariable="--font-noto-sans"
+  preload={[{ subset: "cyrillic", style: "normal" }]}
+/>
+
+<!-- Preload the normal Latin subset as well as the italic version -->
+<Font cssVariable="--font-noto-sans" preload={[{ subset: "latin" }]} />
 ```
 
 ## Icons
