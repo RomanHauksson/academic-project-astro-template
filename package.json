@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.12",
     "@astrojs/react": "^4.4.2",
     "@google/model-viewer": "^4.1.0",
     "@iconify-json/academicons": "^1.1.14",
@@ -19,7 +19,7 @@
     "@tailwindcss/vite": "^4.1.14",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.14.1",
+    "astro": "^5.16.4",
     "astro-expressive-code": "^0.41.3",
     "astro-icon": "^1.1.0",
     "image-size": "^2.0.2",
