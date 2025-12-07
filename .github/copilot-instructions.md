@@ -1,6 +1,6 @@
 # AI agent guide for this repo
 
-This repo is an Astro 5 + MDX site with optional React "islands," Tailwind CSS v4, KaTeX, and a small PDF→image pipeline. It renders a single-page research project site from `src/paper.mdx` using `src/pages/index.astro` as the layout and a curated set of components.
+This repo is an Astro 5 + MDX site with optional React "islands," Tailwind CSS v4, math rendered through KaTeX, and a small PDF→image pipeline. It renders a single-page research project site from `src/paper.mdx` using `src/pages/index.astro` as the layout and a curated set of components.
 
 ## Architecture and key files
 
@@ -10,7 +10,8 @@ This repo is an Astro 5 + MDX site with optional React "islands," Tailwind CSS v
 - Components (examples)
   - `Figure.astro` provides a consistent figure/caption pattern via named slots `figure` and `caption`.
   - `Picture.astro` wraps `astro:assets` with PDF support via `src/lib/render-pdf.ts`. `src` accepts either an `ImageMetadata` import or a string path ending with `.pdf` (path is resolved relative to `./src/pages/`).
-  - `Video.astro`, `YouTubeVideo.astro`, `LaTeX.astro` (server-side KaTeX), `ModelViewer.astro` (`<model-viewer>`), `Comparison.tsx` (React compare slider). React components require a `client:*` hydration directive when used inside MDX/`.astro`.
+  - `Video.astro`, `YouTubeVideo.astro`, `ModelViewer.astro` (`<model-viewer>`), `Carousel.astro`/`CarouselSlide.astro`, `Comparison.tsx` (React compare slider). React components require a `client:*` hydration directive when used inside MDX/`.astro`.
+  - Math is rendered with `remark-math` + `rehype-katex`, so just write inline `$...$` or block `$$...$$` expressions inside MDX—no dedicated component is needed.
 - Styling
   - Tailwind v4 via `@tailwindcss/vite`; global styles in `src/styles/global.css` with a custom `dark` variant keyed off `data-theme`.
   - Code blocks themed with `astro-expressive-code` (see `astro.config.ts` styleOverrides and theme selector).
@@ -40,6 +41,7 @@ This repo is an Astro 5 + MDX site with optional React "islands," Tailwind CSS v
   - Prefer `<Picture>` for images. It accepts:
     - imported images (Astro's `ImageMetadata`) for optimized images; or
     - a relative PDF path like `"../assets/plot.pdf"` to auto-render page 1 to PNG during build/dev.
+  - `Carousel` expects `CarouselSlide` children to render each slide; place any markup inside each slide and the component handles pagination buttons, swipe, and keyboard focus states for you.
   - For React, import the component and add a hydration directive where used, e.g., `<Comparison client:idle>…</Comparison>`.
 - Theme handling
   - Set `theme` in frontmatter to `device | light | dark`. The layout in `src/pages/index.astro` writes `data-theme` and Tailwind's custom `dark` variant reads it. Use class `dark:*` utilities as needed; you can invert images in dark mode via `<Picture invertInDarkMode />`.
