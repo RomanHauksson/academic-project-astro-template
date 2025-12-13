@@ -18,7 +18,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
 <div class="carousel-wrapper">
   <div class="not-prose mb-4 flex items-center justify-center">
     <button
-      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      class="navigation-button prev-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 active:[&>svg]:scale-none!"
       type="button"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] dark:text-zinc-200"
@@ -29,7 +29,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
       {
         Array.from({ length: numSlides }).map(() => (
           <button
-            class="page-button h-[3rem] w-[3rem] cursor-pointer content-center"
+            class="page-button h-[3rem] w-[3rem] cursor-pointer content-center active:[&>div]:scale-none!"
             type="button"
           >
             <div class="mx-auto h-[0.5rem] w-[0.5rem] rounded-full bg-black transition dark:bg-zinc-200" />
@@ -38,7 +38,7 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
       }
     </div>
     <button
-      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50"
+      class="navigation-button next-button h-[3rem] w-[3rem] cursor-pointer content-center disabled:cursor-not-allowed disabled:opacity-50 active:[&>svg]:scale-none!"
       type="button"
       ><Icon
         class="mx-auto h-[2rem] w-[2rem] transition dark:text-zinc-200"
@@ -180,13 +180,14 @@ const slidesHtml = children.map((child) => child.outerHTML).join("");
     @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
   }
 
-  @media (hover: hover) {
-    .page-button:hover > div {
-      @apply scale-[1.4] bg-orange-600 dark:bg-orange-300;
-    }
+  .page-button:active > div {
+    @apply scale-100;
+  }
 
+  @media (hover: hover) {
+    .page-button:hover > div,
     .navigation-button:hover:not(:disabled) > svg {
-      @apply scale-[1.4] text-orange-600 dark:text-orange-300;
+      @apply scale-[1.4];
     }
   }
 </style>
