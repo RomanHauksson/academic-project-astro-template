@@ -34,7 +34,7 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.14",
-    "three": "^0.172.0",
+    "three": "0.172.0",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
