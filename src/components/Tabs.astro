@@ -1,0 +1,53 @@
+---
+import { parseHTML } from "linkedom";
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const pages = Array.from(document.querySelectorAll(".tabs-page"));
+const numPages = pages.length;
+
+pages.forEach((page, index) => {
+  page.setAttribute("data-index", String(index));
+});
+
+const pagesHtml = pages.map((page) => page.outerHTML).join("");
+---
+
+<div class="tab-set">
+  <div>
+    <button>True</button>
+    <button>DiffC</button>
+  </div>
+  <Fragment set:html={pagesHtml} />
+</div>
+
+<script>
+  const tabSets = document.querySelectorAll(
+    ".tab-set",
+  ) as NodeListOf<HTMLDivElement>;
+
+  tabSets.forEach((tabSet) => {
+    const buttons = tabSet.querySelectorAll("button");
+    const pages = tabSet.querySelectorAll(".tab-page");
+    if (buttons.length != pages.length) {
+      throw Error(
+        "The number of tab slides must match the number of tab buttons.",
+      );
+    }
+    function goToPage(index: number) {
+      pages.forEach((page) => {
+        const pageIndex = Number(page.getAttribute("data-index"));
+        if (pageIndex === index) {
+          page.setAttribute("style", "display: block;");
+        } else {
+          page.setAttribute("style", "display: none;");
+        }
+      });
+    }
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        goToPage(index);
+      });
+    });
+  });
+</script>
