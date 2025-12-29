@@ -10,8 +10,8 @@ const { notes } = Astro.props;
 
 <div class="text-center text-sm">
   {
+    // prettier-ignore
     notes.map((note, index, array) =>
-      // prettier-ignore
       <span>
         <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
       </span>

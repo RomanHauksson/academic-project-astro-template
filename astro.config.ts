@@ -12,7 +12,7 @@ import astroExpressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
+	vite: {
     plugins: [tailwindcss()],
   },
   markdown: {
@@ -49,5 +49,5 @@ export default defineConfig({
   },
   image: {
     responsiveStyles: true,
-  }
+  },
 });

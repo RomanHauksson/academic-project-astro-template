@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "tailwind-variants";
+
+type Props = Omit<HTMLAttributes<"div">, "role">;
+
+export const tabsList = tv({
+  base: "mx-auto flex flex-wrap w-fit items-center justify-center gap-2",
+});
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div
+  class={tabsList({ class: className })}
+  data-slot="tabs-list"
+  data-tabs-list
+  role="tablist"
+  {...rest}
+>
+  <slot />
+</div>
