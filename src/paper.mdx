@@ -51,12 +51,13 @@ import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
 import Carousel from "./components/Carousel.astro";
 import CarouselSlide from "./components/CarouselSlide.astro";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import { Comparison } from "./components/Comparison.tsx";
 
 import outside from "./assets/outside.mp4";
-import transformer from "./assets/transformer.webp";
 import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
+import dogsMsillm from "@/assets/dogs-msillm.jpg"
 
 <Video src={outside} />
 
@@ -68,64 +69,88 @@ This is a live demo for a template you can use to create a simple project page f
 
 </HighlightedSection>
 
-## Figures
+## Visuals
 
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
+### Pictures
 
-<Figure>
-  <Picture slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
-  <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
-</Figure>
+Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
 
-If you stored your figures as PDFs, the `Picture` component can convert them into web-friendly images automatically.
+<Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
 
-<Figure>
-  <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
-  <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
-</Figure>
+### Figures with captions
 
-Use the `Comparison` component to compare two elements with an interactive slider. It should work for any component or HTML element, including images, videos, and 3D models.
+Wrap a picture (or any arbitary content, such as videos or equations) in a `Figure` component to add a caption.
 
 <Figure>
-  <Comparison slot="figure" client:idle >
-    <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-    <Picture slot="itemTwo" src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
-  </Comparison>
+  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
 
-## Carousels
+### Comparison sliders
 
-Carousels are useful for situations in which you'd like to display a collection of visuals without taking up much space and you're okay with the reader not seeing every visual. I created my own carousel component for this template because I wasn't satisfied with the existing carousel libraries; please [file an issue](https://github.com/RomanHauksson/academic-project-astro-template/issues/new) if you run into any bugs!
+Use the `Comparison` component to compare two elements with an interactive slider.
+
+<Comparison client:idle >
+  <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+  <Picture slot="itemTwo" src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
+</Comparison>
+
+### Tabbed interfaces
+
+A tabs interface is a great way to display a labeled collection of related visuals without taking up too much space.
+
+<Tabs defaultValue="true">
+  <TabsList>
+    <TabsTrigger value="true">Ground truth</TabsTrigger>
+    <TabsTrigger value="diffc">DiffC (Flux-dev)</TabsTrigger>
+    <TabsTrigger value="msillm">MS-ILLM</TabsTrigger>
+  </TabsList>
+  <TabsContent value="true">
+    <Picture
+      src={dogsTrue}
+      alt="True photo of two dogs running side-by-side in shallow water"
+    />
+  </TabsContent>
+  <TabsContent value="diffc">
+    <Picture
+      src={dogsDiffc}
+      alt="Photo of two running dogs, lossily compressed using the DiffC algorithm"
+    />
+  </TabsContent>
+  <TabsContent value="msillm">
+    <Picture
+      src={dogsMsillm}
+      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
+    />
+  </TabsContent>
+</Tabs>
+
+### Carousels
+
+A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
 
 <Carousel>
   <CarouselSlide>
-    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
+    <Picture src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
   </CarouselSlide>
   <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
+    <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
   </CarouselSlide>
   <CarouselSlide>
-    You can put any element in each carousel slide, not just pictures. Since this text isn't part of a component, it will be _interpreted_ as **Markdown**.
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="Photo of two dogs running side-by-side in shallow water" />
+    <Picture
+      src={dogsMsillm}
+      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
+    />
   </CarouselSlide>
 </Carousel>
 
 ## Two columns
 
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with an interactive 3D model viewer. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+Use the two columns component to display two columns of content. In this example, the first column contains a YouTube video embed and the second column contains an interactive 3D model viewer. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
 
 <TwoColumns>
-  <Figure slot="left">
-    <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
-    <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
-  </Figure>
-  <Figure slot="right">
-    <ModelViewer slot="figure" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
-    <Fragment slot="caption">Now look at this cube, rendered with the `<model-viewer>` web component.</Fragment>
-  </Figure>
+  <YouTubeVideo slot="left" videoId="wjZofJX0v4M" />
+  <ModelViewer slot="right" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
 </TwoColumns>
 
 ## $\LaTeX$
