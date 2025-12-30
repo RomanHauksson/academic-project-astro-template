@@ -51,6 +51,7 @@ import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
 import Carousel from "./components/Carousel.astro";
 import CarouselSlide from "./components/CarouselSlide.astro";
+import Wide from "./components/Wide.astro";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import { Comparison } from "./components/Comparison.tsx";
 
@@ -77,9 +78,17 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
 
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
 
+### Wide visuals
+
+I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
+
+<Wide>
+  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+</Wide>
+
 ### Figures with captions
 
-Wrap a picture (or any arbitrary content, such as videos or equations) in a `Figure` component to add a caption.
+Wrap a visual in a `Figure` component to add a caption.
 
 <Figure>
   <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
@@ -88,7 +97,7 @@ Wrap a picture (or any arbitrary content, such as videos or equations) in a `Fig
 
 ### Comparison sliders
 
-Use the `Comparison` component to compare two elements with an interactive slider.
+Use the `Comparison` component to compare two visuals with an interactive slider.
 
 <Comparison client:idle >
   <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
