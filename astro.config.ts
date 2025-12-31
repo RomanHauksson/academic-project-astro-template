@@ -5,6 +5,7 @@ import mdx from "@astrojs/mdx";
 
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeCitation from "rehype-citation";
 
 import react from "@astrojs/react";
 
@@ -12,12 +13,21 @@ import astroExpressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-	vite: {
+  vite: {
     plugins: [tailwindcss()],
   },
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [
+      rehypeKatex,
+      [
+        rehypeCitation,
+        {
+          bibliography: "bibliography.bib",
+          linkCitations: true,
+        },
+      ],
+    ],
   },
   integrations: [
     icon(),

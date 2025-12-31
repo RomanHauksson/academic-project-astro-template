@@ -35,11 +35,11 @@ This is a template to help you build a professional project page for your resear
 
 At this point, whenever you push to the `main` branch, the GitHub Actions workflow in `.github/workflows/astro.yml` will automatically build a static website and deploy it to `https://<username>.github.io/<repository>/`. No other configuration is necessary!
 
-To edit the content, you *could* simply edit [`./src/paper.mdx`](./src/paper.mdx) in your browser in the GitHub interface, without downloading or setting anything else up. But if you want to preview your changes faster, I recommend editing it locally:
+To edit the content, you _could_ simply edit [`./src/paper.mdx`](./src/paper.mdx) in your browser in the GitHub interface, without downloading or setting anything else up. But if you want to preview your changes faster, I recommend editing it locally:
 
 3. Clone the repository.
 
-5. [Install Node.js](https://nodejs.org/en/download/) if you haven't already. Make sure you're using version 24 or later, which you can check by running
+4. [Install Node.js](https://nodejs.org/en/download/) if you haven't already. Make sure you're using version 24 or later, which you can check by running
 
 ```bash
 node --version
@@ -81,7 +81,7 @@ I'd like to speak directly with users to learn about what they want and get feed
 
 ## Alternative template
 
-For a different look, the other template I'd recommend is [*Clarity: A Minimalist Website Template for AI Research*](https://shikun.io/projects/clarity) by Shikun Liu. It has a beautiful and careful design that's distinct from the original Nerfies page. It's simply an HTML file styled with Sass.
+For a different look, the other template I'd recommend is [_Clarity: A Minimalist Website Template for AI Research_](https://shikun.io/projects/clarity) by Shikun Liu. It has a beautiful and careful design that's distinct from the original Nerfies page. It's simply an HTML file styled with Sass.
 
 ## Credits
 
