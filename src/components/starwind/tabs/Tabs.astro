@@ -45,13 +45,21 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
     private valueToContentMap: Map<string, HTMLElement>;
     private parentHandler: TabsHandler | null = null;
 
-    constructor(tabs: HTMLElement, idx: number, parentHandler: TabsHandler | null = null) {
+    constructor(
+      tabs: HTMLElement,
+      idx: number,
+      parentHandler: TabsHandler | null = null,
+    ) {
       this.tabs = tabs;
       this.parentHandler = parentHandler;
       this.triggers = Array.from(
-        tabs.querySelectorAll(":scope > [data-tabs-list] > [data-tabs-trigger]"),
+        tabs.querySelectorAll(
+          ":scope > [data-tabs-list] > [data-tabs-trigger]",
+        ),
       );
-      this.contents = Array.from(tabs.querySelectorAll(":scope > [data-tabs-content]"));
+      this.contents = Array.from(
+        tabs.querySelectorAll(":scope > [data-tabs-content]"),
+      );
       this.tabsId = `starwind-tabs${idx}`;
       this.syncKey = tabs.dataset.syncKey;
       this.storageKey = this.syncKey
@@ -60,10 +68,16 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
 
       // Create maps for faster lookups
       this.valueToTriggerMap = new Map(
-        this.triggers.map((trigger) => [trigger.getAttribute("data-value") ?? "", trigger]),
+        this.triggers.map((trigger) => [
+          trigger.getAttribute("data-value") ?? "",
+          trigger,
+        ]),
       );
       this.valueToContentMap = new Map(
-        this.contents.map((content) => [content.getAttribute("data-value") ?? "", content]),
+        this.contents.map((content) => [
+          content.getAttribute("data-value") ?? "",
+          content,
+        ]),
       );
 
       this.setupIds();
@@ -77,7 +91,8 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
 
     private initializeTab(): void {
       const value = this.syncKey
-        ? (localStorage.getItem(this.storageKey) ?? this.tabs.dataset.defaultValue)
+        ? (localStorage.getItem(this.storageKey) ??
+          this.tabs.dataset.defaultValue)
         : this.tabs.dataset.defaultValue;
 
       if (value) {
@@ -90,7 +105,9 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
     }
 
     private setupSyncListener(): void {
-      document.addEventListener(`starwind-tabs-sync:${this.syncKey}`, ((e: TabsSyncEvent) => {
+      document.addEventListener(`starwind-tabs-sync:${this.syncKey}`, ((
+        e: TabsSyncEvent,
+      ) => {
         const value = e.detail.value;
         const trigger = this.valueToTriggerMap.get(value);
         const index = trigger ? this.triggers.indexOf(trigger) : -1;
@@ -124,7 +141,10 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
 
     private setTabIndex(): void {
       this.triggers.forEach((trigger, index) => {
-        trigger.setAttribute("tabindex", index === this.currentTabIndex ? "0" : "-1");
+        trigger.setAttribute(
+          "tabindex",
+          index === this.currentTabIndex ? "0" : "-1",
+        );
       });
     }
 
@@ -132,7 +152,9 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
       if (!this.syncKey) return;
 
       document.dispatchEvent(
-        new CustomEvent(`starwind-tabs-sync:${this.syncKey}`, { detail: { value } }),
+        new CustomEvent(`starwind-tabs-sync:${this.syncKey}`, {
+          detail: { value },
+        }),
       );
 
       localStorage.setItem(this.storageKey, value);
@@ -155,7 +177,9 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
         }
         case "ArrowLeft": {
           for (let i = 1; i < this.triggers.length; i++) {
-            const index = (this.currentTabIndex - i + this.triggers.length) % this.triggers.length;
+            const index =
+              (this.currentTabIndex - i + this.triggers.length) %
+              this.triggers.length;
             if (!this.triggers[index].disabled) {
               newIndex = index;
               break;
@@ -210,7 +234,9 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
 
     private addEventListeners(): void {
       this.triggers.forEach((trigger, index) => {
-        trigger.addEventListener("click", () => this.handleClick(trigger, index));
+        trigger.addEventListener("click", () =>
+          this.handleClick(trigger, index),
+        );
         trigger.addEventListener("keydown", (e) => this.handleKeyNavigation(e));
       });
     }
@@ -235,8 +261,12 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
       });
 
       // Initialize any nested tabs in the active content
-      if (content.hasAttribute("data-state") && content.getAttribute("data-state") === "active") {
-        const nestedTabs = content.querySelectorAll<HTMLElement>(".starwind-tabs");
+      if (
+        content.hasAttribute("data-state") &&
+        content.getAttribute("data-state") === "active"
+      ) {
+        const nestedTabs =
+          content.querySelectorAll<HTMLElement>(".starwind-tabs");
 
         nestedTabs.forEach((nestedTab, nestedIdx) => {
           // Skip tabs that already have instances
