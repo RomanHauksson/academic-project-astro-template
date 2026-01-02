@@ -160,7 +160,7 @@ main .katex-display {
 
 @layer base {
   * {
-    @apply border-border outline-outline/50;
+    @apply border-border outline-outline/50 wrap-break-word;
   }
   button {
     @apply cursor-pointer;
