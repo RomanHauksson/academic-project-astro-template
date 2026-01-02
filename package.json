@@ -8,6 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview --host",
     "astro": "astro",
+    "check": "astro check",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier .",
