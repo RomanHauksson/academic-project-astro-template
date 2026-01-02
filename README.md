@@ -65,13 +65,13 @@ npm run dev
 
 While the development server is running, you can open `http://localhost:4321` in your browser to see a live preview of your page.
 
-8. Edit the content in [`./src/paper.mdx`](./src/paper.mdx). You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in `./.vscode/extensions.json`. Every time you save a file, the development server will automatically reload and display the updated version of the page.
+8. Edit the content in [`./src/paper.mdx`](./src/paper.mdx). You should use [Visual Studio Code](https://code.visualstudio.com/) – or one of its forks, like [Cursor](https://cursor.com/) – so you can take advantage of the extensions I recommend in [`./.vscode/extensions.json`](./.vscode/extensions.json). Every time you save a file, the development server will automatically reload and display the updated version of the page.
 
 9. Push your changes to the remote repository to trigger a new deployment with your changes.
 
 Alternatively, you can build the site locally. Running the following command will create a static website stored in `./dist/`.
 
-```
+```bash
 npm run build
 ```
 
