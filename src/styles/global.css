@@ -3,7 +3,6 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/forms";
 
-/* eslint-disable css/use-baseline -- It's alright to use selector nesting here */
 @custom-variant dark {
   &:where([data-theme="dark"] *) {
     @slot;
@@ -14,7 +13,6 @@
     }
   }
 }
-/* eslint-enable css/use-baseline */
 
 .expressive-code {
   width: 100%;
