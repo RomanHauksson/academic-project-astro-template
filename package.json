@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "all:fix": "astro check && eslint --fix . && prettier --write ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
