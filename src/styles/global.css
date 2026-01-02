@@ -3,18 +3,16 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/forms";
 
-/* eslint-disable css/use-baseline -- It's alright to use selector nesting here */
 @custom-variant dark {
-  &:where([data-theme="dark"] *) {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
     @slot;
   }
-  &:where([data-theme="device"] *) {
+  &:where([data-theme="device"], [data-theme="device"] *) {
     @media (prefers-color-scheme: dark) {
       @slot;
     }
   }
 }
-/* eslint-enable css/use-baseline */
 
 .expressive-code {
   width: 100%;
@@ -163,9 +161,6 @@ main .katex-display {
 @layer base {
   * {
     @apply border-border outline-outline/50;
-  }
-  body {
-    /* @apply bg-background text-foreground scheme-light dark:scheme-dark; */
   }
   button {
     @apply cursor-pointer;
