@@ -4,10 +4,10 @@
 @plugin "@tailwindcss/forms";
 
 @custom-variant dark {
-  &:where([data-theme="dark"] *) {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
     @slot;
   }
-  &:where([data-theme="device"] *) {
+  &:where([data-theme="device"], [data-theme="device"] *) {
     @media (prefers-color-scheme: dark) {
       @slot;
     }
