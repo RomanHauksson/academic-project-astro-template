@@ -10,8 +10,5 @@
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "mdx": {
-    "checkMdx": true
-  }
+  "exclude": ["dist"]
 }
