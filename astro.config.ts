@@ -47,16 +47,14 @@ export default defineConfig({
     mdx(),
     react(),
   ],
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: "Noto Sans",
-        cssVariable: "--font-noto-sans",
-        weights: ["100 900"],
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Noto Sans",
+      cssVariable: "--font-noto-sans",
+      weights: ["100 900"],
+    },
+  ],
   image: {
     responsiveStyles: true,
   },
