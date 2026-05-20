@@ -2,8 +2,10 @@
 import type { HTMLAttributes } from "astro/types";
 import { tv } from "tailwind-variants";
 
-interface Props
-  extends Omit<HTMLAttributes<"div">, "id" | "role" | "tabindex" | "hidden"> {
+interface Props extends Omit<
+  HTMLAttributes<"div">,
+  "id" | "role" | "tabindex" | "hidden"
+> {
   value: string;
 }
 
