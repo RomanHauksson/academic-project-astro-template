@@ -46,7 +46,7 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "^2.5.0",
     "@eslint/css": "^1.2.0",
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@eslint/json": "^1.2.0",
     "@eslint/markdown": "^8.0.1",
     "@tailwindcss/forms": "^0.5.11",
