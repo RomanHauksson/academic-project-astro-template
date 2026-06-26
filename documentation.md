@@ -16,6 +16,49 @@ I've already generated an outline of the repository for GitHub Copilot in [`/.gi
 
 For more guidance on using AI tools with this repository, see [Astro's guide](https://docs.astro.build/en/guides/build-with-ai/).
 
+## Header and cover visual
+
+The page header — the title, authors, conference, author notes, and link buttons — is rendered by the `Header` component at the top of [`./src/paper.mdx`](./src/paper.mdx). Edit its props to change the header content:
+
+```mdx
+<Header
+  title="My Paper Title"
+  conference="Conference Name"
+  authors={[
+    {
+      name: "Your Name",
+      url: "https://example.com",
+      institution: "Your Institution",
+      notes: ["*"],
+    },
+  ]}
+  notes={[{ symbol: "*", text: "equal contribution" }]}
+  links={[{ name: "Paper", url: "https://...", icon: "ri:file-pdf-2-line" }]}
+/>
+```
+
+Note that the `title` in the frontmatter is separate: it sets the browser-tab title and the social "link preview" card (alongside `description` and `thumbnail`), while the `title` prop on `Header` sets the heading displayed on the page. They're usually the same, but you can set them independently.
+
+### Adding a cover
+
+To place a cover image or video behind the header, import the asset and pass it through the component's `background` slot using the `Picture` or `Video` component:
+
+```mdx
+import cover from "./assets/cover.png";
+
+<Header title="..." authors={[...]}>
+  <Picture slot="background" src={cover} alt="" />
+</Header>
+```
+
+```mdx
+<Header title="..." authors={[...]}>
+  <Video slot="background" controls={false} />
+</Header>
+```
+
+Store cover **images** in `./src/assets/` so they're optimized (AVIF, responsive sizes) just like figures. **Videos** are served as-is — Astro doesn't optimize video — so keep them short and well-compressed (a muted, looping, controls-free clip works well as a backdrop). The cover fills the width of the page and the height of the header, cropping to cover the area. The header text is shown in white over a subtle dark overlay with a text shadow, so it stays legible regardless of the page's color theme — pick a cover that looks good behind white text.
+
 ## Videos
 
 By default, videos displayed using the `Video` component will be muted and play automatically. To display a video that contains audio, I recommend the following settings:

@@ -1,0 +1,158 @@
+---
+import { Icon } from "astro-icon/components";
+
+type Author = {
+  name: string;
+  url?: string;
+  institution?: string;
+  notes?: string[];
+};
+
+type Note = {
+  symbol: string;
+  text: string;
+};
+
+type Link = {
+  url: string;
+  name: string;
+  icon?: string;
+};
+
+interface Props {
+  title: string;
+  authors: Author[];
+  conference?: string;
+  notes?: Note[];
+  links?: Link[];
+}
+
+const { title, authors, conference, notes, links } = Astro.props;
+
+const hasBackground = Astro.slots.has("background");
+---
+
+<header
+  class:list={[
+    "full-bleed relative mb-12",
+    hasBackground && "-mt-16 pt-24 pb-28",
+  ]}
+>
+  {
+    hasBackground && (
+      <div class="cover absolute inset-0 z-0 overflow-hidden">
+        <slot name="background" />
+        {/* Darken the cover so the white header text stays legible. */}
+        <div class="absolute inset-0 bg-black/40" />
+      </div>
+    )
+  }
+  <div
+    class:list={[
+      "header-stack relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
+      hasBackground
+        ? "cover-text text-blue gap-10 text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]"
+        : "gap-6",
+    ]}
+  >
+    <h1 class="text-5xl font-medium">{title}</h1>
+    <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
+      {
+        authors.map((author) => (
+          <div class="flex flex-col items-center text-center">
+            <div class="flex flex-row text-xl">
+              {author.url ? (
+                <a href={author.url}>{author.name}</a>
+              ) : (
+                author.name
+              )}
+              {author.notes && (
+                <sup class="text-xl">
+                  {author.notes.map(
+                    (note, index, array) =>
+                      note + (index < array.length - 1 ? "," : ""),
+                  )}
+                </sup>
+              )}
+            </div>
+            {author.institution && <div>{author.institution}</div>}
+          </div>
+        ))
+      }
+    </div>
+    {conference && <div>{conference}</div>}
+    {
+      notes && (
+        <div class="text-center text-sm">
+          {
+            // prettier-ignore
+            notes.map((note, index, array) => (
+              <span>
+                <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
+              </span>
+            ))
+          }
+        </div>
+      )
+    }
+    {
+      links && (
+        <div class="not-prose flex flex-row flex-wrap justify-center gap-2">
+          {links.map((link) => (
+            <a
+              href={link.url}
+              class="flex flex-row items-center gap-2 rounded-full bg-zinc-800 px-5 py-2 text-lg text-white hover:bg-black hover:no-underline dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-50"
+            >
+              {link.icon && <Icon name={link.icon} />}
+              <span>{link.name}</span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  /* Make the slotted cover (Picture/Video, or a plain <img>/<video>) fill the
+     header, overriding those components' figure styling. Scoped to `.cover`. */
+  .cover :global(:is(picture, img, video)) {
+    position: absolute;
+    inset: 0;
+    /* Zero the margin that `prose` adds to media elements, which would
+       otherwise push the cover down and expose the page background. */
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  /* The flex `gap` controls all spacing in the stack, so neutralise the
+     heading's default `prose` margins. */
+  .header-stack :global(h1) {
+    margin-block: 0;
+  }
+
+  /* Over a cover, force the header text to white, overriding the muted `prose`
+     element colors. The link buttons keep their own colors, so they're
+     excluded. */
+  .cover-text
+    :global(
+      :where(h1, h2, h3, h4, p, a, span, div, sup, li):not(
+        .not-prose,
+        .not-prose *
+      )
+    ) {
+    color: #fff;
+  }
+
+  /* The link buttons have a solid surface, so they don't take the text shadow;
+     give the pills a matching drop shadow so they lift off the cover too. */
+  .cover-text :global(.not-prose a) {
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+</style>
