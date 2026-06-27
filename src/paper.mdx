@@ -1,37 +1,8 @@
 ---
+# This title is used for the browser tab and the link-preview card (see the
+# "description" and "thumbnail" keys below). The title displayed at the top of
+# the page is set separately, on the <Header> component in the body.
 title: Academic Project Page Template
-authors:
-  - name: Roman Hauksson
-    url: https://roman.technology
-    institution: University of Texas at Dallas
-    notes: ["*", †]
-  - name: Author Two
-    institution: Institution Two
-    notes: ["*", †]
-  - name: Author Three
-    institution: Institution Three
-    notes: ["*"]
-  - name: Author Four
-    institution: Institution Four
-conference: Conference Name
-notes:
-  - symbol: "*"
-    text: author note one
-  - symbol: †
-    text: author note two
-links:
-  - name: Paper
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: ri:file-pdf-2-line
-  - name: Code
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: ri:github-line
-  - name: arXiv
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: academicons:arxiv
-  - name: Slides
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: ri:slideshow-2-line
 
 # The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
 theme: device
@@ -44,6 +15,7 @@ description: Simple project page template for your research paper, built with As
 thumbnail: screenshot-light.png
 ---
 
+import Header from "./components/Header.astro";
 import Video from "./components/Video.astro";
 import HighlightedSection from "./components/HighlightedSection.astro";
 import SmallCaps from "./components/SmallCaps.astro";
@@ -63,23 +35,61 @@ import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
 import dogsMsillm from "@/assets/dogs-msillm.jpg"
 
-<Video src={outside} />
+<Header
+  title="Academic Project Page Template"
+  conference="Conference Name"
+  authors={[
+    {
+      name: "Roman Hauksson",
+      url: "https://roman.technology",
+      institution: "University of Texas at Dallas",
+      notes: ["*", "†"],
+    },
+    { name: "Author Two", institution: "Institution Two", notes: ["*", "†"] },
+    { name: "Author Three", institution: "Institution Three", notes: ["*"] },
+    { name: "Author Four", institution: "Institution Four" },
+  ]}
+  notes={[
+    { symbol: "*", text: "author note one" },
+    { symbol: "†", text: "author note two" },
+  ]}
+  links={[
+    { name: "Paper", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:file-pdf-2-line" },
+    { name: "Code", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:github-line" },
+    { name: "arXiv", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "academicons:arxiv" },
+    { name: "Slides", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:slideshow-2-line" },
+  ]}
+>
+  {/*
+    Optionally place a cover image or video behind the header. Import the
+    asset (from src/assets/, so images are optimized) and pass it through the
+    "background" slot using the Picture or Video component:
+
+      <Picture slot="background" src={cover} alt="" />
+      <Video slot="background" src={outside} controls={false} />
+  */}
+  <Picture slot="background" src={dogsTrue} alt="" priority />
+</Header>
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a template you can use to create a professional project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+This is a template you can use to create a professional-looking, accessible, and performant project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
 </HighlightedSection>
 
 ## Visuals
 
-### Picture
+### Image
 
 Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
 
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+
+### Video
+
+<Video src={outside} />
 
 ### Wide visual
 

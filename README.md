@@ -7,6 +7,7 @@ This is a template to help you build a professional project page for your resear
 ## Features
 
 - Pre-built components for LaTeX, figures, tables, code blocks (with syntax highlighting), videos, YouTube embeds, 3D objects, comparison sliders, carousels, tabbed slides, and pairs of columns.
+- Optional cover image or video behind the page header.
 - Optional dark mode :)
 - Automatically converts figures stored as PDF files into images.
 - Compresses images using [AVIF](https://en.wikipedia.org/wiki/AVIF) and uses [responsive images](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images) to minimize loading time.
