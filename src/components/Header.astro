@@ -51,7 +51,7 @@ const hasBackground = Astro.slots.has("background");
     class:list={[
       "relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
       hasBackground
-        ? "text-blue gap-10 text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)] [&_:where(h1,h2,h3,h4,p,a,span,div,sup,li):not(.not-prose,.not-prose_*)]:text-white [&_.not-prose_a]:text-shadow-none [&_.not-prose_a]:shadow-[0_0_8px_rgba(0,0,0,0.6)]"
+        ? "text-blue gap-10 text-white prose-headings:text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
         : "gap-6",
     ]}
   >
@@ -62,7 +62,7 @@ const hasBackground = Astro.slots.has("background");
           <div class="flex flex-col items-center text-center">
             <div class="flex flex-row text-xl">
               {author.url ? (
-                <a href={author.url}>{author.name}</a>
+                <a class="not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid" href={author.url}>{author.name}</a>
               ) : (
                 author.name
               )}
@@ -102,7 +102,7 @@ const hasBackground = Astro.slots.has("background");
             <a
               href={link.url}
               class:list={["flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline",
-                hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"
+                hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800 text-shadow-none shadow-[0_0_8px_rgba(0,0,0,0.6)]" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"
               ]}
             >
               {link.icon && <Icon name={link.icon} />}
