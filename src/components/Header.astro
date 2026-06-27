@@ -49,13 +49,13 @@ const hasBackground = Astro.slots.has("background");
   }
   <div
     class:list={[
-      "header-stack relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
+      "relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
       hasBackground
-        ? "cover-text text-blue gap-10 text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
+        ? "text-blue gap-10 text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)] [&_:where(h1,h2,h3,h4,p,a,span,div,sup,li):not(.not-prose,.not-prose_*)]:text-white [&_.not-prose_a]:text-shadow-none [&_.not-prose_a]:shadow-[0_0_8px_rgba(0,0,0,0.6)]"
         : "gap-6",
     ]}
   >
-    <h1 class="text-5xl font-medium">{title}</h1>
+    <h1 class="my-0 text-5xl font-medium">{title}</h1>
     <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
       {
         authors.map((author) => (
@@ -115,7 +115,9 @@ const hasBackground = Astro.slots.has("background");
 
 <style>
   /* Make the slotted cover (Picture/Video, or a plain <img>/<video>) fill the
-     header, overriding those components' figure styling. Scoped to `.cover`. */
+     header, overriding those components' figure styling. Scoped to `.cover`.
+     Kept as scoped CSS because expressing it with Tailwind would require
+     repeating the descendant variant on every declaration. */
   .cover :global(:is(picture, img, video)) {
     position: absolute;
     inset: 0;
@@ -128,31 +130,5 @@ const hasBackground = Astro.slots.has("background");
     max-height: none;
     object-fit: cover;
     border-radius: 0;
-  }
-
-  /* The flex `gap` controls all spacing in the stack, so neutralise the
-     heading's default `prose` margins. */
-  .header-stack :global(h1) {
-    margin-block: 0;
-  }
-
-  /* Over a cover, force the header text to white, overriding the muted `prose`
-     element colors. The link buttons keep their own colors, so they're
-     excluded. */
-  .cover-text
-    :global(
-      :where(h1, h2, h3, h4, p, a, span, div, sup, li):not(
-        .not-prose,
-        .not-prose *
-      )
-    ) {
-    color: #fff;
-  }
-
-  /* The link buttons have a solid surface, so they don't take the text shadow;
-     give the pills a matching drop shadow so they lift off the cover too. */
-  .cover-text :global(.not-prose a) {
-    text-shadow: none;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   }
 </style>
