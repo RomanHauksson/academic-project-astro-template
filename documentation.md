@@ -53,7 +53,7 @@ import cover from "./assets/cover.png";
 
 ```mdx
 <Header title="..." authors={[...]}>
-  <Video slot="background" controls={false} />
+  <Video slot="background" src={...} controls={false} />
 </Header>
 ```
 
