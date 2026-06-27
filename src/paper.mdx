@@ -66,28 +66,30 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     "background" slot using the Picture or Video component:
 
       <Picture slot="background" src={cover} alt="" />
-      <Video slot="background" controls={false} />
+      <Video slot="background" src={outside} controls={false} />
   */}
-  <Picture slot="background" src={dogsTrue} alt="" />
+  <Picture slot="background" src={dogsTrue} alt="" priority />
 </Header>
-
-<Video src={outside} />
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a template you can use to create a professional project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+This is a template you can use to create a professional-looking, accessible, and performant project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
 
 </HighlightedSection>
 
 ## Visuals
 
-### Picture
+### Images
 
 Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
 
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+
+### Videos
+
+<Video src={outside} />
 
 ### Wide visual
 

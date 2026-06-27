@@ -51,7 +51,7 @@ const hasBackground = Astro.slots.has("background");
     class:list={[
       "header-stack relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
       hasBackground
-        ? "cover-text text-blue gap-10 text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]"
+        ? "cover-text text-blue gap-10 text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
         : "gap-6",
     ]}
   >
@@ -153,6 +153,6 @@ const hasBackground = Astro.slots.has("background");
      give the pills a matching drop shadow so they lift off the cover too. */
   .cover-text :global(.not-prose a) {
     text-shadow: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   }
 </style>
