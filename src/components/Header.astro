@@ -62,7 +62,7 @@ const hasBackground = Astro.slots.has("background");
           <div class="flex flex-col items-center text-center">
             <div class="flex flex-row text-xl">
               {author.url ? (
-                <a class="not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid" href={author.url}>{author.name}</a>
+                <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
               ) : (
                 author.name
               )}
