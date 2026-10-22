@@ -76,6 +76,8 @@ Alternatively, you can build the site locally, and copy the output to wherever y
 npm run build
 ```
 
+To host the page on Wasmer Edge instead of GitHub Pages, import your repository at `https://wasmer.io/apps/create?github=<owner>%2F<repo>`. To preview this template first: [![Deploy to Wasmer](https://img.shields.io/badge/Deploy%20to-Wasmer-171717?logo=wasmer&logoColor=white)](https://wasmer.io/apps/create?github=RomanHauksson%2Facademic-project-astro-template) The import does not copy the repository into your GitHub account.
+
 For more information, consult [`./documentation.md`](./documentation.md).
 
 I'd like to speak directly with users to learn about what they want and get feedback on the template. If you're interested in getting help with setting up with the project, fixing bugs AI can't solve, or even having me develop the page for you, you can [email me](mailto:roman.i0djm@aleeas.com) or [schedule a virtual meeting](https://cal.com/romanhauksson/projectpage).
